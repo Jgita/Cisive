@@ -1,0 +1,55 @@
+<div class="humanExpertLandingPage">
+    <section class="content dashboard ">
+        <div class="container-fluid">
+            <div class="table-wrapper mt-10">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th class="padL50">Name</th>
+                            <th>User/Site ID</th>
+                            <th>Role</th>
+                            <th>Date & Time</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-if="queueList.length == 0 || nullData || queueList == null">
+                            <td colspan="7">
+                                <div class="alert alert-warning">
+                                 No photos are available for processing.
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr dir-paginate="item in totalQueueList | orderBy: '-CREATED_DATE' | itemsPerPage:10 track by $index" ng-class="{'custom_class':item.IS_LOCK_STATUS}">
+                            <td>
+                                <div class="checkbox checkbox-primary">
+                                    <input id="HE_chk{{item.ID}}" value="{{HE}}" ng-model="updatedQueueList[item.ID]" ng-change="selectedCheckboxStatus(item, updatedQueueList[item.ID])"
+                                        ng-disabled="disable[item.ID]" class="styled" type="checkbox" placeholder="">
+                                    <label for="HE_chk{{item.ID}}">{{item.INSURED_FIRST_NAME || '-'}} {{item.INSURED_LAST_NAME}}</label>
+                                </div>
+                            </td>
+
+                            <td ng-if="item.SITE_ID == null && item.USER_ID != null">{{item.USER_ID}}</td>
+                            <td ng-if="item.SITE_ID != null">{{item.SITE_ID}}</td>
+                            <td>{{item.USERROLENAME}}</td>
+                            <td>{{item.CREATED_DATE || '-' | date : "M/d/y h:mm a" }}</td>
+
+                            <td>
+                              
+                                <button id="btn{{item.ID}}" ng-hide="setDisabled(item.ID, item)" style="line-height: 2.428571;" class="btn btn-inspection btnHidden"
+                                    ng-click="photoViewModal(); viewBtn(item)">View Photos
+                                    <i ng-if="item.AUTO_APPROVE_STATUS" class="fa fa-check fa-lg" aria-hidden="true"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="text-center">
+                    <dir-pagination-controls max-size="10" direction-links="true" boundary-links="true">
+                    </dir-pagination-controls>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

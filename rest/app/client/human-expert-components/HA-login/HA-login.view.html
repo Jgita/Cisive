@@ -1,0 +1,36 @@
+<div class="login-wrap" ng-controller="HALoginController as vm">
+    <div class="logo">
+        <img src="rest/assets/images/logo.svg" alt="Carco">
+    </div>
+    <div id="myTabContent" class="tab-content">
+        <div class="tab-pane active in" id="insured">
+            <form name="HALoginForm" ng-submit="vm.login()" class="form-horizontal" role="form" novalidate>
+                <div class="form-group text-center">
+                    <label for="username" class="control-label textTranCap">Human Expert Login</label>
+                </div>
+                <div class="form-group" ng-class="{ 'has-error': HALoginForm.username.$touched && HALoginForm.username.$error.required,'has-success':HALoginForm.username.$valid }">
+                    <label for="username" class="control-label">Username</label>
+                    <input type="text" autocomplete="off" class="form-control" id="username" name="username" ng-model="vm.HE_USER_NAME" placeholder="Enter your username" ng-disabled="vm.dataLoading" required>
+                    <span ng-show="HALoginForm.username.$touched && HALoginForm.username.$error.required" class="help-block">Username is required</span>
+                </div>
+                <div class="form-group" ng-class="{ 'has-error': HALoginForm.password.$error.required && HALoginForm.password.$touched, 'has-success':HALoginForm.password.$valid}">
+                    <label for="username" class="control-label">Password</label>
+                    <input type="password" autocomplete="off" class="form-control" id="password" name="password" placeholder="Enter password" ng-disabled="vm.dataLoading" 
+                        ng-model="vm.HE_PASSWORD" ng-minlength="8" required>
+
+                    <div ng-if="HALoginForm.password.$touched || signupSubmitted">
+                        <span ng-show="HALoginForm.password.$error.required" class="help-block">Password is required</span>
+                        <span ng-show="HALoginForm.password.$error.minlength" class="help-block">Minimum 8 character</span>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="controls">
+                        <button type="submit" ng-click="login(HALoginForm)" button-spinner="vm.dataLoading" ng-disabled="HALoginForm.$invalid || vm.dataLoading" class="btn btn-secondary w-100">Login</button>
+
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,25 @@
+<form class="details cusDeatilsModal" name="emailForm" ng-submit="emailSubmit()" role="form" novalidate>
+    <!-- Modal content-->
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" ng-click="close()">&times;</button>
+            <h1 class="modal-title text-center">Enter the Email Address for Inspection Report</h1>
+        </div>
+        <div class="modal-body">
+            <div class="form-row" ng-class="{ 'has-error':emailForm.email.$error.pattern && emailForm.email.$touched || emailForm.email.$error.required, 'has-success':emailForm.email.$valid}">
+                <label>Enter the Email Address
+                    <span class="asterisk">*</span>
+                </label>
+                <input autocomplete="off" type="text" class="form-control" name="email" id="email" placeholder="Enter Email" ng-model="EMAIL"
+                ng-pattern="/^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z]{2,4}$/" required>
+                <span ng-show="emailForm.email.$touched && emailForm.email.$error.required" class="help-block">Email Address is required</span>
+                <span ng-show="emailForm.email.$dirty && emailForm.email.$error.pattern" class="help-block">Please enter valid Email Address</span>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" button-spinner="dataLoading" ng-click="sendInspectorEmail()" class="btn btn-sm btn-secondary" ng-disabled="emailForm.$invalid || dataLoading">Send</button>
+            <button type="button" class="btn btn-sm btn-secondary" ng-disabled="cancelVisibility" ng-click="close()">Cancel</button>
+
+        </div>
+    </div>
+</form>

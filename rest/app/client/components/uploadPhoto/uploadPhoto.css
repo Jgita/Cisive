@@ -1,0 +1,50 @@
+
+  .uploadPhoto{
+    font-size:24px;
+    float:left;
+    color: #646464;
+}
+
+.uploaded-photo img{
+	width: 100%;
+	height: 100%;
+}
+.title-name{
+    /* padding: 13px 0; */
+     padding: 13px 10px; 
+    line-height: 42px;
+    /* font-size: 11px; */
+    color: #646464;
+    font-weight: 400;
+    position: relative;
+    text-align: left;
+    width: 200px;
+    margin: 0 auto;
+}
+
+.deleteBtn {
+    display: inline-block;
+    padding: 6px;
+    background: transparent
+}
+
+.disabled {
+    pointer-events:none; 
+    opacity:0.6;         
+  }
+
+.epa-sticker {
+    display: inline-block;
+}
+
+.epa-sticker .uploaded-photo {
+    height: auto;
+}
+
+.well{
+    margin-bottom: 0;
+}
+
+  
+
+ 

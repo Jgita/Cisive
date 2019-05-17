@@ -1,0 +1,149 @@
+body{
+	background: url("../../../../assets/images/bg.png") #e9ecef;
+	background-repeat: no-repeat;
+    background-size: cover;
+    font-family: 'Titillium Web', sans-serif;
+}
+.mb-0{margin-bottom:0 !important;}
+.w-100{width:100%;}
+.btn-secondary{
+	color: #fff;
+	background-color: #ff9b00;
+	border:solid 1px #ff9b00;
+	border-radius: 3px;
+	font-size: 18px;	
+}
+.login-wrap{
+	background-color: #0d3572;
+	width:380px;
+	margin: 100px auto;
+	box-shadow: 0px 5px 12px rgba(0, 0, 0, 0.4);
+}
+.login-wrap h2{
+	font-size: 20px;
+    color: #fff;
+    margin: 0 0 20px 0;
+    text-align: center;
+}
+.login-wrap p{
+	color:#c3ccdb;
+	line-height: 14px;
+	font-size: 14px;
+	text-align: center;
+	font-weight: 300;
+}
+.login-wrap .logo{
+	background-color: #FFF;
+	padding: 25px;
+	text-align: center;
+	float:none;
+}
+.login-wrap .logo img{
+	height: 35px;
+	margin-top: 0;
+}
+.login-wrap .nav-tabs>li>a{
+	background-color: #e9ecef;
+	border: 0;
+	border-radius: 0;
+	color: #5f656e;
+	font-size: 16px;
+	width: 190px;
+	margin: 0;
+	text-align: center;
+}
+.login-wrap .nav-tabs>li.active>a, .login-wrap .nav-tabs>li.active>a:focus, .login-wrap .nav-tabs>li.active>a:hover {
+    background-color: #008b96;
+	border: 0;
+	color: #fff;
+	border-radius: 0;
+	width: 190px;
+	text-align: center;
+}
+.login-wrap .nav-tabs>li.insured>a:before{
+	content: "\62";
+	font-size: 28px;
+	font-family: "cisive" !important;
+	margin-right: 10px;
+}
+.login-wrap .nav-tabs>li.inspector>a:before{
+	content: "\61";
+	font-size: 28px;
+	font-family: "cisive" !important;
+	margin-right: 10px;
+}
+.login-wrap .nav-tabs>li>a span{
+	position: relative;
+	top: -5px;
+}
+.login-wrap .nav-tabs{
+	border-bottom: 0;
+}
+.login-wrap .form-group{
+	padding:15px 25px;
+	margin: 0;
+	border-bottom: solid 1px #284b81;
+}
+.login-wrap .form-group label{
+	color: #8dacda;
+	font-size: 14px;
+	font-family: 'Titillium Web', sans-serif;
+	text-transform: uppercase;
+	font-weight: 300;	
+}
+.login-wrap button, .login-wrap input, .login-wrap select, .login-wrap textarea{
+	font-family: 'Titillium Web', sans-serif;
+}
+.login-wrap .form-group .form-control{
+	box-shadow: none;
+    background-color: transparent;
+    border: 0;
+    padding: 0;
+    font-size: 16px;
+    color: #d6e6fd;
+    line-height: normal;
+    height: auto;
+}
+.login-wrap .form-group .form-control::placeholder{
+	color: #d6e6fd;
+	font-weight: 300;
+}
+.login-wrap .form-group .form-control:focus{
+	box-shadow: none;
+}
+.login-wrap .form-group select.form-control option{
+	color: #353535;
+}
+.login-wrap span.icon{
+	margin-right: 10px;
+	display: inline-block;
+}
+.login-wrap span.txt{
+	position: relative;
+	top:-5px;
+}
+.login-wrap .help-block{
+	margin: 0;
+	color: #ff6000;
+}
+.login-wrap .control-group{
+	padding:25px;
+}
+.login-wrap .radio.radio-primary label::before {
+	background-color: #0d3572;
+}
+.flinks{
+	color: #757575;
+	font-size: 16px;
+	margin-top: 30px;
+}
+.flinks a{
+	color: #198fe3;
+}
+/*Captcha*/
+.captcha-wrapper{
+	padding:20px 0 0 38px;
+}
+.rc-inline-block{
+	
+}

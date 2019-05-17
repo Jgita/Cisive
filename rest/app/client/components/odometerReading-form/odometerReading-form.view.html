@@ -1,0 +1,412 @@
+<form name="odometerForm" id="odometerForm" ng-submit="odometerSubmit()" role="form" novalidate>
+    <h2 class="mobile-title hidden-lg hidden-md">Vehicle Information</h2>
+    <!-- <h3 class="mb-20">Please provide the following information</h3> -->
+    <div class="details">
+        <h1>Vehicle Information</h1>
+        <div class="row-eq-height clearfix">
+            <div class="col-lg-4 col-md-4 border-collapse cols">
+                <div class="form-row" ng-class="{ 'has-error': odometerForm.setyear.$touched && odometerForm.setyear.$error.required, 'has-success':odometerForm.setyear.$valid}">
+                    <label>Year
+                        <span class="asterisk">*</span>
+                    </label>
+                    <select class="form-control" name="setyear" ng-model="odometerInfo.YEAR" required>
+                        <option value="">Select Year</option>
+                        <option ng-repeat="option in years" ng-if="option.LIST_OF_YEARS1 <= currentYear" ng-selected="odometerInfo.YEAR == option.LIST_OF_YEARS1"
+                            value="{{option.ID}}">{{option.LIST_OF_YEARS1}}</option>
+                    </select>
+                    <span ng-show="showMessage(odometerForm.setyear)" class="help-block">Year required</span>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-4 border-collapse cols">
+                <div class="form-row" ng-class="{ 'has-error': odometerForm.setMake.$touched && odometerForm.setMake.$error.required, 'has-success':odometerForm.setMake.$valid}">
+                    <label>Make
+                        <span class="asterisk">*</span>
+                    </label>
+                    <select class="form-control" name="setMake" ng-model="odometerInfo.MAKE" ng-change="makeSelected(odometerInfo.MAKE)" required>
+                        <option value="">Select Make</option>
+                        <option ng-repeat="option in makes" ng-selected="odometerInfo.MAKE == option.ID" value="{{option.ID}}">{{option.MAKE1}}</option>
+                    </select>
+                    <span ng-show="showMessage(odometerForm.setMake)" class="help-block">Make is required</span>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-4 border-collapse cols">
+                <div class="form-row" ng-class="{ 'has-error': odometerForm.setModel.$touched && odometerForm.setModel.$error.required, 'has-success':odometerForm.setModel.$valid}">
+                    <label>Model
+                        <span class="asterisk">*</span>
+                    </label>
+
+                    <select class="form-control" name="setModel" ng-model="odometerInfo.MODEL" ng-change="ModelUpdate(odometerInfo.MODEL)" required>
+                        <option value="">Select Model </option>
+                        <option ng-repeat="option in models" ng-if="option.$id != undefine" ng-selected="odometerInfo.MODEL == option.$id" value="{{option.MODEL1}}">{{option.MODEL1}}</option>
+                        <option ng-if="models != null" value="OTHER">OTHER</option>
+                    </select>
+                    <span ng-show="showMessage(odometerForm.setModel)" class="help-block">Model is required</span>
+
+                    <input ng-if="odometerInfo.MODEL == 'OTHER'" autocomplete="off" ng-maxlength="20" type="text" name="modelText" id="style-Text"
+                        class="form-control" ng-model="odometerInfo.MODEL_OTHER" placeholder="Enter Model" auto-fill-sync required
+                    />
+                    <span ng-show="showMessage(odometerForm.modelText)" class="help-block">Model is required</span>
+                    <span class="help-block" ng-show="(odometerForm.modelText.$error.maxlength && odometerForm.modelText.$dirty) ">
+                        Model, should be max 20 letters
+                    </span>
+                </div>
+
+
+            </div>
+        </div>
+
+        <div class="row-eq-height clearfix">
+            <div class="col-lg-4 col-md-4 border-collapse cols">
+                <div class="form-row" ng-class="{ 'has-error': odometerForm.setMajorColor.$touched && odometerForm.setMajorColor.$error.required , 'has-success':odometerForm.setMajorColor.$valid}">
+                    <label>Color Major
+                        <span class="asterisk">*</span>
+                    </label>
+
+                    <select class="form-control" name="setMajorColor" ng-model="odometerInfo.COLOR_MAJOR" ng-change="majorColorUpdate(odometerInfo.COLOR_MAJOR)"
+                        required>
+                        <option value="">Select Color Major </option>
+                        <option ng-repeat="option in majorColor" ng-selected="odometerInfo.COLOR_MAJOR == option.Id" value="{{option.Id}}">{{option.COLOR}}</option>
+                    </select>
+                    <span ng-show="showMessage(odometerForm.setMajorColor)" class="help-block">Color major is required</span>
+
+                    <input ng-if="odometerInfo.COLOR_MAJOR == '17'" autocomplete="off" ng-maxlength="20" type="text" name="colorMajarText" id="color-MajarText"
+                        class="form-control" ng-model="odometerInfo.COLOR_MAJOR_OTHER" placeholder="Enter Color Major" required
+                    />
+                    <span ng-show="showMessage(odometerForm.colorMajarText)" class="help-block">Color major is required</span>
+                    <span class="help-block" ng-show=" odometerForm.colorMajarText.$error.maxlength && odometerForm.colorMajarText.$dirty">
+                        Major color, should be max 20 letters
+                    </span>
+
+                </div>
+            </div>
+
+
+            <div class="col-lg-4 col-md-4 border-collapse cols">
+                <div class="form-row">
+                    <label>Color Minor</label>
+
+                    <select class="form-control" name="setMinorColor" ng-model="odometerInfo.COLOR_MINOR" ng-change="minorColorUpdate(odometerInfo.COLOR_MINOR)">
+                        <option value="">Select Color Minor </option>
+                        <option ng-repeat="option in minorColor" ng-selected="odometerInfo.COLOR_MINOR == option.Id" value="{{option.Id}}">{{option.COLOR}}</option>
+                    </select>
+
+                    <input ng-if="odometerInfo.COLOR_MINOR == '17'" autocomplete="off" ng-maxlength="20" type="text" name="colorMinorText" id="color-MajarText"
+                        class="form-control" ng-model="odometerInfo.COLOR_MINOR_OTHER" placeholder="Enter Color Minor" auto-fill-sync/>
+                    <span class="help-block" ng-show=" odometerForm.colorMinorText.$error.maxlength && odometerForm.colorMinorText.$dirty">
+                        Minor color, should be max 20 letters
+                    </span>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-4 border-collapse cols">
+                <div class="form-row" ng-class="{ 'has-error': odometerForm.setstyle.$touched && odometerForm.setstyle.$error.required, 'has-success':odometerForm.setstyle.$valid}">
+                    <label>Style
+                        <span class="asterisk">*</span>
+                    </label>
+                    <select class="form-control" name="setstyle" ng-model="odometerInfo.STYLE" ng-change="styleUpdate(odometerInfo.STYLE)" required>
+                        <option value="">Select Style</option>
+                        <option ng-repeat="option in styles" ng-selected="odometerInfo.STYLE == option.STYLE_ID" value="{{option.STYLE_ID}}">{{option.STYLE_NAME}}</option>
+                    </select>
+                    <span ng-show="showMessage(odometerForm.setstyle)" ng-show="odometerForm.setstyle.$touched && odometerForm.setstyle.$error.required"
+                        class="help-block">Style is required</span>
+
+                    <input ng-if="odometerInfo.STYLE == '11'" autocomplete="off" ng-maxlength="20" type="text" name="styleText" id="style-Text"
+                        class="form-control" ng-model="odometerInfo.STYLE_OTHER" placeholder="Enter Style" auto-fill-sync required
+                    />
+                    <span ng-show="showMessage(odometerForm.styleText)" class="help-block">Style is required</span>
+                    <span class="help-block" ng-show=" odometerForm.styleText.$error.maxlength && odometerForm.styleText.$dirty">
+                        Style, should be max 20 letters
+                    </span>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <div class="row-eq-height clearfix">
+            <div class="col-lg-4 col-md-4 border-collapse cols">
+                <div class="form-row" ng-class="{ 'has-error': odometerForm.vehicleTransmission.$touched && odometerForm.vehicleTransmission.$error.required, 'has-success':odometerForm.vehicleTransmission.$valid}">
+                    <label>Transmission
+                        <span class="asterisk">*</span>
+                    </label>
+                    <select class="form-control" name="vehicleTransmission" ng-change="updateDropD()" ng-model="odometerInfo.TRANSMISSION" required>
+                        <option value="">Select Transmission </option>
+                        <option ng-repeat="option in transmissions" ng-selected="odometerInfo.TRANSMISSION == option.TRANSMISSION_ID" value="{{option.TRANSMISSION_ID}}">{{option.TRANSMISSION_TYPE}}</option>
+                    </select>
+                    <span ng-show="showMessage(odometerForm.vehicleTransmission)" class="help-block">Transmission is required</span>
+
+                    <!-- <div class="checkbox checkbox-primary" ng-if="showAutoCbox">
+
+                        <div class="checkbox checkbox-inline checkbox-primary">
+                            <input type="checkbox" id="Overdrive" class="styled" ng-model="odometerInfo.AUTOMATIC_OVERDRIVE">
+                            <label for="Overdrive">OVERDRIVE</label>
+                        </div>
+                        <div class="checkbox checkbox-inline checkbox-primary">
+                            <input type="checkbox" id="AWD" class="styled" ng-model="odometerInfo.AUTOMATIC_AWD">
+                            <label for="AWD">AWD</label>
+                        </div>
+                        <div class="checkbox checkbox-inline checkbox-primary">
+                            <input type="checkbox" id="4WD" class="styled" ng-model="odometerInfo.AUTOMATIC_4WD">
+                            <label for="4WD">4WD</label>
+                        </div>
+
+
+                    </div> -->
+                    <div ng-if="showAutoCbox">
+                        <div class="radio radio-inline radio-primary mt-0">
+                            <input type="radio" id="Overdrive" name="automatic" value="{{odometerInfo.AUTOMATIC_OVERDRIVE}}" ng-model="odometerInfo.AUTOMATIC_OVERDRIVE"
+                                ng-checked="(odometerInfo.AUTOMATIC_OVERDRIVE == true)" ng-click="autoRadioHandle('AUTOMATIC_OVERDRIVE')">
+                            <label for="Overdrive">OVERDRIVE</label>
+                        </div>
+
+                        <div class="radio radio-inline radio-primary mt-0">
+                            <input type="radio" id="AWD" name="automatic" value="{{odometerInfo.AUTOMATIC_AWD}}" ng-model="odometerInfo.AUTOMATIC_AWD"
+                                ng-checked="(odometerInfo.AUTOMATIC_AWD == true)" ng-click="autoRadioHandle('AUTOMATIC_AWD')">
+
+                            <label for="AWD">AWD</label>
+                        </div>
+
+                        <div class="radio radio-inline radio-primary">
+
+                            <input type="radio" id="4WD" name="automatic" ng-model="odometerInfo.AUTOMATIC_4WD" value="{{odometerInfo.AUTOMATIC_4WD}}"
+                                ng-checked="(odometerInfo.AUTOMATIC_4WD == true)" ng-click="autoRadioHandle('AUTOMATIC_4WD')">
+                            <label for="4WD">4WD</label>
+                        </div>
+                    </div>
+
+                    <div ng-if="showManualCbox">
+                        (speed) :
+
+                        <div class="radio radio-inline radio-primary mt-0">
+                            <input name="manual" type="radio" id="3SPEED" value="{{odometerInfo.MANUAL_3SPEED}}" ng-checked="(odometerInfo.MANUAL_3SPEED == true)"
+                                ng-model="odometerInfo.MANUAL_3SPEED" ng-click="manualRadioHandle('MANUAL_3SPEED')">
+                            <label for="3SPEED">3</label>
+                        </div>
+                        <div class="radio radio-inline radio-primary mt-0">
+                            <input name="manual" type="radio" id="4SPEED" value="{{odometerInfo.MANUAL_4SPEED}}" ng-checked="(odometerInfo.MANUAL_4SPEED == true)"
+                                ng-model="odometerInfo.MANUAL_4SPEED" ng-click="manualRadioHandle('MANUAL_4SPEED')">
+                            <label for="4SPEED">4</label>
+                        </div>
+                        <div class="radio radio-inline radio-primary mt-0">
+                            <input name="manual" type="radio" id="5SPEED" value="{{odometerInfo.MANUAL_5SPEED}}" ng-checked="(odometerInfo.MANUAL_5SPEED == true)"
+                                ng-model="odometerInfo.MANUAL_5SPEED" ng-click="manualRadioHandle('MANUAL_5SPEED')">
+                            <label for="5SPEED">5</label>
+                        </div>
+                        <div class="radio radio-inline radio-primary">
+                            <input name="manual" type="radio" id="6SPEED" value="{{odometerInfo.MAUAL_6SPEED}}" ng-checked="(odometerInfo.MAUAL_6SPEED == true)"
+                                ng-model="odometerInfo.MAUAL_6SPEED" ng-click="manualRadioHandle('MAUAL_6SPEED')">
+                            <label for="6SPEED">6</label>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-4 border-collapse cols">
+                <div class="form-row" ng-class="{ 'has-error': odometerForm.vehicleSeatMaterial.$touched && odometerForm.vehicleSeatMaterial.$error.required, 'has-success':odometerForm.vehicleTransmission.$valid}">
+                    <label>Seat Material
+                        <span class="asterisk">*</span>
+                    </label>
+                    <select class="form-control" name="vehicleSeatMaterial" ng-model="odometerInfo.SEAT_MATERIAL" ng-change="GetValue()" required>
+                        <option value="">Select Seat Material</option>
+                        <option ng-repeat="option in seatMaterials" ng-selected="odometerInfo.SEAT_MATERIAL == option.MATERIAL_ID" value="{{option.MATERIAL_ID}}">{{option.MATERIAL_TYPE}}</option>
+                    </select>
+
+                    <span ng-show="showMessage(odometerForm.vehicleSeatMaterial)" class="help-block">Seat material is required</span>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 border-collapse cols">
+                <div class="form-row" ng-class="{ 'has-error': odometerForm.seatColor.$touched && odometerForm.seatColor.$error.required || odometerForm.seatColor.$error.maxlength, 'has-success':odometerForm.seatColor.$valid}">
+                    <label>Front Seat Color
+                        <span class="asterisk">*</span>
+                    </label>
+                    <input autocomplete="off" ng-maxlength="30" type="text" name="seatColor" id="seatColor" class="form-control" ng-model="odometerInfo.FRONT_SEAT_COLOR"
+                        placeholder="Enter Color" auto-fill-sync required />
+                    <span ng-show="showMessage(odometerForm.seatColor)" class="help-block">Front Seat Color is required</span>
+                    <span class="help-block" ng-show="(odometerForm.seatColor.$error.maxlength && odometerForm.seatColor.$dirty) ">
+                        Seat Color, should be max 30 letters
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="details">
+        <div class="row-eq-height clearfix">
+            <div class="col-lg-4 col-md-4 border-collapse cols">
+                <div class="form-row" ng-class="{ 'has-error': odometerForm.identificationNo.$error.pattern || odometerForm.identificationNo.$error.required && odometerForm.identificationNo.$touched || odometerForm.identificationNo.$error.maxlength || odometerForm.identificationNo.$error.minlength, 'has-success':odometerForm.identificationNo.$valid}">
+                    <label>Vehicle Identification Number
+                    </label>
+                    <h3>(Obtain directly from vehicle)</h3>
+                    <input autocomplete="off" ng-pattern="/^[AaBbCcDdEeFfGgHhJjKkLlMmNnPpRrSsTtUuVvWwXxYyZz1234567890]{5,17}$/" class="form-control"
+                        name="identificationNo" style="text-transform: uppercase" ng-minlength="5" ng-maxlength="17" type="text"
+                        class="form-control" ng-model="odometerInfo.VEHICLE_IDENTIFICATION_NUMBER" placeholder="Enter Identification Number"
+                        value="" id="identification-number" auto-fill-sync readonly />
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-4 border-collapse cols">
+                <div class="form-row" ng-class="{ 'has-error': odometerForm.plateNo.$touched && odometerForm.plateNo.$error.required, 'has-success':odometerForm.plateNo.$valid}">
+                    <label>Plate #
+                        <span class="asterisk">*</span>
+                    </label>
+                    <input ng-if="odometerInfo.LICENSE_PLATE_NA == false || odometerInfo.LICENSE_PLATE_NA == undefine" type="text" autocomplete="off"
+                        class="form-control" style="text-transform: uppercase" ng-minlength="2" ng-maxlength="8" id="plateNo"
+                        name="plateNo" placeholder="Enter Plate Number" ng-model="odometerInfo.LICENSE_PLATE" auto-fill-sync
+                        required>
+                    <span ng-show="showMessage(odometerForm.plateNo)" class="help-block">Plate number is required</span>
+                    <span class="help-block" ng-show="((odometerForm.plateNo.$error.minlength || odometerForm.plateNo.$error.maxlength) && odometerForm.plateNo.$dirty) ">
+                        Plate number length should be min 2 & max 8
+                    </span>
+
+                    <div class="checkbox checkbox-primary mb-0">
+                        <input type="checkbox" id="plateNA" class="styled" ng-change="plateNAStatusForState(odometerInfo.LICENSE_PLATE_NA)" ng-model="odometerInfo.LICENSE_PLATE_NA">
+                        <label for="plateNA">Check Here if No Plate #</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-4 border-collapse cols">
+                <div class="form-row" ng-class="{ 'has-error': odometerForm.state.$touched && odometerForm.state.$error.required, 'has-success':odometerForm.state.$valid}">
+                    <label>State/Province
+                        <span class="asterisk">*</span>
+                    </label>
+
+                    <select ng-model="odometerInfo.STATE" class="form-control" name="state" id="state1" required>
+                        <option value="" selected>Select state</option>
+                        <option ng-repeat="state in states" ng-selected="odometerInfo.STATE == state.id" value="{{state.id}}">{{state.name}}</option>
+                    </select>
+                    <span ng-show="showMessage(odometerForm.state)" class="help-block">State/Province is required</span>
+                </div>
+            </div>
+        </div>
+        <div class="row-eq-height clearfix">
+            <div class="col-lg-4 col-md-4 border-collapse cols">
+                <div class="form-row" ng-class="{ 'has-error': odometerForm.odoMeter.$touched && odometerForm.odoMeter.$error.required, 'has-warning':odometerForm.odoMeter.$error.pattern, 'has-success':odometerForm.odoMeter.$valid }">
+                    <label>Odometer
+                        <span class="asterisk">*</span>
+                    </label>
+                    <h3>(Do not include tenths)</h3>
+                    <input class="form-control" autocomplete="off" type="tel" numbers-only ng-pattern="/^(?!0+$)[0-9]{1,6}$/" class="form-control" minlength="1" maxlength="6" ng-model="odometerInfo.ODOMETER"
+                        placeholder="Enter Odometer Reading" value="" name="odoMeter" auto-fill-sync required>
+                    <!-- <span class="help-block" ng-show="((odometerForm.odoMeter.$error.minlength || odometerForm.odoMeter.$error.maxlength) && odometerForm.odoMeter.$dirty) ">
+                        Odometer reading should not be longer than 6 digits.
+                    </span> -->
+                    <span ng-show="showMessage(odometerForm.odoMeter)" class="help-block">Odometer reading is required</span>
+                    <span ng-show="odometerForm.odoMeter.$error.pattern" class="help-block"> Odometer reading cannot be zero. </span>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-4 border-collapse cols">
+            </div>
+            <div class="col-lg-4 col-md-4 border-collapse cols">
+            </div>
+        </div>
+
+        <div class="row-eq-height clearfix">
+            <div class="col-lg-4 col-md-4 border-collapse cols">
+                <div class="form-row">
+                    <label>Location on the Vehicle that VIN was Recorded from
+                        <span class="asterisk">*</span>
+                    </label>
+
+                    <div class="radio radio-inline radio-primary mt-0">
+                        <input id="vehicle-location" name="radioOdometre" type="radio" ng-checked="(odometerInfo.VIN_LOCATION_ON_VEHICLE == 'DASHBOARD')"
+                            value="DASHBOARD" ng-model="odometerInfo.VIN_LOCATION_ON_VEHICLE" class="custom-control-input" ng-click="handleRadioClick('Dashboard')"
+                            ng-required="!odometerInfo.VIN_LOCATION_ON_VEHICLE">
+                        <label for="vehicle-location"> Dashboard</label>
+                    </div>
+                    <div class="radio radio-inline radio-primary">
+                        <input id="Other-location" name="radioOdometre" type="radio" ng-checked="(odometerInfo.VIN_LOCATION_ON_VEHICLE == 'otherVal')"
+                            value="otherVal" ng-model="odometerInfo.VIN_LOCATION_ON_VEHICLE" class="custom-control-input" ng-click="handleRadioClick('otherText')"
+                            ng-required="!odometerInfo.VIN_LOCATION_ON_VEHICLE">
+                        <label for="Other-location"> Other(Describe)</label>
+                    </div>
+
+                    <span class="help-block marT5" ng-show="showMessage(odometerForm.radioOdometre)">
+                        Please select location on the vehicle that VIN was recorded from
+                    </span>
+
+                    <div ng-if="dashflag" class="mt-10">
+                        <textarea class="form-control" name="describeOther" ng-maxlength="50" placeholder="Describe Other" ng-model="odometerInfo.VIN_LOCATION_ON_VEHICLE_DESCRIBE "
+                            id="" rows="2" auto-fill-sync required></textarea>
+                        <span ng-show="showMessage(odometerForm.describeOther)" class="help-block">Describe Other is required</span>
+                        <span class="help-block" ng-show="(odometerForm.describeOther.$error.maxlength && odometerForm.describeOther.$dirty) ">
+                            Describe Other, should be max 50 letters
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-lg-4 col-md-4 border-collapse cols">
+                <div class="form-row" ng-repeat="item in EPAStickers" id="radio-{{item.name}}">
+                    <label>Check here if</label>
+
+                    <div class="checkbox checkbox-primary mb-0">
+                        <input type="checkbox" id="EPA" class="styled" ng-model="odometerInfo.IS_EPA_STICKER_MISSING">
+                        <label for="EPA">EPA Sticker Missing</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-4 border-collapse cols">
+                <div class="form-row">
+                    <label>Principle Location where Vehicle is kept
+                        <span class="asterisk">*</span>
+                    </label>
+
+                    <h3>(City & State/Province)</h3>
+                    <div class="radio radio-inline radio-primary mt-0">
+                        <input id="principle-location1" name="principleLocation" type="radio" ng-checked="(odometerInfo.GARAGE_SAME_AS_INSURED_ADDRESSS == 'Y')"
+                            value="Y" ng-model="odometerInfo.GARAGE_SAME_AS_INSURED_ADDRESSS" class="custom-control-input" ng-click="handleLocation('Same as insured`s address')"
+                            ng-required="!odometerInfo.GARAGE_SAME_AS_INSURED_ADDRESSS">
+                        <label for="principle-location1">Same as Insured's Address</label>
+                        <br/>
+                        <br/>
+                        <input id="principle-location2" name="principleLocation" type="radio" ng-checked="(odometerInfo.GARAGE_SAME_AS_INSURED_ADDRESSS == 'N')"
+                            value="N" ng-model="odometerInfo.GARAGE_SAME_AS_INSURED_ADDRESSS" class="custom-control-input" ng-click="handleLocation('Other - Please Specify')"
+                            ng-required="!odometerInfo.GARAGE_SAME_AS_INSURED_ADDRESSS">
+                        <label for="principle-location2">Other - Please Specify</label>
+                    </div>
+
+                    <span class="help-block marT5" ng-show="showMessage(odometerForm.principleLocation)">
+                        Please select principle location where vehicle is kept
+                    </span>
+
+
+                    <div ng-if="otherFlag" class="form-group mt-20" ng-class="{ 'has-error': odometerForm.city.$touched && odometerForm.city.$error.required || odometerForm.city.$error.maxlength, 'has-success':odometerForm.city.$valid}">
+                        <label>City
+                            <span class="asterisk">*</span>
+                        </label>
+                        <input autocomplete="off" ng-maxlength="25" type="text" letter-white-space name="city" id="city" class="form-control" ng-model="odometerInfo.GARAGE_CITY"
+                            placeholder="Enter City" auto-fill-sync required />
+                        <span ng-show="showMessage(odometerForm.city)" class="help-block">City is required</span>
+                        <span class="help-block" ng-show="(odometerForm.city.$error.maxlength && odometerForm.city.$dirty) ">
+                            City, should be max 25 letters
+                        </span>
+                    </div>
+                    <div ng-if="otherFlag" class="form-group mt-20" ng-class="{ 'has-error': odometerForm.Insuredstate.$touched && odometerForm.Insuredstate.$error.required, 'has-success':odometerForm.Insuredstate.$valid}">
+                        <label>State/Province
+                            <span class="asterisk">*</span>
+                        </label>
+                        <select ng-model="odometerInfo.GARAGE_STATE" class="form-control" name="gargeState" id="state" required>
+                            <option value="" selected>Select state</option>
+                            <option ng-repeat="statename in statesProvince" ng-selected="odometerInfo.GARAGE_STATE == statename.id" value="{{statename.id}}">{{statename.name}}</option>
+                        </select>
+                        <span ng-show="showMessage(odometerForm.gargeState)" class="help-block">State/Province is required</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="text-right mt-20 mb-20">
+        <button class="btn btn-tertiary" wz-previous="logStep()" type="button">
+            <i class="fa fa-chevron-left"></i>
+        </button>
+        <button type="button" class="btn btn-tertiary" ng-click="onCancel()">Cancel</button>
+        <button id="odometerForm" name="odometerForm" type="submit" class="btn btn-secondary" ng-click="goNext(odometerInfo)">Save & Continue</button>
+    </div>
+</form>

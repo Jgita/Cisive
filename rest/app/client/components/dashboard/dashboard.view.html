@@ -1,0 +1,135 @@
+<section class="content dashboard">
+	<div class="container-fluid">
+		<div class="row-eq-height mt-30 clearfix">
+			<div ng-click="showPending()" ng-class="{ 'active': activeClassShowPending }" style="cursor: pointer;" class="col-lg-4 col-md-4 dashboard-widget">
+				<span class="ellipse orange">{{pendingInspectionListCount || 0}}</span>
+				<h2>Pending Inspections</h2>
+			</div>
+			<div ng-click="showCompleted()" ng-class="{ 'active': activeClassShowCompleted }" style="cursor: pointer;" class="col-lg-4 col-md-4 dashboard-widget">
+				<span class="ellipse blue">{{completedInspectionListCount || 0}}</span>
+				<h2>Completed Inspections</h2>
+			</div>
+
+			<div class="col-lg-4 col-md-4 dashboard-widget">
+				<div class="input-group stylish-input-group search">
+					<input type="text" ng-model="searchText" class="form-control" placeholder="Search">
+					<span class="input-group-addon">
+						<button type="submit">
+							<span class="glyphicon glyphicon-search"></span>
+						</button>
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="table-wrapper mt-30" style="overflow-x:auto;">
+
+			<table class="table">
+				<thead>
+					<tr>
+						<th id="division">Name</th>
+						<th ng-if="viewReortText">Report #</th>
+						<th custom-sort order="dateTime" sort="sort">Date & Time</th>
+						<th>Year, Make & Model</th>
+						<th>Type of Inspection</th>
+						<th>{{actionType}}</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-if="!availableUserStatus">
+						<td colspan="7">
+							<div class="alert alert-warning" ng-if='!activeClassShowPending && !activeClassShowCompleted'>
+								No Pending Inspection.
+							</div>
+
+							<div class="alert alert-warning" ng-if='activeClassShowPending'>
+								No Pending Inspection.
+							</div>
+
+							<div class="alert alert-warning" ng-if='activeClassShowCompleted'>
+								No Completed Inspection.
+							</div>
+						</td>
+					</tr>
+					<tr dir-paginate="item in totalUsersWithStatus | filter:searchText  | orderBy:sort.sortingOrder:sort.reverse | itemsPerPage:5 track by $index">
+						<td ng-if="item.TYPE_INSPECTION == 'Pre-Inspection'">{{item.INSURED_FIRST_NAME }} {{item.INSURED_LAST_NAME}}</td>
+						<td ng-if="item.TYPE_INSPECTION == 'Windshield'">{{item.WIN_INSURED_FIRST_NAME }} {{item.WIN_INSURED_LAST_NAME}}</td>
+						<td ng-if="item.TYPE_INSPECTION == 'Pre-Inspection' && viewReortText">{{item.INSURED_REPORT_NUMBER || '-'}}</td>
+						<td ng-if="item.TYPE_INSPECTION == 'Windshield' && viewReortText">{{item.WINDSHIELD_REPORT_NUMBER || '-'}}</td>
+						<td ng-if="item.TYPE_INSPECTION == 'Pre-Inspection'"> {{item.customDate || '-' | date:'M/d/y h:mm a'}}</td>
+						<td ng-if="item.TYPE_INSPECTION == 'Windshield'"> {{item.winCustomDate || '-' | date:'M/d/y h:mm a'}}</td>
+						<td ng-if="item.TYPE_INSPECTION == 'Pre-Inspection' && item.MODEL != 'OTHER'">{{item.YEAR}} {{item.MAKE}} {{item.MODEL}}
+							<span ng-if="item.YEAR == null && item.MAKE == null && item.MODEL == null">-</span>
+						</td>
+						<td ng-if="item.TYPE_INSPECTION == 'Pre-Inspection' && item.MODEL == 'OTHER'">{{item.YEAR}} {{item.MAKE}} {{item.MODEL_OTHER}}
+							<span ng-if="item.YEAR == null && item.MAKE == null && item.MODEL_OTHER == null">-</span>
+						</td>
+						<td ng-if="item.TYPE_INSPECTION == 'Windshield' && item.WIN_MODEL != 'OTHER'">{{item.WIN_YEAR}} {{item.WIN_MAKE}} {{item.WIN_MODEL}}
+							<span ng-if="item.WIN_YEAR == null && item.WIN_MAKE == null && item.WIN_MODEL == null">-</span>
+						</td>
+						<td ng-if="item.TYPE_INSPECTION == 'Windshield' && item.WIN_MODEL == 'OTHER'">{{item.WIN_YEAR}} {{item.WIN_MAKE}} {{item.WIN_MODEL_OTHER}}
+							<span ng-if="item.WIN_YEAR == null && item.WIN_MAKE == null && item.WIN_MODEL_OTHER == null">-</span>
+						</td>
+						<td ng-if="item.TYPE_INSPECTION == 'Pre-Inspection'">Pre-Insurance</td>
+						<td ng-if="item.TYPE_INSPECTION == 'Windshield'">Windshield</td>
+						<td ng-if="item.TYPE_INSPECTION == 'Pre-Inspection'">
+							<a ng-if="inspectionStatus(item.PAGE)" class="dashBoardBtn" tooltip-class="customClass" type="button" uib-tooltip="Click Icon to Proceed with Inspection"
+							 ng-click="gotoWizardStep(item.PAGE,item.INSURED_APPLICATION_ID, item.TYPE_INSPECTION)">
+								<i class="fa fa-clipboard dashBoardBtnIcon" aria-hidden="true"></i>
+							</a>
+							<sapn ng-if="item.PDF_PATH == null">
+								<a ng-if="(item.PAGE == 6)" class="dashBoardBtn" type="button" ng-click="errorOcc()" tooltip-class="customClass" uib-tooltip="Click Icon to View Inspection Report">
+									<i class="fa fa-file-text-o dashBoardBtnIcon" aria-hidden="true"></i>
+								</a>
+							</sapn>
+
+							<sapn ng-if="item.PDF_PATH != null">
+								<a ng-if="(item.PAGE == 6)" class="dashBoardBtn" type="button" tooltip-class="customClass" uib-tooltip="Click Icon to View Inspection Report"
+								 ng-click="sessionLogoutComplete(item.PDF_PATH)">
+									<i class="fa fa-file-text-o dashBoardBtnIcon" aria-hidden="true"></i>
+								</a>
+							</sapn>
+
+							<a type="button" ng-if="(item.PAGE == 6)" class="dashBoardBtn emailIcon" tooltip-class="customClass" uib-tooltip="Click Icon to Email Inspection Report" ng-click="sendEmailInspector(item.TYPE_INSPECTION, item.INSURED_APPLICATION_ID)" button-spinner="dataLoading">
+								<i class="fa fa-envelope dashBoardBtnIcon" aria-hidden="true"></i>
+							</a>
+						</td>
+						<td ng-if="item.TYPE_INSPECTION == 'Windshield'">
+
+							<a ng-if="windshieldInspectionStatus(item.PAGE)" class="dashBoardBtn" tooltip-class="customClass" type="button" uib-tooltip="Click Icon to Proceed with Inspection"
+							 ng-click="gotoWindshieldWizardStep(item.PAGE,item.WinshieldID, item.TYPE_INSPECTION)">
+								<i class="fa fa-clipboard dashBoardBtnIcon" aria-hidden="true"></i>
+							</a>
+
+							<span ng-if="item.WIN_PDF_PATH == null">
+								<a ng-if="(item.PAGE == 3)" class="dashBoardBtn" tooltip-class="customClass" type="button" ng-click="winErrorOcc()" uib-tooltip="Click Icon to View Inspection Report">
+									<i class="fa fa-file-text-o dashBoardBtnIcon" aria-hidden="true"></i>
+								</a>
+							</span>
+
+							<span ng-if="item.WIN_PDF_PATH != null">
+								<a ng-if="item.PAGE == 3" class="dashBoardBtn" tooltip-class="customClass" type="button" uib-tooltip="Click Icon to View Inspection Report"
+								 ng-click="sessionLogoutComplete(item.WIN_PDF_PATH)">
+									<i class="fa fa-file-text-o dashBoardBtnIcon" aria-hidden="true"></i>
+								</a>
+							</span>
+
+							<a type="button" ng-if="(item.PAGE == 3)" class="dashBoardBtn emailIcon" tooltip-class="customClass" uib-tooltip="Click Icon to Email Inspection Report" ng-click="sendEmailInspector(item.TYPE_INSPECTION, item.WinshieldID)" button-spinner="dataLoading">
+								<i class="fa fa-envelope dashBoardBtnIcon" aria-hidden="true"></i>
+							</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="text-center">
+				<dir-pagination-controls max-size="5" direction-links="true" boundary-links="true">
+				</dir-pagination-controls>
+			</div>
+		</div>
+	</div>
+</section>
+<footer>
+	<!-- <div class="container-fluid">
+		&copy;2018 CARCO Group. All rights reserved.
+	</div> -->
+	<div ng-include="'rest/app/client/views/footer.html'"></div>
+</footer>

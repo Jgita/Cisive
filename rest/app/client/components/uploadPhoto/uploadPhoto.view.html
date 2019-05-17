@@ -1,0 +1,151 @@
+<section class="content dashboard mb-30">
+
+    <div class="text-right container-fluid enterInspectionBtn fixed-title">
+        <span class="uploadPhoto">Select Vehicle & EPA Photos</span>
+        <div class="uploadBtn-wrapper">
+            <button type="button" class="btn btn-secondary" button-spinner="buttonLoader" ng-click="confirmAnduploadAllPhotos()">Click to Continue After Selecting Photos</button>
+        </div>
+    </div>
+
+
+    <!--upload photo start-->
+    <div class="container-fluid">
+        <div class="details uploaded-photo-wrapper-first">
+            <div class="uploaded-photo" ng-controller="frontAndDriverSidePhotosController">
+                <h1 ng-if="StateCode == 'MA'  || StateCode == 'massachusetts'">Front and Passenger Side</h1>
+                <h1 ng-if="!(StateCode == 'MA'  || StateCode == 'massachusetts')">Front and Driver Side</h1>
+                <div>
+                    <div nv-file-over="" uploader="uploader" over-class="another-file-over-class" ng-if="!photosUploadedByUser.front" class="well my-drop-zone select-file">
+                        <div class="upload-btn-wrapper select-file-button">
+                            <button class="btn">Upload Photo</button>
+                            <input type="file" nv-file-select="" uploader="uploader" multiple name="ForntFile" filters="imageFilter, sizeFilter" />
+                        </div>
+                    </div>
+                </div>
+                <div ng-if="photosUploadedByUser.front" class="img-border">
+                    <img style="cursor: pointer;" ng-click="photoViewModal(photosUploadedByUser.front)" ng-if="photosUploadedByUser.front != null"
+                        data-ng-src="data:image/png;base64,{{photosUploadedByUser.front.PHOTO}}">
+                    <div class="btn-delete-wrapper">
+                        <button ng-click="delete(0,'front')" tooltip-class="customClass" uib-tooltip="Delete" ng-disabled="frontPhotoUploadStatus"
+                            type="button" class="btn btn-remove deleteBtn">
+                            <span class="glyphicon glyphicon-trash "></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="uploaded-photo" ng-controller="rearAndPassengerSidePhotosController">
+                <h1 ng-if="StateCode == 'MA'  || StateCode == 'massachusetts'">Rear and Driver Side</h1>
+                <h1 ng-if="!(StateCode == 'MA'  || StateCode == 'massachusetts')">Rear and Passenger Side</h1>
+
+                <div>
+                    <div nv-file-over="" uploader="uploader" over-class="another-file-over-class" ng-if="!photosUploadedByUser.rear" class="well my-drop-zone select-file">
+                        <div class="upload-btn-wrapper select-file-button">
+                            <button class="btn">Upload Photo</button>
+                            <input type="file" nv-file-select="" uploader="uploader" multiple name="ForntFile" filters="imageFilter, sizeFilter" />
+                        </div>
+                    </div>
+                </div>
+
+                <div ng-if="photosUploadedByUser.rear" class="img-border">
+                    <img style="cursor: pointer;" ng-if="photosUploadedByUser.rear != null" ng-click="photoViewModal(photosUploadedByUser.rear)"
+                        data-ng-src="data:image/png;base64,{{photosUploadedByUser.rear.PHOTO}}">
+
+                    <div class="btn-delete-wrapper">
+                        <button ng-click="delete(0,'rear')" tooltip-class="customClass" uib-tooltip="Delete" ng-disabled="rearPhotoUploadStatus"
+                            type="button" class="btn btn-remove deleteBtn">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="uploaded-photo" ng-controller="EPAStickerPhotosController">
+                <h1>EPA Sticker</h1>
+                <div>
+                    <div nv-file-over="" uploader="uploader" over-class="another-file-over-class" ng-if="!photosUploadedByUser.EPA" class="well my-drop-zone select-file">
+                        <div class="upload-btn-wrapper select-file-button">
+                            <button class="btn">Upload Photo</button>
+                            <input type="file" nv-file-select="" uploader="uploader" multiple name="ForntFile" filters="imageFilter, sizeFilter" />
+                        </div>
+                    </div>
+                </div>
+
+                <div ng-if="photosUploadedByUser.EPA" class="img-border">
+                    <img style="cursor: pointer;" ng-if="photosUploadedByUser.EPA != null" ng-click="photoViewModal(photosUploadedByUser.EPA)"
+                        data-ng-src="data:image/png;base64,{{photosUploadedByUser.EPA.EPA_STICKER}}">
+
+                    <div class="btn-delete-wrapper">
+                        <button ng-click="delete(0,'EPA')" tooltip-class="customClass" uib-tooltip="Delete" ng-disabled="EPAPhotoUploadStatus" type="button"
+                            class="btn btn-remove deleteBtn">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </button>
+                    </div>
+                </div>
+                <div class="mt-5" id="radio-1">
+                    <div class="checkbox checkbox-primary mb-0 mt-0">
+                        <input type="checkbox" id="EPA" class="styled" ng-model="EPA_STICKER_MISSING" ng-change="EPAStrickerMissing(EPA_STICKER_MISSING)">
+                        <label for="EPA">Check Here If EPA Sticker Is Missing</label>
+                        <span ng-if="EPA_STICKER_MISSING == true" class="epa-missing-msg">Please take photo of doorjamb showing EPA Sticker is not present.</span>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+
+    <!--damage photo start-->
+    <div class="container-fluid mt-20">
+        <div class="details uploaded-photo-wrapper">
+            <h1>Damage Photo(s)
+                <span class="note">(If applicable, max 15 photos)</span>
+            </h1>
+            <div class="note"></div>
+            <div class="clearfix"></div>
+
+            <div class="uploaded-photo mb-10" ng-repeat="item in photosUploadedByUser.damage track by $index">
+
+                <div ng-if="photosUploadedByUser.damage.length != 0">
+                    <div class="img-border">
+                        <img style="cursor: pointer;" ng-if="photosUploadedByUser.damage.length != 0" ng-click="photoViewModal(item)" data-ng-src="data:image/png;base64,{{item.PHOTO}}">
+                        <div class="btn-delete-wrapper">
+                            <button ng-click="delete($index,'damage')" tooltip-class="customClass" uib-tooltip="Delete" ng-disabled="damagePhotoUploadStatus"
+                                type="button" class="btn btn-remove deleteBtn">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                        </div>
+                    </div>
+                    <p>Damage {{$index + 1}}</p>
+                </div>
+            </div>
+            <div class="uploaded-photo">
+                <div ng-controller="damagePhotoController">
+                    <div nv-file-over="" uploader="uploader" over-class="another-file-over-class" class="well my-drop-zone select-file mb-0"
+                        ng-if="photosUploadedByUser.damage.length < 15">
+                        <div class="upload-btn-wrapper select-file-button">
+                            <button class="btn">Upload Photo(s)</button>
+                            <input type="file" nv-file-select="" uploader="uploader" multiple name="myfile" resize-max-height="800" resize-max-width="800"
+                                resize-quality="0.7" resize-type="image/jpg" ng-image-compress filters="imageFilter, sizeFilter"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+        </div>
+    </div>
+
+</section>
+
+<footer>
+    <!-- <div class="container-fluid">
+        &copy;2018 CARCO Group. All rights reserved.
+    </div> -->
+    <div ng-include="'rest/app/client/views/footer.html'"></div>
+</footer>

@@ -1,0 +1,38 @@
+<div id="main_content_wrap" class="outer">
+  <section id="main_content" class="inner main-inner">
+
+    <wizard ng-if="inspectionType == 'Pre-Inspection'" on-finish="finished()" edit-mode="" indicators-position="top" wz-heading-title="one">
+      <wz-step wz-title="Insured Info">
+        <insured-form></insured-form>
+      </wz-step>
+      <wz-step wz-title="Vehicle Identification Number">
+        <vehicle-info-form></vehicle-info-form>
+      </wz-step>
+      <wz-step wz-title="Vehicle Information">
+        <odometer-reading-form></odometer-reading-form>
+      </wz-step>
+      <wz-step wz-title="Vehicle Options">
+        <vehicle-option-form></vehicle-option-form>
+      </wz-step>
+      <wz-step wz-title="Vehicle Condition">
+        <vehicle-condition-form></vehicle-condition-form>
+      </wz-step>
+      <wz-step wz-title="Inspection Summary">
+        <inspection-summary-form></inspection-summary-form>
+      </wz-step>
+    </wizard>
+
+    <wizard id="windshield-wizard" ng-if="inspectionType == 'Windshield'" on-finish="finished()" edit-mode="" indicators-position="top" wz-heading-title="one">
+      <wz-step wz-title="Insured Info">
+        <windshield-insured-form></windshield-insured-form>
+      </wz-step>
+      <wz-step wz-title="Windshield Damage Section">
+        <windshield-damage-form></windshield-damage-form>
+      </wz-step>
+      <wz-step wz-title="Inspection Summary">
+        <windshield-insurance-summery-form></windshield-insurance-summery-form>
+      </wz-step>
+    </wizard>
+
+  </section>
+</div>

@@ -1,0 +1,23 @@
+.steps-indicator li.done a:before {
+    background-color: #08f;
+  }
+  .steps-indicator li.current a:before {
+    background-color: #08f;
+  }
+
+  #windshield-wizard .steps-indicator.steps-3:before{
+    left: 0;
+    right: 0;
+  }
+
+  #windshield-wizard .progress-line {
+    position: relative;
+    top: 0;
+    left: 0;
+    height: 1px;
+    background: #19ff6a;
+    width: calc(100%/6);
+}
+
+
+  

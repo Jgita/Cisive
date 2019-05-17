@@ -1,0 +1,10 @@
+.vin .input-size {
+    display: inline-block;
+    box-shadow: 1px 0 0 0 #ced4da, 0 1px 0 0 #ced4da, 1px 1px 0 0 #ced4da, 1px 0 0 0 #ced4da inset, 0 1px 0 0 #ced4da inset;
+    font-size: 24px;
+    float: left;
+    color: #212429;
+    text-align: center;
+    height: 36px;
+    width: 36px;
+}

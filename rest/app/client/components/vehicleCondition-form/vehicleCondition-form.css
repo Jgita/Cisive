@@ -1,0 +1,91 @@
+.headingInline {
+    display: inline-block;
+    padding-left: 15px;
+}
+
+.vehicleConditions .details .form-row.CusFormRow{
+    min-height: auto;
+    padding: 0 20px;
+}
+
+.headingInline2 {
+    display: inline-block;
+    float: right;
+    position: relative;
+    right: 0px;
+}
+
+.rustedCheckbox {
+    float: right;
+    position: relative;
+    right: 48px;
+}
+
+.forBorder {
+    margin: 0 15px;
+    border: 1px solid #d5dadf;
+    padding: 20px 0;
+    border-bottom: 0;
+}
+
+@media only screen and (max-width: 767px) {
+    .vehicleConditions .details .form-row .checkbox label {
+        font-size: 14px;
+    }
+
+    .vehicleConditions {
+        font-size: 12px;
+    }
+
+    .vehicleConditions .details .form-row .checkbox label::before {
+        top: 0;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .vehicle-conditions .details h1 {
+        background: transparent;
+        margin: -1px -26px 0 0;
+        padding-left: 15px;
+    }
+    .vehicle-conditions .details h1.headingInline{
+        padding-left:0 !important;
+    }
+
+    .headingInline2 {
+        right: 0;
+    }
+
+    .rustedCheckbox {
+        float: right;
+        position: relative;
+        right: 22px;
+    }
+    .forBorder{
+        border: 0;
+    }
+    
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px) {}
+
+@media only screen and (min-width: 992px) and (max-width: 1199px) {
+    .padding0 {
+        padding: 0 !important;
+    }
+
+    .rustedCheckbox {
+        right: 28px;
+    }
+}
+
+@media only screen and (min-width: 1200px) and (max-width: 1920px) {
+
+    .rustedCheckbox {
+        right: 103px;
+    }
+
+    .headingInline2 {
+        right: 80px;
+    }
+}

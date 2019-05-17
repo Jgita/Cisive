@@ -1,0 +1,12 @@
+.test  {
+  border-bottom: solid 1px #0598a4;
+  color: #0598a4 !important;
+  outline: none;
+  pointer-events: none;
+}
+.disabled {
+  opacity: .6;
+  cursor: not-allowed;
+  pointer-events: none;    
+}
+

@@ -1,0 +1,35 @@
+<div class="faq">
+    <section class="content dashboard">
+        <div class="container-fluid">
+            <div class="row-eq-height mt-30 clearfix">
+                <div class="col-lg-12 col-md-12 dashboard-widget">
+                    <span class="headingColor">Support:</span>
+                    <h2 style="text-transform: none; margin-left: 2px;">Please contact the CARCO help desk if you need additional assistance at (866) 725-5294 or email
+                        <span class="headingColor">
+                            <a href="mailto:customerservice@carcogroup.com">customerservice@carcogroup.com</a>
+                        </span>
+                    </h2>
+                </div>
+            </div>
+
+        </div>
+        <div class="container-fluid mt-30">
+            <div class="col-lg-12 col-md-12 upload-widget hr-divider pt-0 pb-0">
+                <nav role="navigation" class="navbar mainmenu mb-0 ">
+                    <ul class="nav navbar-nav dropdown bottomNavbar">
+                        <li ng-repeat="tab in faqTab" ng-click="faqTabsEvent(tab,$event)">
+                            <a ui-sref-active="active" ng-class="{ 'test': isActive(tab.route) }" ui-sref="{{tab.route}}">{{tab.title}}</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+        <div ui-view></div>
+    </section>
+</div>
+<footer>
+    <!-- <div class="container-fluid">
+        &copy;2018 CARCO Group. All rights reserved.
+    </div> -->
+    <div ng-include="'rest/app/client/views/footer.html'"></div>
+</footer>

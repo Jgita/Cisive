@@ -1,0 +1,25 @@
+<section class="content dashboard">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="preInsuranceDiv">
+                    <img class="pointer-id" ng-click="preInsuranceInspection()" src="rest/assets/images/Pre-insurance.png" alt="">
+                    <h4 style="text-transform: uppercase;">Pre-Insurance Inspection</h4>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="windShieldDiv">
+                    <img class="pointer-id" ng-click="windshieldInspection($event)" src="rest/assets/images/Windshield-inspection.png" alt="">
+                    <h4 style="text-transform: uppercase;">Windshield Inspection</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <!-- <div class="container-fluid">
+        &copy;2018 CARCO Group. All rights reserved.
+    </div> -->
+    <div ng-include="'rest/app/client/views/footer.html'"></div>
+</footer>

@@ -1,0 +1,58 @@
+<header>
+
+	<div class="container-fluid">
+		<div class="logo">
+			<img src="rest/assets/images/logo.svg" alt="Carco">
+		</div>
+		<div ng-if="!Isdisable" class="pull-right hidden-xs">
+				<!-- <div class="pull-right hidden-xs hide-mob"> -->
+			<nav role="navigation" class="navbar mainmenu">
+				<ul class="nav navbar-nav dropdown">
+
+					<li ng-repeat="tab in headerTabs" ng-if="showRoute">
+						<a ui-sref-active="active" ng-class="{ 'test': isActive(tab.route) }" ui-sref="{{tab.route}}" ng-click="navButtons(tab)">{{tab.title}}</a>
+					</li>
+
+					<li ng-if="userTypeValue == true" ng-click="navigateFAQ('inspector')" style="cursor: pointer;">
+						<a ui-sref-active="active" ng-class="{ 'test': isActive('inspectionPage.FAQ.preInsuranceFAQ') || isActive('inspectionPage.FAQ.windshieldFAQ')}">FAQ</a>
+					</li>
+
+					<li ng-if="userTypeValue == false" ng-click="navigateFAQ('insured')" style="cursor: pointer;">
+						<a ui-sref-active="active" ng-class="{ 'test': isActive('insuredPage.FAQ.preInsuranceFAQ') || isActive('insuredPage.FAQ.windshieldFAQ') }">FAQ</a>
+					</li>
+
+					<li class="dropdown" ng-if="showRoute">
+						<a data-toggle="dropdown" class="dropdown-toggle avatar pr-0">
+							<span ng-if="userType == 'Insured'">Welcome {{FirstNameToDispaly}} {{LastNameToDispaly}}</span>
+							<span ng-if="userType == 'Inspector'">Welcome {{userEmail}}</span>
+							<!-- <img src="rest/assets/images/avatar.png" alt="" class="mr-10"> -->
+							<i class="fa fa-angle-down"></i>
+						</a>
+						<ul class="dropdown-menu dropdown-menu-right">
+							<li ng-repeat="item in welcomeDropDown" ng-click="onSubmitClear(item.title)">
+								<a ui-sref-active="active" ng-click="onSubmit(item.title)" ui-sref="{{item.route}}">
+									<i class="fa {{item.faClass}} fa-lg mr-10 profile-icon"></i> {{item.title}}</a>
+								</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</header>
+<section class="content">
+	<div class="container-fluid">
+		<div class="info">
+			<wizard-app></wizard-app>
+			<div ui-view></div>
+		</div>
+	</div>
+</section>
+
+<footer>
+	<!-- <div class="container-fluid">
+		&copy;2018 CARCO Group. All rights reserved.
+	</div> -->
+	<div ng-include="'rest/app/client/views/footer.html'"></div>
+</footer>

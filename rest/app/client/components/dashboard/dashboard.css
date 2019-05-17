@@ -1,0 +1,62 @@
+.dashBoardBtn{
+    background: transparent;
+    border: 0;
+}
+
+.input-group.stylish-input-group.search input {
+    
+        padding-left: 10px;
+    
+        /* padding-bottom: 0;
+     */
+    }
+   .input-group.stylish-input-group.search {
+    
+        border: 1px solid #dde0e3;
+    
+    }
+    
+    
+.dashBoardBtnIcon {
+    border: 1px solid #94a9c9;
+    padding: 10px;
+    border-radius: 50%;
+    color: #6387bd;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.dashBoardBtnIcon:hover {
+    background: #4db2fa;
+    color: #fff;
+}
+
+    .tooltip-wrapper {
+        display: inline-block; /* display: block works as well */
+        margin: 50px; /* make some space so the tooltip is visible */
+      }
+      
+      .tooltip-wrapper .btn[disabled] {
+        /* don't let button block mouse events from reaching wrapper */
+        pointer-events: none;
+      }
+      
+      .tooltip-wrapper.disabled {
+        /* OPTIONAL pointer-events setting above blocks cursor setting, so set it here */
+        cursor: not-allowed;
+      }
+
+      .selected{
+        font-weight: bold;
+    }
+
+.emailIcon {
+    margin-left: 5px; 
+}
+
+@media screen and (max-width: 920px) {
+    .emailIcon {
+        display: inline-block;
+        margin: 5px 0 0 0; 
+    }
+}

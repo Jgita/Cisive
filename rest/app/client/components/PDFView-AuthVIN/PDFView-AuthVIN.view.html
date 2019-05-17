@@ -1,0 +1,28 @@
+<div class="login-wrap">
+    <div class="logo">
+        <img src="rest/assets/images/logo.svg" alt="Carco">
+    </div>
+    <form class="form-horizontal" name="authVINForm" ng-submit="loading()" role="form" novalidate>
+
+        <div class="form-group">
+        </div>
+        <div class="form-group" ng-class="{ 'has-error': authVINForm.authVIN.$error.pattern || authVINForm.authVIN.$error.required && authVINForm.authVIN.$touched || authVINForm.authVIN.$error.maxlength || authVINForm.authVIN.$error.minlength, 'has-success':authVINForm.authVIN.$valid}">
+            <label for="username" class="control-label">Enter VIN NUMBER (Last 8 characters)</label>
+
+            <input type="text" ng-pattern="/^[AaBbCcDdEeFfGgHhJjKkLlMmNnPpRrSsTtUuVvWwXxYyZz1234567890]{8,8}$/" autocomplete="off" class="form-control"
+                style="text-transform: uppercase" name="authVIN" id="vin" auto-fill-sync placeholder="Enter VIN" minlength="8"
+                maxlength="8" ng-model="VEHICLE_IDENTIFICATION_NUMBER" required>
+            <span ng-show="showMessage(authVINForm.authVIN)" class="help-block">VIN is required</span>
+            <span ng-show="VEHICLE_IDENTIFICATION_NUMBER.length && VEHICLE_IDENTIFICATION_NUMBER == 0" class="help-block">VIN should be non zero.</span>
+            <span ng-show="authVINForm.authVIN.$dirty && authVINForm.authVIN.$error.pattern" class="help-block">
+                VIN should be last 8 characters, composed of letters and digits. Also I or i, O or o, Q or q letters are not allowed.</span>
+        </div>
+
+        <div class="control-group">
+            <div class="controls">
+                <button id="authVINForm" name="authVINForm" type="submit" button-spinner="dataSpinner" ng-click="onSubmit(VEHICLE_IDENTIFICATION_NUMBER)"
+                    ng-disabled="authVINForm.$invalid || dataLoading" class="btn btn-secondary w-100">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>

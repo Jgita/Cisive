@@ -1,0 +1,22 @@
+<div class="humanExpertLandingPage">
+    <section class="photoReview">
+        <div class="photoPopup">
+            <div class="photoHeader">
+                <h6 class="headingColor">
+                    {{photoType | uppercase}} PHOTO PREVIEW
+                    <button type="button" class="close" ng-click="close()">&times;</button>
+                </h6>
+            </div>
+
+            <div ng-if="photoLoad != null" class="photoBody">
+                <div id="myDiv" class=" photo animate-bottom">
+                    <img data-ng-src="data:image/png;base64,{{PhotoBase64}}" ng-image-appear responsive transition-duration="1s" alt="">
+                    <h6 class="headingColor">
+                        {{photoName}}
+                    </h6>
+                </div>
+                <span ng-if="photoLoad == null">Failed to load image</span>
+            </div>
+        </div>
+</div>
+</section>

@@ -1,0 +1,67 @@
+<div class="login-wrap" ng-controller="RegisterController as vm">
+    <div class="logo">
+        <img src="rest/assets/images/logo.svg" alt="Carco">
+    </div>
+    <form class="form-horizontal" name="registerForm" ng-submit="vm.register()" role="form" novalidate>
+        <div class="form-group" ng-class="{ 'has-error': registerForm.firstName.$touched && registerForm.firstName.$error.required, 'has-success':registerForm.firstName.$valid}">
+            <label for="username" class="control-label">First Name</label>
+            <input autocomplete="off" type="text" ng-disabled="disableText" name="firstName" id="firstName" class="form-control" ng-model="vm.user.INSURED_FIRST_NAME"
+                placeholder="Enter your first name" ng-maxlength="50" required />
+            <span ng-show="registerForm.firstName.$touched && registerForm.firstName.$error.required" class="help-block">First name is required</span>
+            <span ng-show="registerForm.firstName.$touched && registerForm.firstName.$error.maxlength" class="help-block">Max 50 chars</span>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error': registerForm.lastName.$touched && registerForm.lastName.$error.required, 'has-warning':registerForm.lastName.$error.minlength || registerForm.lastName.$error.maxlength, 'has-success':registerForm.lastName.$valid}">
+            <label for="lastname" class="control-label">Last Name</label>
+            <input autocomplete="off" ng-disabled="disableText" type="text" name="lastName" id="lastName" class="form-control" ng-class="{'form-control-danger':registerForm.lastName.$touched && registerForm.lastName.$error.required, 'form-control-warning':registerForm.lastName.$error.minlength || registerForm.lastName.$error.maxlength, 'form-control-success':registerForm.lastName.$valid}"
+                ng-model="vm.user.INSURED_LAST_NAME" placeholder="Enter your last name" ng-maxlength="50" required />
+            <span ng-show="registerForm.lastName.$touched && registerForm.lastName.$error.required" class="help-block">Last name is required</span>
+            <!-- <span ng-show="registerForm.lastName.$touched && registerForm.lastName.$error.minlength" class="help-block">Min 3 chars.</span> -->
+            <span ng-show="registerForm.lastName.$touched && registerForm.lastName.$error.maxlength" class="help-block">Max 50 chars</span>
+        </div>
+
+        <div class="form-group" ng-class="{ 'has-error':registerForm.email.$error.pattern || registerForm.email.$error.required && registerForm.email.$touched, 'has-success':registerForm.email.$valid}">
+            <label for="username" class="control-label">Email</label>
+            <input autocomplete="off" type="text" ng-disabled="disableText" name="email" id="email" class="form-control" ng-class="{'form-control-danger':registerForm.email.$error.pattern || registerForm.email.$error.required && registerForm.email.$touched, 'form-control-success':registerForm.email.$valid}"
+                ng-model="vm.user.INSURED_EMAIL" placeholder="Enter your email" ng-pattern="/^[^\s@]+@[a-z]+\.[^\s@]{2,}$/" required/>
+            <span ng-show="registerForm.email.$touched && registerForm.email.$error.required" class="help-block">Email Address is required</span>
+            <span ng-show="registerForm.email.$dirty && registerForm.email.$error.pattern" class="help-block">Please enter valid Email Address</span>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error': registerForm.state.$touched && registerForm.state.$error.required, 'has-success':registerForm.state.$valid}">
+            <label for="username" class="control-label">State - Vehicle insured in</label>
+
+            <select ng-model="vm.user.INSURED_STATE_CODE" ng-disabled="disableText" class="form-control" name="state" id="state" ng-change="GetValue()"
+                required>
+                <option value="" selected>Select state</option>
+                <option ng-repeat="state in states" id="{{state.id}}" value="{{state}}" selected>{{state.name}}</option>
+            </select>
+
+            <span class="select-arrow"></span>
+            <span ng-show="registerForm.state.$touched && registerForm.state.$error.required" class="help-block">State is required</span>
+        </div>
+
+        <div class="form-group" ng-class="{'has-error':registerForm.phone.$error.required && registerForm.phone.$touched, 'has-success':registerForm.phone.$valid}">
+
+            <label for="username" class="control-label">Cell Phone</label>
+            <input type="text" phone-input autocomplete="off" ng-disabled="disableText" class="form-control" id="inputPhone" name="phone"
+                placeholder="Enter your cell number" ng-model="vm.user.INSURED_CELL_PHONE" required>
+            <span ng-show="registerForm.phone.$touched && registerForm.phone.$error.required" class="help-block">Cell phone number is required</span>
+            <span class="help-block" ng-show="registerForm.phone.$error.phoneInput">Cell phone number should be 10 digits</span>
+        </div>
+
+        <div class="captcha-wrapper">
+            <div vc-recaptcha key="publicKey"></div>
+        </div>
+
+        <div class="control-group">
+            <div class="controls">
+                <button type="submit" ng-click="insuredRegister()" button-spinner="vm.dataLoading" ng-disabled="registerForm.$invalid || vm.dataLoading"
+                    class="btn btn-secondary w-100">Register</button>
+            </div>
+        </div>
+    </form>
+    <div class="flinks">
+        <div class="pull-left">
+            <a ui-sref="login">Back to Login</a>
+        </div>
+    </div>
+</div>

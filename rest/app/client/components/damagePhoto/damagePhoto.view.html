@@ -1,0 +1,18 @@
+<section>
+    <div class="container-fluid">
+        <div class="col-lg-12 col-md-12 dashboard-widget  pt-20 pb-20">
+            <div class="col-lg-12 col-md-12">
+                <div ng-show="uploader.isHTML5">
+                    <div uploader="uploader" id="dropzone">
+                        <div nv-file-over="" uploader="uploader" over-class="another-file-over-class" class="well my-drop-zone mb-0">
+                            <div class="upload-btn-wrapper">
+                                <button class="btn">Select File(s)</button>
+                                <input type="file" nv-file-select="" uploader="uploader" multiple name="myfile" resize-max-height="800" resize-max-width="800"
+                                    resize-quality="0.7" resize-type="image/jpg" ng-image-compress />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+</section>

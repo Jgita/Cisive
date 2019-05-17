@@ -1,0 +1,9 @@
+.form-row .signature {
+    
+    cursor: pointer;
+  }
+  .form-row .signature canvas {
+    
+    margin: 0 auto;
+    cursor: pointer;
+  }

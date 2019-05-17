@@ -1,0 +1,14 @@
+{
+  "name": "hmac-sha1",
+  "_cacheHeaders": {
+    "ETag": "W/\"5afd48ec-1332\"",
+    "Last-Modified": "Thu, 17 May 2018 09:18:36 GMT",
+    "Content-Length": "2045",
+    "Content-Type": "application/javascript"
+  },
+  "_release": "e-tag:W/\"5afd48e",
+  "main": "index.js",
+  "_source": "https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/hmac-sha1.js",
+  "_target": "*",
+  "_originalSource": "https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/hmac-sha1.js"
+}

@@ -1,0 +1,67 @@
+.dashBoardBtn{
+    background: transparent;
+    border: 0;
+}
+
+.input-group.stylish-input-group.search input {
+    
+        padding-left: 10px;
+    
+        /* padding-bottom: 0; */
+    
+    }
+   .input-group.stylish-input-group.search {
+    
+        border: 1px solid #dde0e3;
+    
+    }
+    
+.dashBoardBtnIcon {
+    border: 1px solid #94a9c9;
+    padding: 10px;
+    border-radius: 50%;
+    color: #6387bd;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.dashBoardBtnIcon:hover {
+    background: #4db2fa;
+    color: #fff;
+}
+
+.upload-photo-sucess{
+
+    border: 1px solid #32CD32 !important;
+    color: #32CD32;
+
+}
+
+.upload-photo-sucess:hover {
+    background: #00FF00 !important;
+    color: #fff !important;
+}
+
+.upload-photo-error{
+    border: 1px solid #B22222 !important;
+    color: #B22222;
+}
+
+.upload-photo-error:hover{
+    background: #FF0000 !important;
+    color: #fff !important;
+}
+.selected{
+    font-weight: bold;
+}
+
+.emailIcon {
+    margin-left: 5px; 
+}
+
+@media screen and (max-width: 920px) {
+    .emailIcon {
+        display: inline-block;
+        margin: 5px 0 0 0; 
+    }
+}

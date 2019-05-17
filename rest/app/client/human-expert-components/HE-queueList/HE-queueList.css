@@ -1,0 +1,25 @@
+  .table-wrapper .table>tbody>tr>td, .table-wrapper .table>tbody>tr>td label{
+    color: #000000;
+    font-weight: 700;
+  }
+  .table-wrapper .checkbox label::before{
+    border: 2px solid #000000;
+    font-weight: 700;
+  }
+  .custom_class {
+      pointer-events:none; 
+      /* background-color:grey;    */
+  }
+
+  .custom_class label, .custom_class td {
+    color: #999999 !important;
+  }
+
+  .custom_class .checkbox label::before {
+      border: 2px solid #999999 !important;
+      display: none;
+  } 
+
+  .alert-warning {
+    font-weight: 300;
+  }

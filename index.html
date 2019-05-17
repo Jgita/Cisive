@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html ng-app="carco" lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=11" />
+    <meta http-equiv="Cache-Control" content="no-cache" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="Mon, 26 Jul 1997 05:00:00 GMT" />
+
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web">
+    <link rel="stylesheet" href="rest/css/carco.css">
+</head>
+
+<body ng-controller="mainController">
+
+    <!-- handle mobile device back button functality for that sending page index to mobile end -->
+
+    <script>
+        function getPageIndex() {
+            Android.sendData(gPageNumber);
+        }
+        function getPageIndexiOS() {
+            return gPageNumber;
+        }
+    </script>
+    <div class="">
+        <div class="LoaderModel" ng-if="isLoader">
+            <div class="loader">
+            </div>
+        </div>
+        <div id="holder" class="holder-grey">
+            <div class="">
+                <div ng-class="{ 'alert': flash, 'alert-success': flash.type === 'success', 'alert-danger': flash.type === 'error' }" ng-if="flash"
+                    ng-bind="flash.message"></div>
+                <div ui-view></div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="node_modules/angular/angular.min.js"></script>
+    <!-- <script type="text/javascript" src="node_modules/angular-sanitize/angular-sanitize.min.js"></script> -->
+    <script type="text/javascript" src="bower_components/angular-sanitize/angular-sanitize.min.js"></script>
+    <script type="text/javascript" src="node_modules/underscore/underscore-min.js"></script>
+    <script type="text/javascript" src="bower_components/angular-animate/angular-animate.js"></script>
+    <script type="text/javascript" src="bower_components/jquery-ui/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="node_modules/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script type="text/javascript" src="node_modules/tether/dist/js/tether.min.js"></script>
+    <script type="text/javascript" src="node_modules/bootstrap/dist/js/bootstrap.min.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
+    <script type="text/javascript" src="bower_components/angular-messages/angular-messages.min.js"></script>
+    <script type="text/javascript" src="bower_components/moment/min/moment.min.js"></script>
+    <script type="text/javascript" src="bower_components/moment/min/moment-with-locales.min.js"></script>
+    <script type="text/javascript" src="node_modules/angular-cookies/angular-cookies.min.js"></script>
+    <script type="text/javascript" src="bower_components/angular-touch/angular-touch.min.js"></script>
+    <script type="text/javascript" src="vendor/angular-wizard.min.js"></script>
+    <script type="text/javascript" src="bower_components/ng-idle/angular-idle.min.js"></script>
+    <script type="text/javascript" src="bower_components/angular-button-spinner/dist/angular-button-spinner.min.js"></script>
+    <script type="text/javascript" src="bower_components/angular-css/angular-css.min.js"></script>
+    <script type="text/javascript" src="node_modules/signature_pad/dist/signature_pad.min.js"></script>
+    <script type="text/javascript" src="vendor/signature.js"></script>
+    <script type="text/javascript" src="node_modules/angular-resource/angular-resource.min.js"></script>
+    <script type="text/javascript" src="node_modules/datatables.net/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" src="node_modules/angular-datatables/dist/angular-datatables.min.js"></script>
+    <script type="text/javascript" src="node_modules/angular-file-upload/dist/angular-file-upload.min.js"></script>
+    <script type="text/javascript" src="node_modules/ng-popover/dist/angular-popover.min.js"></script>
+    <script type="text/javascript" src="node_modules/angular-toastr/dist/angular-toastr.tpls.min.js"></script>
+    <!-- <script type='text/javascript' src="node_modules/ng-infinite-scroll/build/ng-infinite-scroll.min.js"></script> -->
+    <script type='text/javascript' src="node_modules/angular-base64/angular-base64.min.js"></script>
+    <script type='text/javascript' src="node_modules/ng-image-appear/dist/ng-image-appear.min.js"></script>
+    <script type='text/javascript' src="bower_components/angularUtils-pagination/dirPagination.js"></script>
+    <script type="text/javascript" src="node_modules/angular-recaptcha/release/angular-recaptcha.min.js"></script>
+    <script type='text/javascript' src="node_modules/angular-pdfjs-viewer/bower_components/pdf.js-viewer/pdf.js"></script>
+    <script type='text/javascript' src="node_modules/angular-pdfjs-viewer/dist/angular-pdfjs-viewer.js"></script>
+
+
+    <script type="text/javascript" src="config.js"></script>
+    <script type="text/javascript" src="constants.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript" src="rest/services/authentication.service.js"></script>
+    <script type="text/javascript" src="rest/services/flash.service.js"></script>
+    <script type="text/javascript" src="rest/services/global.service.js"></script>
+    <script type="text/javascript" src="rest/services/dropDown.service.js"></script>
+
+
+
+    <!-- Fake user service for demo that uses local storage -->
+    <script type="text/javascript" src="rest/services/user.service.local-storage.js"></script>
+    <script type="text/javascript" src="rest/routes/routeConfig.js"></script>
+    <script type="text/javascript" src="rest/services/wizard.service.js"></script>
+    <script type="text/javascript" src="rest/controllers/mainController.js"></script>
+    <script type="text/javascript" src="rest/app/client/controllers/main-page.js"></script>
+    <script type="text/javascript" src="rest/app/client/services/province.js"></script>
+    <script type="text/javascript" src="vendor/rsa_encryption.js"></script>
+
+    <!-- login -->
+    <script type="text/javascript" src="rest/app/client/components/login/login.controller.js"></script>
+    <!-- register -->
+    <script type="text/javascript" src="rest/app/client/components/register/register.controller.js"></script>
+    <!-- Forgot Password -->
+    <script type="text/javascript" src="rest/app/client/components/forgotPassword/forgotPassword.controller.js"></script>
+    <!-- Reset Password -->
+    <script type="text/javascript" src="rest/app/client/components/resetPassword/resetPassword.controller.js"></script>
+
+    <script type="text/javascript" src="rest/directive/match-password.directive.js"></script>
+    <!-- Numbers Only Directive -->
+    <script type="text/javascript" src="rest/directive/numbersOnly.directive.js"></script>
+    <!-- onlyLetter.directive -->
+    <script type="text/javascript" src="rest/directive/onlyLetter.directive.js"></script>
+    <!-- customSort.directive -->
+    <script type="text/javascript" src="rest/directive/customSort.js"></script>
+    <!-- letterWithWhiteSpace.directive -->
+    <script type="text/javascript" src="rest/directive/letterWhiteSpace.directive.js"></script>
+    <!-- phoneInput.directive -->
+    <script type="text/javascript" src="rest/directive/phoneInput.directive.js"></script>
+    <!-- autoFill.directive -->
+    <script type="text/javascript" src="rest/directive/autoFill.js"></script>
+
+    <!-- Validation Messages Service -->
+    <script type="text/javascript" src="rest/app/client/services/validation.messages.service.js"></script>
+    <!-- Wizard -->
+    <script type="text/javascript" src="rest/app/client/components/wizard/wizard.directive.js"></script>
+    <!-- Insured Data -->
+    <script type="text/javascript" src="rest/app/client/components/insured-form/insured-form.directive.js"></script>
+    <!-- vehicleInfo-form -->
+    <script type="text/javascript" src="rest/app/client/components/vehicleInfo-form/vehicleInfo-form.directive.js"></script>
+    <!-- header content -->
+    <script type="text/javascript" src="rest/app/client/components/header-content/header-content.js"></script>
+    <!-- dashboard -->
+    <script type="text/javascript" src="rest/app/client/components/dashboard/dashboard.controller.js"></script>
+    <!-- odometerReading form-->
+    <script type="text/javascript" src="rest/app/client/components/odometerReading-form/odometerReading-form.directive.js"></script>
+    <!-- vehicleOption form-->
+    <script type="text/javascript" src="rest/app/client/components/vehicleOption-form/vehicleOption-form.directive.js"></script>
+    <!-- vehicleCondition-form -->
+    <script type="text/javascript" src="rest/app/client/components/vehicleCondition-form/vehicleCondition-form.directive.js"></script>
+    <!-- inspectionSummary-form -->
+    <script type="text/javascript" src="rest/app/client/components/inspectionSummary-form/inspectionSummary-form.directive.js"></script>
+    <!-- insuredSignature-modal -->
+    <script type="text/javascript" src="rest/app/client/components/insuredSignature-modal/insuredSignature-modal.js"></script>
+    <!-- inspectorSignature-modal -->
+    <script type="text/javascript" src="rest/app/client/components/inspectorSignature-modal/inspectorSignature-modal.js"></script>
+    <!-- inspectionSummary-modal -->
+    <script type="text/javascript" src="rest/app/client/components/inspectionSummary-modal/inspectionSummary-modal.js"></script>
+    <!-- QRRetake -->
+    <script type="text/javascript" src="rest/app/client/components/QRRetake/QRRetake.controller.js"></script>
+    <!-- inspectionPage -->
+    <script type="text/javascript" src="rest/app/client/components/inspectionPage/inspectionPage.js"></script>
+    <!-- damagePhoto -->
+    <script type="text/javascript" src="rest/app/client/components/damagePhoto/damagePhoto.controller.js"></script>
+    <script type="text/javascript" src="rest/app/client/components/damagePhoto/directive.js"></script>
+    <!-- input-focus -->
+    <script type="text/javascript" src="rest/directive/input-focus.directive.js"></script>
+    <!-- frontAndDriverSidePhotos -->
+    <script type="text/javascript" src="rest/app/client/components/frontAndDriverSidePhotos/frontAndDriverSidePhotos.controller.js"></script>
+    <!-- rearAndPassengerSidePhotos -->
+    <script type="text/javascript" src="rest/app/client/components/rearAndPassengerSidePhotos/rearAndPassengerSidePhotos.controller.js"></script>
+    <!-- EPAStickerPhotos -->
+    <script type="text/javascript" src="rest/app/client/components/EPAStickerPhotos/EPAStickerPhotos.controller.js"></script>
+    <!-- formsData.service -->
+    <script type="text/javascript" src="rest/services/formsData.service.js"></script>
+    <script type="text/javascript" src="rest/services/dropDown.service.js"></script>
+   
+    <!-- dashboard.Insured -->
+    <script type="text/javascript" src="rest/app/client/components/dashboard.Insured/dashboard.Insured.controller.js"></script>
+    <script type="text/javascript" src="rest/app/client/components/insuredPage/insuredPage.js"></script>
+    <script type="text/javascript" src="rest/app/client/components/uploadPhoto/uploadPhoto.controller.js"></script>
+    <!-- windshield-insured-data -->
+    <script type="text/javascript" src="rest/app/client/components/windshield-insured-form/windshield-insured-form.directive.js"></script>
+    <!-- windshield-damage-form -->
+    <script type="text/javascript" src="rest/app/client/components/windshield-damage-form/windshield-damage-form.directive.js"></script>
+    <!--windshield-inspection-summary-->
+    <script type="text/javascript" src="rest/app/client/components/windshield-inspection-summary/windshield-inspection-summary.directive.js"></script>
+    <!--windshield-insuredSignature-modal-->
+    <script type="text/javascript" src="rest/app/client/components/windshield-insuredSignature-modal/windshield-insuredSignature-modal.js"></script>
+
+    <!--windshield-inspectorSignature-modal-->
+    <script type="text/javascript" src="rest/app/client/components/windshield-inspectorSignature-modal/windshield-inspectorSignature-modal.js"></script>
+
+    <!--formProcessing-model-->
+    <script type="text/javascript" src="rest/app/client/components/formProcessing-model/formProcessing-model.controller.js"></script>
+    <!-- uploadPhotoInspector -->
+    <script type="text/javascript" src="rest/app/client/components/uploadPhotoInspector/uploadPhotoInspector.controller.js"></script>
+    <!-- windshield-inspectionSummary-modal -->
+    <script type="text/javascript" src="rest/app/client/components/windshield-inspectionSummary-modal/windshield-inspectionSummary-modal.js"></script>
+    <!-- windshield-uploadPhoto -->
+    <script type="text/javascript" src="rest/app/client/components/windshield-uploadPhoto/windshield-uploadPhoto.controller.js"></script>
+    <!-- Windshield-damagePhoto -->
+    <script type="text/javascript" src="rest/app/client/components/Windshield-damagePhoto/Windshield-damagePhoto.controller.js"></script>
+    <!-- Windshield-uploadPhotoInspector -->
+    <script type="text/javascript" src="rest/app/client/components/windshield-uploadPhotoInspector/windshield-uploadPhotoInspector.controller.js"></script>
+    <!-- Windshield-FullPhoto -->
+    <script type="text/javascript" src="rest/app/client/components/Windshield-fullPhoto/Windshield-fullPhoto.controller.js"></script>
+    <!-- Windshield-QRRetake -->
+    <script type="text/javascript" src="rest/app/client/components/windshield-QRRetake/windshield-QRRetake.controller.js"></script>
+
+    <!-- Windshield-QRRetake -->
+    <script type="text/javascript" src="rest/app/client/controllers/deletePopover.js"></script>
+    <!-- inspectorEmail-model -->
+    <script type="text/javascript" src="rest/app/client/components/inspectorEmail-model/inspectorEmail-model.js"></script>
+    <!-- windshieldEmail-model -->
+    <script type="text/javascript" src="rest/app/client/components/windshieldEmail-model/windshieldEmail-model.js"></script>
+    <!-- FAQ -->
+    <script type="text/javascript" src="rest/app/client/components/FAQ/FAQ.controller.js"></script>
+    <!-- FAQ-preInsurance -->
+    <script type="text/javascript" src="rest/app/client/components/FAQ-preInsurance/FAQ-preInsurance.controller.js"></script>
+    <!-- FAQ-windshield -->
+    <script type="text/javascript" src="rest/app/client/components/FAQ-windshield/FAQ-windshield.controller.js"></script>
+    <!-- profile -->
+    <script type="text/javascript" src="rest/app/client/components/profile/profile.controller.js"></script>
+    <!-- profile -->
+    <script type="text/javascript" src="rest/app/client/components/edit-profile/edit-profile.controller.js"></script>
+    <!-- new-inspection -->
+    <script type="text/javascript" src="rest/app/client/components/new-inspection/new-inspection.controller.js"></script>
+    <!-- Start human-expert -->
+    <script type="text/javascript" src="rest/app/client/human-expert-components/HA-login/HA-login.controller.js"></script>
+    <!-- human-expert HE-dashboard -->
+    <script type="text/javascript" src="rest/app/client/human-expert-components/HE-queueList/HE-queueList.controller.js"></script>
+    <!-- human-expert HE-landingPage -->
+    <script type="text/javascript" src="rest/app/client/human-expert-components/HE-landingPage/HE-landingPage.controller.js"></script>
+    <!-- human-expert HE-photoView -->
+    <script type="text/javascript" src="rest/app/client/human-expert-components/HE-photoView/HE-photoView.controller.js"></script>
+    <!-- HE-formProcessing-model -->
+    <script type="text/javascript" src="rest/app/client/human-expert-components/HE-formProcessing-model/HE-formProcessing-model.controller.js"></script>
+    <!-- photoView-model -->
+    <script type="text/javascript" src="rest/app/client/components/PhotoView-model/PhotoView-model.controller.js"></script>
+    <!-- confirmation-model -->
+    <script type="text/javascript" src="rest/app/client/components/confirmation-model/confirmation-model.controller.js"></script>
+    <!-- alert-model -->
+    <script type="text/javascript" src="rest/app/client/components/alert-model/alert-model.controller.js"></script>
+    <!-- photoMissing-model -->
+    <script type="text/javascript" src="rest/app/client/components/photoMissing-model/photoMissing-model.controller.js"></script>
+    <!-- editUploadedPhoto-model -->
+    <script type="text/javascript" src="rest/app/client/components/editUploadedPhoto-model/editUploadedPhoto-model.controller.js"></script>
+    <script type="text/javascript" src="rest/app/client/components/pdfView/pdfView.controller.js"></script>
+    <!-- tokenExpire-model -->
+    <script type="text/javascript" src="rest/app/client/components/tokenExpire-model/tokenExpire-model.controller.js"></script>
+    <!-- idle-model -->
+    <script type="text/javascript" src="rest/app/client/components/idle-model/idle-model.controller.js"></script>
+
+    <script type="text/javascript" src="rest/app/client/controllers/footer.js"></script>
+
+    <script type="text/javascript" src="rest/app/client/components/PDFView-AuthVIN/PDFView-AuthVIN.controller.js"></script>
+
+</body>
+
+</html>

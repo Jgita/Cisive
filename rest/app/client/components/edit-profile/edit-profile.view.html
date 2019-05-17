@@ -1,0 +1,71 @@
+<form name="editProfilForm" id="editProfilForm" ng-submit="editProfilSubmit()" role="form" novalidate>
+    <div class="profile">
+        <section class="content">
+            <div class="container-fluid">
+                <div class="info windshield-report">
+                    <h3 class="mb-20">
+                        Edit Profile
+                    </h3>
+                    <div class="details mb-30">
+                        <div class="row-eq-height clearfix">
+                            <div class="col-lg-6 col-md-6 cols border-collapse">
+                                <div class="form-row" ng-class="{ 'has-error': editProfilForm.firstName.$touched && editProfilForm.firstName.$error.required, 'has-success':editProfilForm.firstName.$valid}">
+                                    <label>First Name
+                                        <span class="asterisk">*</span>
+                                    </label>
+                                    <input type="text" class="form-control" name="firstName" ng-maxlength="50" ng-model="profileData.INSURED_FIRST_NAME"
+                                        required>
+                                    <span ng-show="showMessage(editProfilForm.firstName)" class="help-block">First name is required</span>
+                                    <span ng-show="editProfilForm.firstName.$dirty && editProfilForm.firstName.$error.maxlength" class="help-block">Max 50 char allowed</span>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 cols border-collapse">
+                                <div class="form-row">
+                                    <label>EMAIL</label>
+                                    <input type="text" class="form-control" ng-disabled="true" ng-model="profileData.USER_NAME">
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row-eq-height clearfix">
+                            <div class="col-lg-6 col-md-6 cols border-collapse">
+                                <div class="form-row" ng-class="{ 'has-error': editProfilForm.lastName.$touched && editProfilForm.lastName.$error.required, 'has-warning':editProfilForm.lastName.$error.minlength || editProfilForm.lastName.$error.maxlength, 'has-success':editProfilForm.lastName.$valid}">
+                                    <label>Last Name
+                                        <span class="asterisk">*</span>
+                                    </label>
+                                    <input type="text" ng-maxlength="50" name="lastName" class="form-control" ng-model="profileData.INSURED_LAST_NAME"
+                                        required>
+                                    <span ng-show="showMessage(editProfilForm.lastName)" class="help-block">Last name is required</span>
+                                    <span ng-show="editProfilForm.lastName.$dirty && editProfilForm.lastName.$error.maxlength" class="help-block">Max 50 char allowed</span>
+                                </div>
+
+                            </div>
+                            <div class="col-lg-6 col-md-6 cols border-collapse">
+                                <div class="form-row">
+                                    <label>Cell Phone
+                                        <span class="asterisk">*</span>
+                                    </label>
+                                    <input type="text" phone-input autocomplete="off" class="form-control" id="inputPhone" name="phoneNumber" ng-model="profileData.INSURED_CELL_PHONE"
+                                        required>
+                                    <span ng-show="showMessage(editProfilForm.phoneNumber)" class="help-block">Cell phone number is required</span>
+                                    <span class="help-block" ng-show="showMessageMaxLen(editProfilForm.phoneNumber)">Cell phone number should be 10 digits and non zero.</span>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="mb-30 text-right">
+                        <button class="btn btn-tertiary mr-10" ng-click="onCancel()" type="submit">Cancel</button>
+                        <button class="btn btn-secondary" id="editProfilForm" name="editProfilForm" ng-click="updateProfileInfo(profileData)">Update</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</form>
+<footer>
+    <!-- <div class="container-fluid">
+        &copy;2018 CARCO Group. All rights reserved.
+    </div> -->
+    <div ng-include="'rest/app/client/views/footer.html'"></div>
+</footer>

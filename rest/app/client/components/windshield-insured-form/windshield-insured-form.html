@@ -1,0 +1,412 @@
+<form name="windshieldInsuredForm" id="windshieldInsuredForm" ng-submit="windshieldSubmit()" role="form" novalidate>
+    <div class="info windshield-report">
+        <h2 class="mobile-title hidden-lg hidden-md">Insured Info</h2>
+        <!-- <h3 class="mb-20">Please provide the following information</h3> -->
+        <div class="details">
+            <h1>Policy Details</h1>
+            <div class="row-eq-height clearfix">
+                <div class="col-lg-4 col-md-4 border-collapse cols">
+                    <div class="form-row">
+                        <label>Date of Inspection:
+                            <span>{{date}}</span>
+                        </label>
+                        <label class="txt">Time of Inspection:
+                            <span>{{time}}</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 border-collapse cols">
+                    <div class="form-row">
+                        <label>Adverse Conditions</label>
+                        <select ng-model="WindshieldInsuredInfo.WIN_ADVERSE_CONDITIONS" class="form-control" name="adverse" id="adverse">
+                            <option value="" selected>Select Adverse Condition</option>
+                            <option ng-repeat="adverseCondition in adverseConditions" ng-selected="WindshieldInsuredInfo.WIN_ADVERSE_CONDITIONS == adverseCondition.ID"
+                                value="{{adverseCondition.ID}}">{{adverseCondition.ADVERSE_CONDITION}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 border-collapse cols">
+                    <div class="form-row" ng-class="{ 'has-error': windshieldInsuredForm.insuranceCompany.$touched && windshieldInsuredForm.insuranceCompany.$error.required, 'has-success':windshieldInsuredForm.insuranceCompany.$valid}">
+                        <label>Insurance Company
+                            <span class="asterisk">*</span>
+                        </label>
+                        <select ng-model="WindshieldInsuredInfo.WIN_INSPECTION_COMPANY_NAME" class="form-control" name="insuranceCompany" id="insuranceCompany"
+                            required>
+                            <option value="" selected>Select Insurance Company</option>
+                            <option ng-repeat="insuranceCompany in insuranceCompanies" ng-selected="WindshieldInsuredInfo.WIN_INSPECTION_COMPANY_NAME == insuranceCompany.Name"
+                                value="{{insuranceCompany.Name}}">{{insuranceCompany.Name}}</option>
+                        </select>
+                        <span class="select-arrow"></span>
+
+                        <span ng-show="showMessage(windshieldInsuredForm.insuranceCompany)" class="help-block">Insurance Company is required</span>
+
+                        <input ng-if="WindshieldInsuredInfo.WIN_INSPECTION_COMPANY_NAME == otherUnknownCompanyCode" autocomplete="off" ng-maxlength="35"
+                            type="text" name="winOtherInsuComp" id="style-Text" class="form-control" ng-model="WindshieldInsuredInfo.WIN_INSURANCE_COMPANY_NAME_OTHER"
+                            placeholder="Enter Insurance Company" auto-fill-sync required />
+                        <span ng-show="showMessage(windshieldInsuredForm.winOtherInsuComp)" class="help-block">Insurance Company is required</span>
+                        <span class="help-block" ng-show="(windshieldInsuredForm.winOtherInsuComp.$error.maxlength && windshieldInsuredForm.winOtherInsuComp.$dirty)">
+                            Insurance Company, should be max 35 letters
+                        </span>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row-eq-height clearfix">
+                <div class="col-lg-4 col-md-4 cols border-collapse">
+                    <div class="form-row" ng-class="{'has-error':windshieldInsuredForm.policyNo.$touched && windshieldInsuredForm.policyNo.$error.maxlength,'has-success':windshieldInsuredForm.policyNo.$valid}">
+                        <label>Policy or Application #</label>
+                        <input autocomplete="off" ng-maxlength="16" class="form-control" type="text" class="form-control" ng-model="WindshieldInsuredInfo.WIN_POLICY_NUMBER"
+                            placeholder="Policy or Application #" name="policyNo" id="policy-number" auto-fill-sync>
+                        <span class="help-block" ng-show="(windshieldInsuredForm.policyNo.$error.maxlength && windshieldInsuredForm.policyNo.$dirty) ">
+                            Policy or Application #, should be composed of max 16 letters & digits
+                        </span>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 cols border-collapse">
+
+                </div>
+                <div class="col-lg-4 col-md-4 cols border-collapse">
+
+                </div>
+            </div>
+        </div>
+        <div class="details">
+            <h1>Personal Details</h1>
+            <div class="clearfix row-eq-height">
+                <div class="col-lg-4 col-md-4 cols border-collapse">
+                    <div class="form-row" ng-class="{ 'has-error': windshieldInsuredForm.lastName.$touched && windshieldInsuredForm.lastName.$error.required || windshieldInsuredForm.lastName.$error.maxlength, 'has-success':windshieldInsuredForm.lastName.$valid}">
+                        <label>Insured’s Last Name or Company Name
+                            <span class="asterisk">*</span>
+                        </label>
+                        <input autocomplete="off" ng-maxlength="50" name="lastName" id="lastName" class="form-control" ng-model="WindshieldInsuredInfo.WIN_INSURED_LAST_NAME"
+                            placeholder="Insured’s Last Name or Company Name" auto-fill-sync required/>
+                        <span ng-show="showMessage(windshieldInsuredForm.lastName)" class="help-block">Insured’s Last Name or Company Name is required</span>
+                        <span class="help-block" ng-show="(windshieldInsuredForm.lastName.$error.maxlength && windshieldInsuredForm.lastName.$dirty) ">
+                            Insured’s Last Name or Company Name, should be max 50 letters
+                        </span>
+
+                        <div class="checkbox checkbox-primary mb-0">
+                            <input type="checkbox" id="checkboxCompany" class="styled" ng-model="WindshieldInsuredInfo.IS_WIN_FIRST_NAME_ENABLE">
+                            <label for="checkboxCompany">Check here if Company Name</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 cols border-collapse">
+
+                    <div ng-if="WindshieldInsuredInfo.IS_WIN_FIRST_NAME_ENABLE == true" class="form-row" ng-class="{ 'has-error': windshieldInsuredForm.firstName.$touched && windshieldInsuredForm.firstName.$error.maxlength, 'has-success':windshieldInsuredForm.firstName.$valid}">
+                        <label>Insured’s First Name
+
+                        </label>
+                        <input autocomplete="off" type="text" ng-maxlength="50" name="firstName" id="firstName" class="form-control" ng-model="WindshieldInsuredInfo.WIN_INSURED_FIRST_NAME"
+                            placeholder="Insured's First name" auto-fill-sync />
+
+                        <span class="help-block" ng-show="(windshieldInsuredForm.firstName.$error.maxlength && windshieldInsuredForm.firstName.$dirty) ">
+                            Insured's first name, should be max 50 letters
+                        </span>
+                    </div>
+
+                    <div ng-if="WindshieldInsuredInfo.IS_WIN_FIRST_NAME_ENABLE == false || WindshieldInsuredInfo.IS_WIN_FIRST_NAME_ENABLE == undefined"
+                        class="form-row" ng-class="{ 'has-error': windshieldInsuredForm.firstName.$touched && windshieldInsuredForm.firstName.$error.required, 'has-success':windshieldInsuredForm.firstName.$valid}">
+                        <label>Insured’s First Name
+                            <span class="asterisk">*</span>
+                        </label>
+                        <input autocomplete="off" type="text" ng-maxlength="50" name="firstName" id="firstName" class="form-control" ng-model="WindshieldInsuredInfo.WIN_INSURED_FIRST_NAME"
+                            placeholder="Insured's First name" auto-fill-sync required/>
+                        <span ng-if="WindshieldInsuredInfo.IS_WIN_FIRST_NAME_ENABLE == false || WindshieldInsuredInfo.IS_WIN_FIRST_NAME_ENABLE == undefined"
+                            ng-show="showMessage(windshieldInsuredForm.firstName)" class="help-block">Insured's first name is required</span>
+                        <span class="help-block" ng-show="(windshieldInsuredForm.firstName.$error.maxlength && windshieldInsuredForm.firstName.$dirty) ">
+                            Insured's first name, should be max 50 letters
+                        </span>
+                    </div>
+
+                </div>
+                <div class="col-lg-4 col-md-4 cols border-collapse">
+                    <div class="form-row" ng-class="{'has-error':windshieldInsuredForm.middleName.$error.maxlength || windshieldInsuredForm.middleName.$error.minlength,'has-success':windshieldInsuredForm.middleName.$valid}">
+                        <label>Insured’s Middle Initial (1 letter)</label>
+                        <input autocomplete="off" only-letters-input type="text" ng-minlength="1" ng-maxlength="1" name="middleName" id="middleName"
+                            class="form-control" ng-model="WindshieldInsuredInfo.WIN_INSURED_MIDDLE_NAME" placeholder="Enter Middle Initial"
+                            auto-fill-sync />
+                        <div ng-if="windshieldInsuredForm.middleName.$touched || signupSubmitted">
+                            <span class="help-block" ng-show="((windshieldInsuredForm.middleName.$error.minlength || windshieldInsuredForm.middleName.$error.maxlength) && windshieldInsuredForm.middleName.$dirty) ">
+                                Insured’s middle name should be max 1 character
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="row-eq-height clearfix">
+                <div class="col-lg-4 col-md-4 cols border-collapse" id="insuredAdd">
+                    <div class="form-row" ng-class="{ 'has-error': windshieldInsuredForm.address.$touched && windshieldInsuredForm.address.$error.required || windshieldInsuredForm.address.$error.maxlength, 'has-success':windshieldInsuredForm.address.$valid}">
+                        <label>Insured’s Street Address
+                            <span class="asterisk">*</span>
+                        </label>
+                        <textarea class="form-control" name="address" ng-maxlength="150" placeholder="Enter Street Address" ng-model="WindshieldInsuredInfo.WIN_INSURED_ADDRESS "
+                            id="exampleTextarea" rows="2" auto-fill-sync required></textarea>
+                        <span ng-show="showMessage(windshieldInsuredForm.address)" ng-show="windshieldInsuredForm.address.$touched && windshieldInsuredForm.address.$error.required"
+                            class="help-block">Insured's address is required</span>
+                        <span class="help-block" ng-show="(windshieldInsuredForm.address.$error.maxlength && windshieldInsuredForm.address.$dirty) ">
+                            Insured's address, should be composed of max 150 letters & digits
+                        </span>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 cols border-collapse">
+                    <div class="form-row" ng-class="{ 'has-error': windshieldInsuredForm.town.$touched && windshieldInsuredForm.town.$error.required || windshieldInsuredForm.town.$error.maxlength, 'has-success':windshieldInsuredForm.town.$valid}">
+                        <label>Insured’s City/Town
+                            <span class="asterisk">*</span>
+                        </label>
+                        <input autocomplete="off" letter-white-space type="text" ng-maxlength="20" name="town" id="town" class="form-control" ng-model="WindshieldInsuredInfo.WIN_INSURED_TOWN"
+                            placeholder="Enter City/Town" auto-fill-sync required/>
+                        <span ng-show="showMessage(windshieldInsuredForm.town)" class="help-block">Insured town is required.
+                        </span>
+                        <span class="help-block" ng-show="(windshieldInsuredForm.town.$error.maxlength && windshieldInsuredForm.town.$dirty) ">
+                            Insured’s town, should be max 20 letters
+                        </span>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 cols border-collapse">
+                    <div class="form-row" ng-class="{ 'has-error': windshieldInsuredForm.state1.$touched && windshieldInsuredForm.state1.$error.required, 'has-success':windshieldInsuredForm.state1.$valid}">
+                        <label>Insured’s State/Province
+                            <span class="asterisk">*</span>
+                        </label>
+                        <select ng-model="WindshieldInsuredInfo.WIN_INSURED_STATE" class="form-control" name="state1" id="state1" required>
+                            <option value="" selected>Select state</option>
+                            <!-- <option ng-repeat="state in states" ng-selected="WindshieldInsuredInfo.WIN_INSURED_STATE == state.id" ng-if="state.IS_WINSHIELD_ENABLED" -->
+                            <!-- <option ng-repeat="state in states | limitTo: 49: 0" ng-selected="WindshieldInsuredInfo.WIN_INSURED_STATE == state.id" value="{{state.id}}">{{state.name}}</option> -->
+                            <option ng-repeat="state in filterStatesForProvince()" ng-selected="WindshieldInsuredInfo.WIN_INSURED_STATE == state.id"
+                                value="{{state.id}}">{{state.name}}</option>
+
+
+                        </select>
+                        <span class="select-arrow"></span>
+                        <span ng-show="showMessage(windshieldInsuredForm.state1)" class="help-block">State/Province is required</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row-eq-height clearfix">
+                <div class="col-lg-4 col-md-4 cols border-collapse">
+                    <div class="form-row" ng-class="{ 'has-error': windshieldInsuredForm.zipCode.$touched && windshieldInsuredForm.zipCode.$error.required, 'has-warning':windshieldInsuredForm.zipCode.$error.pattern, 'has-success':windshieldInsuredForm.zipCode.$valid }">
+                        <label>Insured’s Zip/Postal Code
+                            <span class="asterisk">*</span>
+                        </label>
+                        <input autocomplete="off" auto-fill-sync class="form-control" type="tel" maxlength="5" numbers-only ng-pattern="/^(?!0{5})[0-9]{5}$/"
+                            class="form-control" ng-model="WindshieldInsuredInfo.WIN_INSURED_ZIPCODE" placeholder="Enter Zip Code"
+                            value="" id="zip-code" name="zipCode" required>
+                        <span ng-show="showMessage(windshieldInsuredForm.zipCode)" class="help-block">Zipcode is required</span>
+                        <span ng-show="windshieldInsuredForm.zipCode.$error.pattern" class="help-block"> The US zipcode must contain 5 digits and non zero. </span>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-4 cols border-collapse">
+                    <div class="form-row">
+                        <div class="radio radio-inline radio-primary">
+                            <input id="radio-Mobile" name="PhoneNoRadio" type="radio" ng-checked="typeOfPhoneNumbers[0].checked" ng-click="handleRadioClick(typeOfPhoneNumbers[0])"
+                                value="Mobile" ng-model="WindshieldInsuredInfo.selectedValue.name">
+                            <label for="radio-Mobile">Mobile
+                                <span class="asterisk" ng-if="isRequired">*</span>
+                            </label>
+                        </div>
+                        <div class="radio radio-inline pl-0"> OR </div>
+                        <div class="radio radio-inline radio-primary">
+                            <input id="radio-Landline" name="PhoneNoRadio" type="radio" ng-checked="typeOfPhoneNumbers[1].checked" ng-click="handleRadioClick(typeOfPhoneNumbers[1])"
+                                value="Landline" ng-model="WindshieldInsuredInfo.selectedValue.name">
+                            <label for="radio-Landline"> Landline
+                                <span class="asterisk" ng-if="isRequired">*</span>
+                            </label>
+                        </div>
+                        <div ng-if="showMobile" class="mt-10">
+                            <input type="tel" auto-fill-sync autocomplete="off" class="form-control" id="inputPhone" name="phoneNumber" phone-input placeholder="Enter Mobile Number"
+                                ng-change="cellPhoneUpdate('cell')" ng-model="WindshieldInsuredInfo.WIN_INSURED_CELL_PHONE" ng-required="isRequired">
+
+                            <span ng-show="showMessage(windshieldInsuredForm.phoneNumber)" class="help-block">Phone number is required</span>
+                            <span class="help-block" ng-show="windshieldInsuredForm.phoneNumber.$error.phoneInput">Phone number should be 10 digits and non zero.</span>
+
+                        </div>
+
+                        <div ng-if="showLandline" class="mt-10">
+                            <input type="tel" auto-fill-sync phone-input autocomplete="off" class="form-control" id="inputPhone" name="landline" placeholder="Enter Landline Number"
+                                ng-change="cellPhoneUpdate('landLine')" ng-model="WindshieldInsuredInfo.WIN_INSURED_LANDLINE"
+                                ng-required="isRequired">
+
+                            <span ng-show="showMessage(windshieldInsuredForm.landline)" class="help-block">Landline is required</span>
+                            <span class="help-block" ng-show="windshieldInsuredForm.landline.$error.phoneInput">Landline number should be 10 digits and non zero.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-4 cols border-collapse">
+                    <div class="form-row" ng-class="{ 'has-error':windshieldInsuredForm.email.$error.pattern  && windshieldInsuredForm.email.$touched || windshieldInsuredForm.email.$error.required, 'has-success':windshieldInsuredForm.email.$valid}">
+                        <label>Insured’s Email Address
+                            <span class="asterisk">*</span>
+                        </label>
+                        <input autocomplete="off" auto-fill-sync type="text" name="email" id="email" class="form-control" ng-model="WindshieldInsuredInfo.WIN_INSURED_EMAIL"
+                            placeholder="Enter Email" ng-pattern="/^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z]{2,4}$/" required/>
+                        <span ng-show="showMessage(windshieldInsuredForm.email)" class="help-block">Email Address is required</span>
+                        <span ng-show="windshieldInsuredForm.email.$dirty && windshieldInsuredForm.email.$error.pattern" class="help-block">Please enter valid Email Address</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="details">
+            <h1>Vehicle Information</h1>
+            <div class="row-eq-height  clearfix">
+                <div class="col-lg-8 col-md-8 cols border-collapse">
+                    <div class="form-row form-group" ng-class="{ 'has-error': windshieldInsuredForm.VIN.$error.pattern || windshieldInsuredForm.VIN.$error.required && windshieldInsuredForm.VIN.$touched || windshieldInsuredForm.VIN.$error.maxlength || windshieldInsuredForm.VIN.$error.minlength, 'has-success':windshieldInsuredForm.VIN.$valid}">
+                        <label>Vehicle Identification Number (VIN). Obtain from Dashboard. (Usually 17 Digits)
+                            <span class="asterisk">*</span>
+                        </label>
+                        <input type="text" auto-fill-sync ng-pattern="/^[AaBbCcDdEeFfGgHhJjKkLlMmNnPpRrSsTtUuVvWwXxYyZz1234567890]{5,17}$/" autocomplete="off"
+                            class="form-control" style="text-transform: uppercase" name="VIN" id="vin" placeholder="Enter VIN"
+                            ng-minlength="5" ng-maxlength="17" ng-model="WindshieldInsuredInfo.WIN_VEHICLE_IDENTIFICATION_NUMBER"
+                            ng-model-options="{ updateOn: 'blur'}" ng-change="OnBlurVINValidation(WindshieldInsuredInfo.WIN_VEHICLE_IDENTIFICATION_NUMBER)"
+                            required>
+
+                        <!-- for ng-blur -->
+
+                        <!-- <input type="text" ng-blur='OnBlurVINValidation()' ng-pattern="/^[AaBbCcDdEeFfGgHhJjKkLlMmNnPpRrSsTtUuVvWwXxYyZz1234567890]{5,17}$/"
+                            autocomplete="off" class="form-control" style="text-transform: uppercase" name="VIN" id="vin" placeholder="Enter VIN"
+                            ng-minlength="5" ng-maxlength="17" ng-model="WindshieldInsuredInfo.WIN_VEHICLE_IDENTIFICATION_NUMBER"
+                            required> -->
+
+                        <span ng-show="showMessage(windshieldInsuredForm.VIN)" class="help-block">VIN is required</span>
+                        <span ng-show="WindshieldInsuredInfo.WIN_VEHICLE_IDENTIFICATION_NUMBER.length && WindshieldInsuredInfo.WIN_VEHICLE_IDENTIFICATION_NUMBER == 0"
+                            class="help-block">VIN should be non zero.</span>
+                        <span ng-show="windshieldInsuredForm.VIN.$dirty && windshieldInsuredForm.VIN.$error.pattern" class="help-block">
+                            VIN should be between 5 and 17 characters, composed of letters and digits. Also I or i, O or o, Q or q letters are not allowed</span>
+
+                    </div>
+
+                    <div class="form-row" ng-class="{ 'has-error': windshieldInsuredForm.winOdometer.$touched && windshieldInsuredForm.winOdometer.$error.required, 'has-warning':windshieldInsuredForm.winOdometer.$error.pattern,  'has-success':windshieldInsuredForm.winOdometer.$valid }">
+                        <label>Odometer
+                            <span class="asterisk">*</span>
+                        </label>
+                        <h3>(Do not include tenths)</h3>
+                        <input class="form-control" autocomplete="off" type="text" minlength="1" maxlength="6" numbers-only ng-pattern="/^(?!0+$)[0-9]{1,6}$/"
+                            class="form-control" ng-model="WindshieldInsuredInfo.WIN_ODOMETER" placeholder="Enter Odometer Reading"
+                            value="" name="winOdometer" auto-fill-sync required>
+                        <!-- <span class="help-block" ng-show="((windshieldInsuredForm.winOdometer.$error.minlength || windshieldInsuredForm.winOdometer.$error.maxlength) && windshieldInsuredForm.winOdometer.$dirty) ">
+                            Odometer reading should not be longer than 6 digits.
+                        </span> -->
+                        <span ng-show="showMessage(windshieldInsuredForm.winOdometer)" class="help-block">Odometer reading is required</span>
+                        <span ng-show="windshieldInsuredForm.winOdometer.$error.pattern" class="help-block"> Odometer reading cannot be zero.</span>
+                    </div>
+
+                </div>
+                <div class="col-lg-4 col-md-4 cols border-collapse">
+                    <div class="form-row" ng-class="{ 'has-error': windshieldInsuredForm.plateNo.$touched && windshieldInsuredForm.plateNo.$error.required, 'has-success':windshieldInsuredForm.plateNo.$valid}">
+                        <label>Plate #
+                            <span class="asterisk">*</span>
+                        </label>
+
+                        <input ng-if="WindshieldInsuredInfo.WIN_LICENSE_PLATE_NA == false || WindshieldInsuredInfo.WIN_LICENSE_PLATE_NA == undefine"
+                            type="text" autocomplete="off" class="form-control" style="text-transform: uppercase" ng-minlength="2"
+                            ng-maxlength="8" id="plateNo" name="plateNo" placeholder="Enter Plate Number" ng-model="WindshieldInsuredInfo.WIN_LICENSE_PLATE"
+                            auto-fill-sync required>
+
+                        <span ng-show="showMessage(windshieldInsuredForm.plateNo)" class="help-block">Plate number is required</span>
+                        <span class="help-block" ng-show="((windshieldInsuredForm.plateNo.$error.minlength || windshieldInsuredForm.plateNo.$error.maxlength) && windshieldInsuredForm.plateNo.$dirty) ">
+                            Plate number length should be min 2 & max 8.
+                        </span>
+
+                        <div class="checkbox checkbox-primary mb-0">
+                            <input type="checkbox" id="plateNA" class="styled" ng-change="plateNAStatusForWinState(WindshieldInsuredInfo.WIN_LICENSE_PLATE_NA)"
+                                ng-model="WindshieldInsuredInfo.WIN_LICENSE_PLATE_NA">
+                            <label for="plateNA">Check Here if No Plate #</label>
+                        </div>
+
+                    </div>
+
+                    <div class="form-row" ng-class="{ 'has-error': windshieldInsuredForm.state.$touched && windshieldInsuredForm.state.$error.required, 'has-success':windshieldInsuredForm.state.$valid}">
+                        <label>State of Vehicle Plate
+                            <span class="asterisk">*</span>
+                        </label>
+                        <select ng-model="WindshieldInsuredInfo.WIN_STATE" class="form-control" name="state" id="state" required>
+                            <option value="" selected>Select state</option>
+                            <option ng-repeat="state in states" ng-selected="WindshieldInsuredInfo.WIN_STATE == state.id" value="{{state.id}}">{{state.name}}</option>
+                            <!-- <option ng-repeat="state in statesForPlate" ng-selected="WindshieldInsuredInfo.WIN_STATE == state.id" ng-if="state.IS_WINSHIELD_ENABLED"
+                                value="{{state.id}}">{{state.name}}</option> -->
+                        </select>
+                        <span class="select-arrow"></span>
+                        <span ng-show="showMessage(windshieldInsuredForm.state)" class="help-block">State is required</span>
+
+                        <!-- <input ng-if="WindshieldInsuredInfo.WIN_STATE == '61'" auto-fill-sync autocomplete="off" ng-maxlength="20" type="text" name="winStateVehiclePlateOther"
+                            id="winStateVehiclePlateOther" class="form-control" ng-model="WindshieldInsuredInfo.WIN_STATE_OF_VEHICLE_PLATE_OTHER"
+                            placeholder="Enter State of Vehicle Plate" required />
+                        <span ng-show="showMessage(windshieldInsuredForm.winStateVehiclePlateOther)" class="help-block">State is required</span>
+                        <span class="help-block" ng-show="windshieldInsuredForm.winStateVehiclePlateOther.$error.maxlength && windshieldInsuredForm.winStateVehiclePlateOther.$dirty">
+                            State should be max 20 letters
+                        </span> -->
+                    </div>
+                </div>
+            </div>
+            <div class="row-eq-height clearfix">
+                <div class="col-lg-4 col-md-4 border-collapse cols">
+                    <div class="form-row" ng-class="{ 'has-error': windshieldInsuredForm.winsetyear.$touched && windshieldInsuredForm.winsetyear.$error.required, 'has-success':windshieldInsuredForm.winsetyear.$valid}">
+                        <label>Year
+                            <span class="asterisk">*</span>
+                        </label>
+                        <select class="form-control" id="win-setyear" name="winsetyear" ng-model="WindshieldInsuredInfo.WIN_YEAR" required>
+                            <option value="">Select Year</option>
+                            <option ng-repeat="option in years" ng-if="option.LIST_OF_YEARS1 <= currentYear" ng-selected="WindshieldInsuredInfo.WIN_YEAR == option.LIST_OF_YEARS1"
+                                value="{{option.ID}}">{{option.LIST_OF_YEARS1}}</option>
+                        </select>
+                        <span ng-show="showMessage(windshieldInsuredForm.winsetyear)" class="help-block">Year is required</span>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-4 cols border-collapse">
+                    <div class="form-row" ng-class="{ 'has-error': windshieldInsuredForm.setMake.$touched && windshieldInsuredForm.setMake.$error.required, 'has-success':windshieldInsuredForm.setMake.$valid}">
+                        <label>Make
+                            <span class="asterisk">*</span>
+                        </label>
+
+
+                        <select class="form-control" name="setMake" ng-model="WindshieldInsuredInfo.WIN_MAKE" ng-change="makeSelected(WindshieldInsuredInfo.WIN_MAKE)"
+                            required>
+                            <option value="">Select Make</option>
+                            <option ng-repeat="option in makes" ng-selected="WindshieldInsuredInfo.WIN_MAKE == option.ID" value="{{option.ID}}">{{option.MAKE1}}</option>
+                        </select>
+                        <span ng-show="showMessage(windshieldInsuredForm.setMake)" class="help-block">Make is required</span>
+
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-4 cols border-collapse">
+                    <div class="form-row" ng-class="{ 'has-error': windshieldInsuredForm.setModel.$touched && windshieldInsuredForm.setModel.$error.required, 'has-success':windshieldInsuredForm.setModel.$valid}">
+                        <label>Model
+                            <span class="asterisk">*</span>
+                        </label>
+
+                        <select class="form-control" name="setModel" ng-model="WindshieldInsuredInfo.WIN_MODEL" ng-change="winModelUpdate(WindshieldInsuredInfo.WIN_MODEL)"
+                            required>
+                            <option value="">Select Model </option>
+
+                            <option ng-repeat="option in models" ng-if="option.$id != undefine" ng-selected="WindshieldInsuredInfo.WIN_MODEL == option.MODEL1"
+                                value="{{option.MODEL1}}">{{option.MODEL1}}</option>
+                            <option ng-if="models != null" value="OTHER">OTHER</option>
+                        </select>
+
+                        <span ng-show="showMessage(windshieldInsuredForm.setModel)" class="help-block">Model is required</span>
+
+                        <input ng-if="WindshieldInsuredInfo.WIN_MODEL == 'OTHER'" auto-fill-sync autocomplete="off" ng-maxlength="20" type="text"
+                            name="modelText" id="style-Text" class="form-control" ng-model="WindshieldInsuredInfo.WIN_MODEL_OTHER"
+                            placeholder="Enter Model" required />
+                        <span ng-show="showMessage(windshieldInsuredForm.modelText)" class="help-block">Model is required</span>
+                        <span class="help-block" ng-show="(windshieldInsuredForm.modelText.$error.maxlength && windshieldInsuredForm.modelText.$dirty) ">
+                            Model, should be max 20 letters
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-30 text-right mt-20">
+            <button type="button" class="btn btn-tertiary" ng-click="onCancel()">Cancel</button>
+            <button id="windshieldInsuredForm" name="windshieldInsuredForm" type="submit" class="btn btn-secondary" ng-click="goNext(WindshieldInsuredInfo)">Save & Continue</button>
+
+        </div>
+    </div>
+</form>

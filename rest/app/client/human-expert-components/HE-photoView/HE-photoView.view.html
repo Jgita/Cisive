@@ -1,0 +1,40 @@
+<div class="humanExpertLandingPage">
+    <div ng-if="autoAcceptStatus" class="alert alert-danger text-center mb-0">
+        <strong>Alert!</strong> 20 second timer is over, the photo has been auto-approved.
+        <!-- <a href="#" class="alert-link">read this message</a>. -->
+    </div>
+    <section class="photoReview pt-15">
+        <div class="photoPopup">
+
+            <!-- <p ng-if="autoAcceptStatus">30 second timer is over, the photo has been auto-approved.</p> -->
+            <div class="photoHeader text-center">
+                    <button ng-if="!autoAcceptStatus" type="button" class="close" ng-click="close()">&times;</button>
+                <h6 class="headingColor">
+                    {{photoType}}
+                    <!-- {{photoType}} PHOTO REVIEW -->
+                </h6>
+            </div>
+            <div id="loader"></div>
+            <div class="photoBody">
+
+                <div style="display:none;" id="myDiv" class=" photo animate-bottom">
+                    <img data-ng-src="data:image/png;base64,{{photoReview}}" responsive transition-duration="1s" alt="">
+                </div>
+            </div>
+
+            <div class="photofooter">
+                <div ng-if="!autoAcceptStatus" ng-show="!dataLoading">
+                    <button class="btn-primary" ng-disabled="dataLoading" button-spinner="RdataLoading" ng-click="rejectPhoto()">
+                        Reject
+                    </button>
+                    <button class="btn-warning" ng-disabled="dataLoading" button-spinner="AdataLoading" ng-click="acceptPhoto()">
+                        Accept
+                    </button>
+                </div>
+                <div ng-if="autoAcceptStatus">
+                    <button type="button" class="btn btn-sm btn-no" ng-click="closeModal()">Close</button>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

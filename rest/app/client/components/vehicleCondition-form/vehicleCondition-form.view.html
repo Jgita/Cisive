@@ -1,0 +1,285 @@
+<div class="info vehicle-conditions vehicleConditions">
+	<form name="vehicleCondForm" id="vehicleCondForm" ng-submit="vehicleCondSubmit()" role="form" novalidate>
+		<h2 class="mobile-title hidden-lg hidden-md">Vehicle Condition</h2>
+		<!-- <h3 class="mb-20">Please provide the following information</h3> -->
+		<div class="details">
+			<div class="row1 clearfix">
+				<h1>Physical Condition/Damage</h1>
+				<div class="form-row border-collapse min-height-auto">
+					<div class="checkbox checkbox-primary">
+						<input id="damage1" class="styled" type="checkbox" ng-click='uncheckAll()' ng-model="vehicleCondInfo.NO_EXISTING_DAMAGE_RUST_MISSING_PART ">
+						<label for="damage1">Check here if NO existing damage, rust or missing parts.</label>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="details">
+			<div class="col-lg-12 col-md-12">
+				<div class="row">
+					<div class="col-md-4">
+						<h1 class="headingInline">Damaged</h1>
+						<h1 class="headingInline2">Rusted</h1>
+
+						<div class="checkbox checkbox-primary">
+							<input id="chkbox2" class="styled" type="checkbox" ng-checked="checkall" ng-disabled="vehicleCondInfo.NO_EXISTING_DAMAGE_RUST_MISSING_PART"
+							 ng-model="vehicleCondInfo.FRONT_BUMPER_DAMAGE">
+							<label for="chkbox2">01 Front bumper</label>
+
+							<input id="rustchkbox2" class="styled" type="checkbox" ng-checked="checkall" ng-disabled="vehicleCondInfo.NO_EXISTING_DAMAGE_RUST_MISSING_PART"
+							 ng-model="vehicleCondInfo.FRONT_BUMPER_RUST">
+							<label class="rustedCheckbox" for="rustchkbox2"></label>
+						</div>
+						<div class="checkbox checkbox-primary">
+							<input id="chkbox3" class="styled" type="checkbox" ng-checked="checkall" ng-disabled="vehicleCondInfo.NO_EXISTING_DAMAGE_RUST_MISSING_PART"
+							 ng-model="vehicleCondInfo.REAR_BUMPER_DAMAGE">
+							<label for="chkbox3">02 Rear bumper</label>
+
+							<input id="rustchkbox3" class="styled" type="checkbox" ng-checked="checkall" ng-disabled="vehicleCondInfo.NO_EXISTING_DAMAGE_RUST_MISSING_PART"
+							 ng-model="vehicleCondInfo.REAR_BUMPER_RUST">
+							<label class="rustedCheckbox" for="rustchkbox3"></label>
+						</div>
+						<div class="checkbox checkbox-primary">
+							<input id="chkbox4" class="styled" type="checkbox" ng-checked="checkall" ng-disabled="vehicleCondInfo.NO_EXISTING_DAMAGE_RUST_MISSING_PART"
+							 ng-model="vehicleCondInfo.FENDER_LEFT_FRONT_DAMAGE">
+							<label for="chkbox4">03 Fender left front</label>
+
+							<input id="rustchkbox4" class="styled" type="checkbox" ng-checked="checkall" ng-disabled="vehicleCondInfo.NO_EXISTING_DAMAGE_RUST_MISSING_PART"
+							 ng-model="vehicleCondInfo.FENDER_LEFT_FRONT_RUST">
+							<label class="rustedCheckbox" for="rustchkbox4"></label>
+						</div>
+						<div class="checkbox checkbox-primary">
+							<input id="chkbox5" class="styled" type="checkbox" ng-checked="checkall" ng-disabled="vehicleCondInfo.NO_EXISTING_DAMAGE_RUST_MISSING_PART"
+							 ng-model="vehicleCondInfo.FENDER_RIGHT_FRONT_DAMAGE">
+							<label for="chkbox5">04 Fender right front</label>
+
+							<input id="rustchkbox5" class="styled" type="checkbox" ng-checked="checkall" ng-disabled="vehicleCondInfo.NO_EXISTING_DAMAGE_RUST_MISSING_PART"
+							 ng-model="vehicleCondInfo.FENDER_RIGHT_FRONT_RUST">
+							<label class="rustedCheckbox" for="rustchkbox5"></label>
+						</div>
+						<div class="checkbox checkbox-primary">
+							<input id="chkbox6" class="styled" type="checkbox" ng-checked="checkall" ng-disabled="vehicleCondInfo.NO_EXISTING_DAMAGE_RUST_MISSING_PART"
+							 ng-model="vehicleCondInfo.DOOR_LEFT_FRONT_DAMAGE ">
+							<label for="chkbox6">05 Door left front</label>
+
+							<input id="rustchkbox6" class="styled" type="checkbox" ng-checked="checkall" ng-disabled="vehicleCondInfo.NO_EXISTING_DAMAGE_RUST_MISSING_PART"
+							 ng-model="vehicleCondInfo.DOOR_LEFT_FRONT_RUST">
+							<label class="rustedCheckbox" for="rustchkbox6"></label>
+						</div>
+						<div class="checkbox checkbox-primary">
+							<input id="chkbox7" class="styled" type="checkbox" ng-checked="checkall" ng-disabled="vehicleCondInfo.NO_EXISTING_DAMAGE_RUST_MISSING_PART"
+							 ng-model="vehicleCondInfo.DOOR_RIGHT_FRONT_DAMAGE">
+							<label for="chkbox7">06 Door right front</label>
+
+							<input id="rustchkbox7" class="styled" type="checkbox" ng-checked="checkall" ng-disabled="vehicleCondInfo.NO_EXISTING_DAMAGE_RUST_MISSING_PART"
+							 ng-model="vehicleCondInfo.DOOR_RIGHT_FRONT_RUST">
+							<label class="rustedCheckbox" for="rustchkbox7"></label>
+						</div>
+						<div class="checkbox checkbox-primary">
+							<input id="chkbox8" class="styled" type="checkbox" ng-checked="checkall" ng-disabled="vehicleCondInfo.NO_EXISTING_DAMAGE_RUST_MISSING_PART"
+							 ng-model="vehicleCondInfo.DOOR_LEFT_REAR_DAMAGE ">
+							<label for="chkbox8">07 Door left rear</label>
+
+							<input id="rustchkbox8" class="styled" type="checkbox" ng-checked="checkall" ng-disabled="vehicleCondInfo.NO_EXISTING_DAMAGE_RUST_MISSING_PART"
+							 ng-model="vehicleCondInfo.DOOR_LEFT_REAR_RUST">
+							<label class="rustedCheckbox" for="rustchkbox8"></label>
+						</div>
+						<div class="checkbox checkbox-primary">
+							<input id="chkbox9" class="styled" type="checkbox" ng-checked="checkall" ng-disabled="vehicleCondInfo.NO_EXISTING_DAMAGE_RUST_MISSING_PART"
+							 ng-model="vehicleCondInfo.DOOR_RIGHT_REAR_DAMAGE ">
+							<label for="chkbox9">08 Door right rear</label>
+
+							<input id="rustchkbox9" class="styled" type="checkbox" ng-checked="checkall" ng-disabled="vehicleCondInfo.NO_EXISTING_DAMAGE_RUST_MISSING_PART"
+							 ng-model="vehicleCondInfo.DOOR_RIGHT_REAR_RUST">
+							<label class="rustedCheckbox" for="rustchkbox9"></label>
+						</div>
+					</div>
+
+
+					<div class="col-md-4 padding0">
+						<h1 class="headingInline">Damaged</h1>
+						<h1 class="headingInline2">Rusted</h1>
+						<div class="checkbox checkbox-primary">
+							<input id="chkbox10" class="styled" type="checkbox" ng-checked="checkall" ng-disabled="vehicleCondInfo.NO_EXISTING_DAMAGE_RUST_MISSING_PART"
+							 ng-model="vehicleCondInfo.QUARTER_PANEL_LEFT_REAR_DAMAGE">
+							<label for="chkbox10">09 Quarter panel left rear</label>
+
+							<input id="rustchkbox10" class="styled" type="checkbox" ng-checked="checkall" ng-disabled="vehicleCondInfo.NO_EXISTING_DAMAGE_RUST_MISSING_PART"
+							 ng-model="vehicleCondInfo.QUARTER_PANEL_LEFT_REAR_RUST">
+							<label class="rustedCheckbox" for="rustchkbox10"></label>
+						</div>
+						<div class="checkbox checkbox-primary">
+							<input id="chkbox11" class="styled" type="checkbox" ng-checked="checkall" ng-disabled="vehicleCondInfo.NO_EXISTING_DAMAGE_RUST_MISSING_PART"
+							 ng-model="vehicleCondInfo.QUARTER_PANEL_RIGHT_REAR_DAMAGE">
+							<label for="chkbox11">10 Quarter panel right rear</label>
+
+							<input id="rustchkbox11" class="styled" type="checkbox" ng-checked="checkall" ng-disabled="vehicleCondInfo.NO_EXISTING_DAMAGE_RUST_MISSING_PART"
+							 ng-model="vehicleCondInfo.QUARTER_PANEL_RIGHT_REAR_RUST">
+							<label class="rustedCheckbox" for="rustchkbox11"></label>
+						</div>
+						<div class="checkbox checkbox-primary">
+							<input id="chkbox12" class="styled" type="checkbox" ng-checked="checkall" ng-disabled="vehicleCondInfo.NO_EXISTING_DAMAGE_RUST_MISSING_PART"
+							 ng-model="vehicleCondInfo.HOOD_PANEL_DAMAGE">
+							<label for="chkbox12">11 Hood panel</label>
+
+							<input id="rustchkbox12" class="styled" type="checkbox" ng-checked="checkall" ng-disabled="vehicleCondInfo.NO_EXISTING_DAMAGE_RUST_MISSING_PART"
+							 ng-model="vehicleCondInfo.HOOD_PANEL_RUST">
+							<label class="rustedCheckbox" for="rustchkbox12"></label>
+						</div>
+						<div class="checkbox checkbox-primary">
+							<input id="chkbox13" class="styled" type="checkbox" ng-checked="checkall" ng-disabled="vehicleCondInfo.NO_EXISTING_DAMAGE_RUST_MISSING_PART"
+							 ng-model="vehicleCondInfo.ROOF_PANEL_DAMAGE">
+							<label for="chkbox13">12 Roof panel</label>
+
+							<input id="rustchkbox13" class="styled" type="checkbox" ng-checked="checkall" ng-disabled="vehicleCondInfo.NO_EXISTING_DAMAGE_RUST_MISSING_PART"
+							 ng-model="vehicleCondInfo.ROOF_PANEL_RUST">
+							<label class="rustedCheckbox" for="rustchkbox13"></label>
+						</div>
+						<div class="checkbox checkbox-primary">
+							<input id="chkbox14" class="styled" type="checkbox" ng-checked="checkall" ng-disabled="vehicleCondInfo.NO_EXISTING_DAMAGE_RUST_MISSING_PART"
+							 ng-model="vehicleCondInfo.TRUNK_LID_DAMAGE">
+							<label for="chkbox14">13 Trunk lid/rear door</label>
+
+							<input id="rustchkbox14" class="styled" type="checkbox" ng-checked="checkall" ng-disabled="vehicleCondInfo.NO_EXISTING_DAMAGE_RUST_MISSING_PART"
+							 ng-model="vehicleCondInfo.TRUNK_LID_RUST">
+							<label class="rustedCheckbox" for="rustchkbox14"></label>
+						</div>
+						<div class="checkbox checkbox-primary">
+							<input id="chkbox15" class="styled" type="checkbox" ng-checked="checkall" ng-disabled="vehicleCondInfo.NO_EXISTING_DAMAGE_RUST_MISSING_PART"
+							 ng-model="vehicleCondInfo.GRILL_DAMAGE">
+							<label for="chkbox15">14 Grill</label>
+
+							<input id="rustchkbox1511" class="styled" type="checkbox" ng-checked="checkall" ng-disabled="vehicleCondInfo.NO_EXISTING_DAMAGE_RUST_MISSING_PART"
+							 ng-model="vehicleCondInfo.GRILL_RUST">
+							<label class="rustedCheckbox" for="rustchkbox1511"></label>
+						</div>
+						<div class="checkbox checkbox-primary">
+							<input id="chkbox16" class="styled" type="checkbox" ng-checked="checkall" ng-disabled="vehicleCondInfo.NO_EXISTING_DAMAGE_RUST_MISSING_PART"
+							 ng-model="vehicleCondInfo.WHELL_COVERS_DAMAGE">
+							<label for="chkbox16">15 Wheel covers</label>
+
+							<input id="rustchkbox16" class="styled" type="checkbox" ng-checked="checkall" ng-disabled="vehicleCondInfo.NO_EXISTING_DAMAGE_RUST_MISSING_PART"
+							 ng-model="vehicleCondInfo.WHELL_COVERS_RUST">
+							<label class="rustedCheckbox" for="rustchkbox16"></label>
+						</div>
+						<div class="checkbox checkbox-primary">
+							<input id="chkbox17" class="styled" type="checkbox" ng-checked="checkall" ng-disabled="vehicleCondInfo.NO_EXISTING_DAMAGE_RUST_MISSING_PART"
+							 ng-model="vehicleCondInfo.WINDSHIELD_DAMAGE">
+							<label for="chkbox17">16 Windshield</label>
+						</div>
+					</div>
+
+					<div class="col-md-4">
+						<h1 class="headingInline">Damaged</h1>
+						<div class="checkbox checkbox-primary">
+							<input id="chkbox18" class="styled" type="checkbox" ng-checked="checkall" ng-disabled="vehicleCondInfo.NO_EXISTING_DAMAGE_RUST_MISSING_PART"
+							 ng-model="vehicleCondInfo.SIDE_GLASS_LEFT_FRONT_DAMAGE">
+							<label for="chkbox18">17 Side glass left front</label>
+
+						</div>
+						<div class="checkbox checkbox-primary">
+							<input id="chkbox19" class="styled" type="checkbox" ng-checked="checkall" ng-disabled="vehicleCondInfo.NO_EXISTING_DAMAGE_RUST_MISSING_PART"
+							 ng-model="vehicleCondInfo.SIDE_GLASS_RIGHT_FRONT_DAMAGE">
+							<label for="chkbox19">18 Side glass right front</label>
+						</div>
+						<div class="checkbox checkbox-primary">
+							<input id="chkbox20" class="styled" type="checkbox" ng-checked="checkall" ng-disabled="vehicleCondInfo.NO_EXISTING_DAMAGE_RUST_MISSING_PART"
+							 ng-model="vehicleCondInfo.SIDE_GLASS_LEFT_REAR_DAMAGE">
+							<label for="chkbox20">19 Side glass left rear</label>
+						</div>
+						<div class="checkbox checkbox-primary">
+							<input id="chkbox21" class="styled" type="checkbox" ng-checked="checkall" ng-disabled="vehicleCondInfo.NO_EXISTING_DAMAGE_RUST_MISSING_PART"
+							 ng-model="vehicleCondInfo.SIDE_GLASS_RIGHT_REAR_DAMAGE">
+							<label for="chkbox21">20 Side glass right rear</label>
+						</div>
+						<div class="checkbox checkbox-primary">
+							<input id="chkbox22" class="styled" type="checkbox" ng-checked="checkall" ng-disabled="vehicleCondInfo.NO_EXISTING_DAMAGE_RUST_MISSING_PART"
+							 ng-model="vehicleCondInfo.REAR_WINDSHIELD_DAMAGE">
+							<label for="chkbox22">21 Rear windshield</label>
+						</div>
+						<div class="checkbox checkbox-primary">
+							<input id="chkbox23" class="styled" type="checkbox" ng-checked="checkall" ng-disabled="vehicleCondInfo.NO_EXISTING_DAMAGE_RUST_MISSING_PART"
+							 ng-model="vehicleCondInfo.WORN_TORN_INTERIOR_SEAT_DAMAGE">
+							<label for="chkbox23">22 Worn, torn, interior/seats</label>
+						</div>
+						<div class="checkbox checkbox-primary">
+							<input id="chkbox24" class="styled" type="checkbox" ng-checked="checkall" ng-disabled="vehicleCondInfo.NO_EXISTING_DAMAGE_RUST_MISSING_PART"
+							 ng-model="vehicleCondInfo.DASHBOARD_SOUNDSYSTEM_DAMAGE">
+							<label for="chkbox24">23 Dashboard/Sound system</label>
+						</div>
+						<div ng-show="stateCode == 'NJ'" class="checkbox checkbox-primary">
+							<input id="chkbox1212" class="styled" type="checkbox" ng-checked="checkall" ng-disabled="vehicleCondInfo.NO_EXISTING_DAMAGE_RUST_MISSING_PART"
+							 ng-model="vehicleCondInfo.UNDERCARRIAGE_DAMAGE">
+							<label for="chkbox1212">24 Undercarriage</label>
+						</div>
+						<div ng-show="stateCode == 'NJ'" class="checkbox checkbox-primary">
+							<input id="chkbox2611" class="styled" type="checkbox" ng-checked="checkall" ng-disabled="vehicleCondInfo.NO_EXISTING_DAMAGE_RUST_MISSING_PART"
+							 ng-model="vehicleCondInfo.REAR_VIEW_MIRROR_DAMAGE">
+							<label for="chkbox2611">25 Rear view mirror</label>
+						</div>
+
+						<div ng-show="stateCode != 'NJ'" class="checkbox checkbox-primary">
+							<input id="chkbox25" class="styled" type="checkbox" ng-checked="checkall" ng-disabled="vehicleCondInfo.NO_EXISTING_DAMAGE_RUST_MISSING_PART"
+							 ng-model="vehicleCondInfo.CENTER_CONSOLE_DAMAGE">
+							<label for="chkbox25">26 Center console</label>
+						</div>
+
+						<div class="checkbox checkbox-primary">
+							<input id="chkbox27" class="styled" type="checkbox" ng-checked="checkall" ng-disabled="vehicleCondInfo.NO_EXISTING_DAMAGE_RUST_MISSING_PART"
+							 ng-model="vehicleCondInfo.STORM_DAMAGE">
+							<label for="chkbox27">27 Storm Damage(Describe Below)</label>
+						</div>
+						<div ng-if="vehicleCondInfo.STORM_DAMAGE == 1" class="indent-fields form-row CusFormRow mb-20">
+							<input autocomplete="off" type="text" ng-maxlength="50" name="descriptionStorm" class="form-control" placeholder="Enter Storm Damage"
+							 ng-model="vehicleCondInfo.STORM_DAMAGE_DESCRIPTION" auto-fill-sync>
+							<span class="help-block" ng-show="showMessageMaxLen(vehicleCondForm.descriptionStorm)">
+								Description of Storm Damage, can be max 50 letters
+							</span>
+						</div>
+						<div class="checkbox checkbox-primary">
+							<input id="chkbox26" class="styled" type="checkbox" ng-checked="checkall" ng-disabled="vehicleCondInfo.NO_EXISTING_DAMAGE_RUST_MISSING_PART"
+							 ng-model="vehicleCondInfo.OTHER">
+							<label for="chkbox26">90 Other Damage(Describe Below)</label>
+						</div>
+						<div ng-if="vehicleCondInfo.OTHER == 1" class="indent-fields form-row CusFormRow mb-20">
+							<input autocomplete="off" type="text" ng-maxlength="50" name="other" class="form-control" placeholder="Enter Other Damage"
+							 ng-model="vehicleCondInfo.OTHER_DESCRIPTION" auto-fill-sync>
+							<span class="help-block" ng-show="showMessageMaxLen(vehicleCondForm.other)">
+								Description of Other Damage, can be max 50 letters
+							</span>
+						</div>
+					</div>
+					<div class="clearfix"></div>
+
+				</div>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+
+		<div class="details">
+			<div>
+				<!-- <div class="col-lg-12 col-md-12"> -->
+				<div class="form-row border-collapse">
+					<label>Use this space to further describe any Damage, Rust, Missing parts, or major alterations (150 char. max)</label>
+					<input autocomplete="off" name="describe" ng-maxlength="150" type="text" class="form-control" placeholder="Enter information"
+					 ng-model="vehicleCondInfo.DESCRIPTION" auto-fill-sync>
+					<span class="help-block" ng-show="showMessageMaxLen(vehicleCondForm.describe)">
+						Description of Damage, Rust, Missing parts, can be max 150 letters
+					</span>
+				</div>
+				<!-- </div> -->
+			</div>
+		</div>
+
+		<div class="text-right mt-20 mb-20">
+			<button class="btn btn-tertiary" wz-previous="logStep()" type="button">
+				<i class="fa fa-chevron-left"></i>
+			</button>
+
+			<button type="button" class="btn btn-tertiary" ng-click="onCancel()">Cancel</button>
+
+			<button id="vehicleCondForm" name="vehicleCondForm" type="submit" ng-if="stateCode != 'NJ'" class="btn btn-secondary" ng-click="goNext(vehicleCondInfo, stateCode)">Save</button>
+
+			<button id="vehicleCondForm" name="vehicleCondForm" type="submit" ng-if="stateCode == 'NJ'" class="btn btn-secondary" ng-click="goNext(vehicleCondInfo, stateCode)">Save</button>
+		</div>
+	</form>
+</div>

@@ -1,0 +1,69 @@
+.disabled {
+  pointer-events:none; 
+  opacity:0.6;         
+}
+
+.well {
+  margin-bottom: 0;
+}
+
+.cus-form-row{
+color: #212429;
+padding: 20px;
+min-height: 92px;
+margin: 0;
+background: #fff;
+}
+
+.cus-label{
+color: #6e7388;
+text-transform: uppercase;
+font-size: 14px;
+font-weight: normal;
+display: block;
+}
+
+.form-control:focus{
+box-shadow: none;
+}
+@media only screen and (max-width: 669px){
+.cus-form-row {
+    padding: 0;
+}
+}
+
+.uploadPhoto{
+  font-size:24px;
+  float:left;
+  color: #646464;
+}
+
+.uploaded-photo img{
+width: 100%;
+height: 100%;
+}
+.title-name{
+  /* padding: 13px 0; */
+   padding-top:10px; 
+  /*line-height: 42px;
+   font-size: 11px; */
+  color: #646464;
+  font-weight: 400;
+  position: relative;
+  text-align: left;
+  width: 200px;
+  margin: 0 auto;
+}
+
+.deleteBtn {
+  display: inline-block;
+  padding: 6px;
+  background: transparent
+}
+
+.disabled {
+  pointer-events:none; 
+  opacity:0.6;         
+}
+
+

@@ -1,0 +1,38 @@
+.test  {
+  border-bottom: solid 1px #0598a4;
+  color: #0598a4 !important;
+  outline: none;
+}
+.disabled {
+  pointer-events:none; 
+  opacity:0.6;         
+}
+
+.dropdown-menu>li>a {
+  display: block;
+  padding: 10px 20px;
+  clear: both;
+  font-weight: 400;
+  line-height: 1.42857143;
+  color: #333;
+  white-space: nowrap;
+  border-bottom: 1px solid #dddddd;
+}
+
+
+.dropdown-menu>li:last-child>a {
+  border: 0;
+}
+
+.mainmenu .nav>li>a:hover, .nav .open>a, .mainmenu .nav>li>a:focus {
+  background-color: transparent;
+  outline: none;
+  border: 0;
+}
+
+.navbar-nav>li>.dropdown-menu {
+  margin-top: 0;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  padding: 0;
+}

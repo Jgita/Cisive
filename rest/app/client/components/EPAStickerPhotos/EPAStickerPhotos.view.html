@@ -1,0 +1,26 @@
+<section class="">
+    <div class="container-fluid">
+        <div class="col-lg-12 col-md-12 dashboard-widget  pt-20 pb-20">
+            <div class="col-lg-4 col-md-4">
+                <div class="form-row" id="radio-1">
+                    <div class="checkbox checkbox-primary mb-0 mt-0">
+                        <input type="checkbox" id="EPA" class="styled" ng-change="ISEPAChecked(EPA_STICKER_MISSING)" ng-model="EPA_STICKER_MISSING">
+                        <label style="font-size: 16px;" for="EPA">Check Here If EPA Sticker Is Missing</label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-12 col-md-12 mt-20">
+                <div ng-show="uploader.isHTML5">
+                    <div id="dropzone" uploader="uploader">
+                        <div nv-file-over="" uploader="uploader" over-class="another-file-over-class" class="well my-drop-zone mb-0">
+                            <div class="upload-btn-wrapper">
+                                <button class="btn">Select File</button>
+                                <input type="file" nv-file-select="" uploader="uploader" multiple name="myfile" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

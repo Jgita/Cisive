@@ -1,0 +1,532 @@
+<div class="info vehicle-options">
+    <form name="vehicleInfOption" id="vehicleInfOption" ng-submit="vehicleOption()" role="form" novalidate>
+        <h2 class="mobile-title hidden-lg hidden-md">Vehicle Options</h2>
+        <!-- <h3 class="mb-20">Enter Accessories, Options and Physical Condition</h3> -->
+        <div class="details">
+            <div class="row-eq-height row1 clearfix">
+                <div class="col-lg-4 col-md-4 ">
+                    <h1>Radio/Navigation Equipment</h1>
+                    <div class="form-row equalHeight border-collapse">
+
+                        <div class="checkbox checkbox-primary">
+                            <input id="checkboxAM" ng-model="vehicleOptionModel.RADIO_EQUIPMENT_AM_FM" class="styled" type="checkbox">
+                            <label for="checkboxAM">AM/FM</label>
+                        </div>
+                        <div class="checkbox checkbox-primary">
+                            <input id="checkboxCassette" ng-model="vehicleOptionModel.RADIO_EQUIPMENT_AM_FM_CASSETTE_PLAYER" class="styled" type="checkbox">
+                            <label for="checkboxCassette">AM/FM/Cassette</label>
+                        </div>
+                        <div class="checkbox checkbox-primary">
+                            <input id="checkboxPlayer" ng-model="vehicleOptionModel.RADIO_EQUIPMENT_FM_CD_PLAYER" class="styled" type="checkbox">
+                            <label for="checkboxPlayer">CD Player</label>
+                        </div>
+
+                        <div class="checkbox checkbox-primary">
+                            <input id="checkbox1" class="styled" type="checkbox" ng-model="vehicleOptionModel.RADIO_EQUIPMENT_DASHBOARD">
+                            <label for="checkbox1">CD Changer</label>
+                        </div>
+
+                        <div class="checkbox checkbox-primary">
+                            <input id="checkboxSatellite" ng-model="vehicleOptionModel.RADIO_EQUIPMENT_SATELLITE_RADIO" class="styled" type="checkbox">
+                            <label for="checkboxSatellite">Satellite Radio</label>
+                        </div>
+
+                        <div class="checkbox checkbox-primary">
+                            <input id="checkbox3" class="styled" type="checkbox" ng-model="vehicleOptionModel.GPS_NAVIGATION_SYSTEM_INSTALLED">
+                            <label for="checkbox3">GPS/Navigation System</label>
+                        </div>
+
+                        <div class="indent-fields" ng-if="vehicleOptionModel.GPS_NAVIGATION_SYSTEM_INSTALLED == true">
+                            <label>Permanently installed</label>
+                            <div class="radio radio-inline radio-primary mt-0">
+                                <input type="radio" id="radio1p" ng-value="true" name="authorization" ng-model="vehicleOptionModel.GPS_NAVIGATION_INSTALLED_PERMANENTLY">
+                                <label for="radio1p">Yes</label>
+                            </div>
+                            <div class="radio radio-inline radio-primary">
+                                <input type="radio" id="radio2p" ng-value="false" name="authorization" ng-model="vehicleOptionModel.GPS_NAVIGATION_INSTALLED_PERMANENTLY">
+                                <label for="radio2p">No</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div ng-show="$root.stateCode != 'NJ'" class="col-lg-4 col-md-4">
+                    <h1>Anti-Theft Device
+                        <span class="asterisk">*</span>
+                    </h1>
+
+                    <div class="form-row equalHeight border-collapse">
+
+                        <div class="">
+                            <label>Does this Vehicle have an Anti-Theft Device?
+                            </label>
+                            <div class="radio radio-inline radio-primary mt-0">
+                                <input type="radio" id="radioanti" name="radioDeviceTheft" ng-model="vehicleOptionModel.ANTITHEFT_NONE" ng-value="true">
+                                <label for="radioanti"> Yes</label>
+                            </div>
+                            <div class="radio radio-inline radio-primary mt-0">
+                                <input type="radio" id="radiotheft" ng-click='uncheckAll()' name="radioDeviceTheft" ng-model="vehicleOptionModel.ANTITHEFT_NONE"
+                                    ng-value="false">
+                                <label for="radiotheft"> No</label>
+                            </div>
+                        </div>
+
+
+                        <div ng-hide="!vehicleOptionModel.ANTITHEFT_NONE == false">
+                        </div>
+
+                        <div ng-if="vehicleOptionModel.ANTITHEFT_NONE == true">
+
+                            <h3 style="margin-top:2px">(Select All That Apply)</h3>
+
+                            <div class="checkbox checkbox-primary">
+                                <input id="checkbox5" class="styled" type="checkbox" ng-change="checkboxChanged()" ng-model="vehicleOptionModel.ANTITHEFT_INOPERATIVE">
+                                <label for="checkbox5">System present, but inoperative</label>
+                            </div>
+                            <div class="checkbox checkbox-primary">
+                                <input id="checkbox6" class="styled" type="checkbox" ng-change="checkboxChanged()" ng-model="vehicleOptionModel.ANTITHEFT_AUTO_RECOVERY_SYSTEM">
+                                <label for="checkbox6">Auto recovery system</label>
+                            </div>
+                            <div class="checkbox checkbox-primary">
+                                <input id="checkbox7" class="styled" type="checkbox" ng-change="checkboxChanged()" ng-model="vehicleOptionModel.ANTITHEFT_PASSIVE_DISABLE">
+                                <label for="checkbox7">Passive disabling device</label>
+                                <h3 class="ml-10">(Automatically engaged)</h3>
+                            </div>
+                            <div class="checkbox checkbox-primary">
+                                <input id="checkbox8" class="styled" type="checkbox" ng-change="checkboxChanged()" ng-model="vehicleOptionModel.ANTITHEFT_ACTIVE_DISABLE">
+                                <label for="checkbox8">Active disabling device</label>
+                                <h3 class="ml-10">(Must be manually engaged)</h3>
+                            </div>
+                            <div class="checkbox checkbox-primary">
+                                <input id="checkbox9" class="styled" type="checkbox" ng-change="checkboxChanged()" ng-model="vehicleOptionModel.ANTITHEFT_AUDIBLE_ALARM_ONLY">
+                                <label for="checkbox9">Siren/audible alarm only</label>
+                            </div>
+                            <div class="checkbox checkbox-primary">
+                                <input id="checkbox10" class="styled" type="checkbox" ng-change="checkboxChanged()" ng-model="vehicleOptionModel.ANTITHEFT_COMBAT_AUTO_THEFT">
+                                <label for="checkbox10">Combat auto theft (CAT)</label>
+                                <h3 class="ml-10">P.D. Issued rear Window sticker</h3>
+                            </div>
+                            <div class="checkbox checkbox-primary">
+                                <input id="checkbox11" class="styled" type="checkbox" ng-change="checkboxChanged()" ng-model="vehicleOptionModel.ANTITHEFT_ETCHED_GLASS_CODING">
+                                <label for="checkbox11">Etched glass indicating VIN or coding</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--New jersey fields starts -->
+                <div ng-show="$root.stateCode == 'NJ'" class="col-lg-4 col-md-4" id="newJersey">
+                    <h1>Anti-Theft Device
+                        <span class="asterisk">*</span>
+                    </h1>
+
+                    <div class="form-row equalHeight border-collapse">
+
+                        <div class="">
+                            <label>Does this vehicle have an anti-theft device?
+                            </label>
+                            <div class="radio radio-inline radio-primary mt-0">
+                                <input type="radio" id="radioanti11" name="radioDevice" ng-model="vehicleOptionModel.ANTI_THEFT_NONE_NEW_JERCY" name="authorization"
+                                    ng-value="true">
+                                <label for="radioanti11"> Yes</label>
+                            </div>
+                            <div class="radio radio-inline radio-primary mt-0">
+                                <input type="radio" id="radiotheft12" ng-click='uncheckAll()' name="radioDevice" ng-model="vehicleOptionModel.ANTI_THEFT_NONE_NEW_JERCY"
+                                    name="authorization" ng-value="false">
+                                <label for="radiotheft12"> No</label>
+                            </div>
+                        </div>
+
+                        <div ng-if="vehicleOptionModel.ANTI_THEFT_NONE_NEW_JERCY == true">
+                            <h3 style="margin-top:2px">(Select All That Apply)</h3>
+
+                            <div class="checkbox checkbox-primary">
+                                <input id="checkbox201" class="styled" type="checkbox" ng-change="checkboxChanged()" ng-model="vehicleOptionModel.ANTI_THEFT_B_IGNITION_OR_STARTER_CUT_OFF_SWITCH_DEVICE">
+                                <label for="checkbox201">B - Ingnition or starter cut-off switch device</label>
+                            </div>
+                            <div class="checkbox checkbox-primary">
+                                <input id="checkbox202" class="styled" type="checkbox" ng-change="checkboxChanged()" ng-model="vehicleOptionModel.ANTI_THEFT_D_STEERING_COLUMN_ARMORED_COLLAR">
+                                <label for="checkbox202">D - Steering column armored collar</label>
+                            </div>
+
+                            <div class="checkbox checkbox-primary">
+                                <input id="checkbox203" class="styled" type="checkbox" ng-change="checkboxChanged()" ng-model="vehicleOptionModel.ANTI_THEFT_E_NON_PASSIVE_FUEL_CUT_OFF_DEVICE_ACTIVE_MANUAL">
+                                <label for="checkbox203">E - Non-passive fuel cut-off device (Active/Manual)</label>
+                            </div>
+                            <div class="checkbox checkbox-primary">
+                                <input id="checkbox204" class="styled" type="checkbox" ng-change="checkboxChanged()" ng-model="vehicleOptionModel.ANTI_THEFT_F_NON_PASSIVE_EXTERNALLY_OPERATE_ALARM_ACTIVE_MANUAL">
+                                <label for="checkbox204">F - Non-passive externally operated alarm (Active/Manual)</label>
+                            </div>
+                            <div class="checkbox checkbox-primary">
+                                <input id="checkbox205" class="styled" type="checkbox" ng-change="checkboxChanged()" ng-model="vehicleOptionModel.ANTI_THEFT_G_WINDOW_GLASS_ETCHING">
+                                <label for="checkbox205">G - Window glass etching</label>
+                            </div>
+                            <div class="checkbox checkbox-primary">
+                                <input id="checkbox206" class="styled" type="checkbox" ng-change="checkboxChanged()" ng-model="vehicleOptionModel.ANTI_THEFT_H_NON_PASSIVE_STEERING_WHEEL_LOCK_DEVICE__ACTIVE_MANUAL">
+                                <label for="checkbox206">H - Non-passive steering wheel lock device (Active/Manual)</label>
+                            </div>
+                            <div class="checkbox checkbox-primary">
+                                <input id="checkbox207" class="styled" type="checkbox" ng-change="checkboxChanged()" ng-model="vehicleOptionModel.ANTI_THEFT_I_ARMOURED_CABLE_HOOD_LOCK_AND_IGNITION_CUT_OFF_SWITCH">
+                                <label for="checkbox207">I - Armored cable hood lock & ignition cut-off switch</label>
+                            </div>
+                            <div class="checkbox checkbox-primary">
+                                <input id="checkbox208" class="styled" type="checkbox" ng-change="checkboxChanged()" ng-model="vehicleOptionModel.ANTI_THEFT_J_EMERGENCY_HAND_BRAKE_LOCK">
+                                <label for="checkbox208">J - Emergency hand break lock</label>
+                            </div>
+                            <div class="checkbox checkbox-primary">
+                                <input id="checkbox209" class="styled" type="checkbox" ng-change="checkboxChanged()" ng-model="vehicleOptionModel.ANTI_THEFT_K_PASSIVE_ALARM_SYSTEM_COUPLED_WITH_IGINITION_OR_STARTER_CUT_OFF_AUTOMATIC">
+                                <label for="checkbox209">K - Passive alarm system coupled with ignition or starter cut-off (Automatic)</label>
+                            </div>
+                            <div class="checkbox checkbox-primary">
+                                <input id="checkbox210" class="styled" type="checkbox" ng-change="checkboxChanged()" ng-model="vehicleOptionModel.ANTI_THEFT_L_ANTI_THEFT_VEHICLE_RECOVERY_SYSTEM">
+                                <label for="checkbox210">L - Anti-theft vehicle recovery system</label>
+                            </div>
+                            <div class="checkbox checkbox-primary">
+                                <input id="checkbox211" class="styled" type="checkbox" ng-change="checkboxChanged()" ng-model="vehicleOptionModel.ANTI_THEFT_M_FUEL_CUT_OFF_DEVICE">
+                                <label for="checkbox211">M - Fuel cut-off device</label>
+                            </div>
+                            <div class="checkbox checkbox-primary">
+                                <input id="checkbox212" class="styled" type="checkbox" ng-change="checkboxChanged()" ng-model="vehicleOptionModel.ANTI_THEFT_N_ARMORED_IGNITION_CUT_OFF_SWITCH">
+                                <label for="checkbox212">N - Armored ignition cut-off switch</label>
+                            </div>
+                            <div class="checkbox checkbox-primary">
+                                <input id="checkbox213" class="styled" type="checkbox" ng-change="checkboxChanged()" ng-model="vehicleOptionModel.ANTI_THEFT_R_PASSSIVE_MULTI_COMPONENTS_CUT_OFF_SWITCH_AUTOMATIC">
+                                <label for="checkbox213">R - Passive multi component cut-off switch(Automatic)</label>
+                            </div>
+                            <div class="checkbox checkbox-primary">
+                                <input id="checkbox214" class="styled" type="checkbox" ng-change="checkboxChanged()" ng-model="vehicleOptionModel.ANTI_THEFT_T_PASSIVE_TIME_DELAY_IGNITION_SYSTEM_AUTOMATIC">
+                                <label for="checkbox214">T - Passive time delay ignition</label>
+                            </div>
+                            <div class="checkbox checkbox-primary">
+                                <input id="checkbox215" class="styled" type="checkbox" ng-change="checkboxChanged()" ng-model="vehicleOptionModel.ANTI_THEFT_U_CABLE_HOOD_LOCK_AND_IGNITION_LIGHT">
+                                <label for="checkbox215">U - Armored cable or electronically operated hood lock & ignition cut-off switch</label>
+                            </div>
+                            <div class="checkbox checkbox-primary">
+                                <input id="checkbox216" class="styled" type="checkbox" ng-change="checkboxChanged()" ng-model="vehicleOptionModel.ANTI_THEFT_V_PASSIVE_DELAYED_IGNITION_CUTOFF_SYSTEM_AUTOMATIC">
+                                <label for="checkbox216">V - Passive delayed ignition cut-off system(Automatic)</label>
+                            </div>
+                            <div class="checkbox checkbox-primary">
+                                <input id="checkbox217" class="styled" type="checkbox" ng-change="checkboxChanged()" ng-model="vehicleOptionModel.ANTI_THEFT_W_PASSIVE_IGNITION_LOCK_PROTECTION_SYSTEM_AUTOMATIC">
+                                <label for="checkbox217">W - Passive ignition lock protection system(Automatic)</label>
+                            </div>
+                            <div class="checkbox checkbox-primary">
+                                <input id="checkbox218" class="styled" type="checkbox" ng-change="checkboxChanged()" ng-model="vehicleOptionModel.ANTI_THEFT_Y_HIGH_SECURITY_REPLACEMENT_LOCK_DEVICE">
+                                <label for="checkbox218">Y - High security replacement lock device</label>
+                            </div>
+                            <div class="checkbox checkbox-primary">
+                                <input id="checkbox219" class="styled" type="checkbox" ng-change="checkboxChanged()" ng-model="vehicleOptionModel.ANTI_THEFT_Z_HYDRAULIC_BRAKE_LOCK_DEVICE">
+                                <label for="checkbox219">Z - Hydraulic brake lock device</label>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+                <!--New jersey fields end -->
+
+                <div class="col-lg-4 col-md-4">
+                    <h1>Exterior</h1>
+                    <div class="form-row equalHeight border-collapse">
+                        <div class="checkbox checkbox-primary">
+                            <input id="checkbox12" class="styled" type="checkbox" ng-model="vehicleOptionModel.CUSTOM_MAG_WHEELS ">
+                            <label for="checkbox12">Custom/MAG wheels</label>
+                        </div>
+                        <div class="checkbox checkbox-primary">
+                            <input id="checkbox13" class="styled" type="checkbox" ng-model="vehicleOptionModel.SPECIAL_HUB_CAPS">
+                            <label for="checkbox13">Special hub caps</label>
+                        </div>
+                        <div ng-if="vehicleOptionModel.SPECIAL_HUB_CAPS == true" class="indent-fields">
+                            <label>Quantity on vehicle</label>
+                            <input type="number" ng-pattern="/^[0-9]*$/" name="capQant" min="1" max="4" autocomplete="off" class="form-control" placeholder="Enter Quantity"
+                                ng-model="vehicleOptionModel.SPECIAL_HUB_CAP_QUANTITY">
+                            <span class="help-block" ng-show="showMessageMaxLen(vehicleInfOption.capQant)">
+                                Min. 1 & Max. 4 is allowed
+                            </span>
+                        </div>
+                        <div class="checkbox checkbox-primary">
+                            <input id="checkbox14" class="styled" type="checkbox" ng-model="vehicleOptionModel.SPECIAL_TIRES">
+                            <label for="checkbox14">Special tires</label>
+                        </div>
+                        <div ng-if="vehicleOptionModel.SPECIAL_TIRES == true" class="indent-fields">
+                            <label>Type</label>
+                            <input type="text" name="specialTires" ng-maxlength="30" autocomplete="off" class="form-control" placeholder="Enter Type"
+                                ng-model="vehicleOptionModel.SPECIAL_TIRES_TYPE " auto-fill-sync>
+                            <span class="help-block" ng-show="showMessageMaxLen(vehicleInfOption.specialTires)">
+                                Tires Type, should be max 30 letters
+                            </span>
+                        </div>
+                        <div class="checkbox checkbox-primary">
+                            <input id="checkbox15" class="styled" type="checkbox" ng-model="vehicleOptionModel.SPOILER ">
+                            <label for="checkbox15">Spoiler</label>
+                        </div>
+                        <div class="checkbox checkbox-primary">
+                            <input id="checkbox16" class="styled" type="checkbox" ng-model="vehicleOptionModel.SUNROOF">
+                            <label for="checkbox16">Sunroof/Moonroof</label>
+                        </div>
+                        <div class="indent-fields" ng-if="vehicleOptionModel.SUNROOF == true">
+                            <div class="checkbox checkbox-primary mt-0">
+                                <input id="checkbox17" class="styled" type="checkbox" ng-model="vehicleOptionModel.SUNROOF_MOTORIZED ">
+                                <label for="checkbox17">Motorized</label>
+                            </div>
+                        </div>
+                        <div class="checkbox checkbox-primary">
+                            <input id="checkbox18" class="styled" type="checkbox" ng-model="vehicleOptionModel.REAR_WINDOW_WIPER ">
+                            <label for="checkbox18">Rear window wiper</label>
+                        </div>
+                        <div class="checkbox checkbox-primary">
+                            <input id="checkbox19" class="styled" type="checkbox" ng-model="vehicleOptionModel.DAYTIME_RUNNING_LIGHTS ">
+                            <label for="checkbox19">Daytime running lights</label>
+                        </div>
+                        <div class="checkbox checkbox-primary">
+                            <input id="checkbox20" class="styled" type="checkbox" ng-model="vehicleOptionModel.BLIND_SPOT_DETECTION_SYSTEM ">
+                            <label for="checkbox20">Blind spot detection system</label>
+                        </div>
+                        <div class="checkbox checkbox-primary">
+                            <input id="checkbox21" class="styled" type="checkbox" ng-model="vehicleOptionModel.BACKUP_CAMERA ">
+                            <label for="checkbox21">Backup camera</label>
+                        </div>
+                        <div class="checkbox checkbox-primary">
+                            <input id="checkbox22" class="styled" type="checkbox" ng-model="vehicleOptionModel.COLLISION_AVOIDANCE_SYSTEM ">
+                            <label for="checkbox22">Collision avoidance system</label>
+                        </div>
+                        <div class="checkbox checkbox-primary mb-0">
+                            <input id="checkbox23" class="styled" type="checkbox" ng-model="vehicleOptionModel.BACKUP_SENSOR ">
+                            <label for="checkbox23">Backup sensor</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="details">
+            <div class="row-eq-height row2 clearfix">
+                <div class="col-lg-4 col-md-4">
+                    <h1>Seats</h1>
+                    <div class="form-row equalHeight border-collapse">
+                        <div class="checkbox checkbox-primary mt-0">
+                            <input id="checkbox24" class="styled" type="checkbox" ng-model="vehicleOptionModel.SEATS_AUTOMATIC_BELT ">
+                            <label for="checkbox24">Automatic seat belts</label>
+                        </div>
+                        <div class="checkbox checkbox-primary">
+                            <input id="checkbox25" class="styled" type="checkbox" ng-model="vehicleOptionModel.SEATS_POWER ">
+                            <label for="checkbox25">Power seats</label>
+                        </div>
+                        <div class="checkbox checkbox-primary">
+                            <input id="checkbox26" class="styled" type="checkbox" ng-model="vehicleOptionModel.SEATS_HEATED ">
+                            <label for="checkbox26">Heated seats</label>
+                        </div>
+                        <div class="checkbox checkbox-primary">
+                            <input id="checkbox27" class="styled" type="checkbox" ng-model="vehicleOptionModel.SEATS_LUMBAR ">
+                            <label for="checkbox27">Lumbar</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <h1>Instrumentation</h1>
+                    <div class="form-row equalHeight border-collapse">
+                        <div class="checkbox checkbox-primary mt-0">
+                            <input id="checkbox28" class="styled" type="checkbox" ng-model="vehicleOptionModel.INSTRU_AIRCONDITIONER ">
+                            <label for="checkbox28">Air conditioner</label>
+                        </div>
+                        <div class="checkbox checkbox-primary">
+                            <input id="checkbox29" class="styled" type="checkbox" ng-model="vehicleOptionModel.INSTRU_DIGITAL ">
+                            <label for="checkbox29">Digital instrumentation</label>
+                        </div>
+                        <div class="checkbox checkbox-primary">
+                            <input id="checkbox30" class="styled" type="checkbox" ng-model="vehicleOptionModel.INSTRU_CRUISECONTROL ">
+                            <label for="checkbox30">Cruise control</label>
+                        </div>
+                        <div class="checkbox checkbox-primary">
+                            <input id="checkbox31" class="styled" type="checkbox" ng-model="vehicleOptionModel.INSTRU_TILTWHEEL ">
+                            <label for="checkbox31">Tilt wheel</label>
+                        </div>
+                        <div class="checkbox checkbox-primary">
+                            <input id="checkbox32" class="styled" type="checkbox" ng-model="vehicleOptionModel.INSTRU_POWERWINDOWS ">
+                            <label for="checkbox32">Power windows</label>
+                        </div>
+                        <div class="checkbox checkbox-primary">
+                            <input id="checkbox33" class="styled" type="checkbox" ng-model="vehicleOptionModel.INSTRU_POWERLOCKDOORS ">
+                            <label for="checkbox33">Power door locks</label>
+                        </div>
+                        <div class="checkbox checkbox-primary">
+                            <input id="checkbox34" class="styled" type="checkbox" ng-model="vehicleOptionModel.INSTRU_POWERSTEERING ">
+                            <label for="checkbox34">Power steering</label>
+                        </div>
+                        <div class="checkbox checkbox-primary">
+                            <input id="checkbox35" class="styled" type="checkbox" ng-model="vehicleOptionModel.INSTRU_POWERANTENNA ">
+                            <label for="checkbox35">Power antenna</label>
+                        </div>
+                        <div class="checkbox checkbox-primary">
+                            <input id="checkbox36" class="styled" type="checkbox" ng-model="vehicleOptionModel.INSTRU_POWERTRUNK ">
+                            <label for="checkbox36">Power trunk</label>
+                        </div>
+                        <div class="checkbox checkbox-primary">
+                            <input id="checkbox37" class="styled" type="checkbox" ng-model="vehicleOptionModel.INSTRU_POWERMIROR ">
+                            <label for="checkbox37">Power mirrors</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4">
+                    <h1>Safety</h1>
+                    <div class="form-row equalHeight border-collapse">
+                        <div class="checkbox checkbox-primary mt-0">
+                            <input id="checkbox38" class="styled" type="checkbox" ng-model="vehicleOptionModel.SAFTY_ANTILOCK_BRAKES">
+                            <label for="checkbox38">Anti-lock brakes</label>
+                        </div>
+                        <div class="checkbox checkbox-primary">
+                            <input id="checkbox39" class="styled" type="checkbox" ng-model="vehicleOptionModel.SAFTY_FRONT_AIRBAG">
+                            <label for="checkbox39">Front air bags</label>
+                        </div>
+                        <div class="indent-fields" ng-if="vehicleOptionModel.SAFTY_FRONT_AIRBAG == true">
+                            <div ng-repeat="frontItem in frontAirBags" class="radio radio-inline radio-primary mt-0">
+                                <input id="radio-{{frontItem.name}}-1" name="fairbags" type="radio" ng-change="handleFairbagsClick(frontItem)" ng-selected="vehicleOptionModel.SAFTY_FRONT_AIRBAG_NUMBER == {{frontItem.checked}}"
+                                    ng-value="{{frontItem.checked}}" ng-model="vehicleOptionModel.SAFTY_FRONT_AIRBAG_NUMBER">
+                                <label for="radio-{{frontItem.name}}-1">{{frontItem.name}}</label>
+                            </div>
+                        </div>
+
+                        <div class="checkbox checkbox-primary">
+                            <input id="checkbox40" class="styled" type="checkbox" ng-model="vehicleOptionModel.SAFTY_SIDE_AIRBAG">
+                            <label for="checkbox40">Side air bags</label>
+                        </div>
+                        <div class="indent-fields" ng-if="vehicleOptionModel.SAFTY_SIDE_AIRBAG == true">
+                            <div ng-repeat="sideItem in sideAirBags" class="radio radio-inline radio-primary mt-0">
+                                <input id="radio-{{sideItem.name}}-2" name="sairbags" type="radio" ng-change="handleSairbagsClick(sideItem)" ng-selected="vehicleOptionModel.SAFTY_SIDE_AIRBAG_NUMBER == {{sideItem.checked}}"
+                                    ng-value="{{sideItem.checked}}" ng-model="vehicleOptionModel.SAFTY_SIDE_AIRBAG_NUMBER">
+                                <label for="radio-{{sideItem.name}}-2">{{sideItem.name}}</label>
+                            </div>
+                        </div>
+                        <div class="checkbox checkbox-primary">
+                            <input id="checkbox41" class="styled" type="checkbox" ng-model="vehicleOptionModel.SAFTY_REAR_AIRBAG">
+                            <label for="checkbox41">Rear air bags</label>
+                        </div>
+                        <div class="indent-fields" ng-if="vehicleOptionModel.SAFTY_REAR_AIRBAG == true">
+                            <div ng-repeat="rearItem in rearAirBags" class="radio radio-inline radio-primary mt-0">
+                                <input id="radio-{{rearItem.name}}-3" name="rairbags" type="radio" ng-change="handleRairbagsClick(rearItem)" ng-selected="vehicleOptionModel.SAFTY_REAR_AIRBAG_NUMBER == {{rearItem.checked}}"
+                                    ng-value="{{rearItem.checked}}" ng-model="vehicleOptionModel.SAFTY_REAR_AIRBAG_NUMBER">
+                                <label for="radio-{{rearItem.name}}-3">{{rearItem.name}}</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="details">
+            <div class="clearfix">
+                <div class="col-lg-12 col-md-12">
+                    <div class="form-row equalHeight border-collapse">
+                        <div class="checkbox checkbox-primary mb-20">
+                            <input id="checkbox42" class="styled" type="checkbox" ng-model="vehicleOptionModel.IS_OTHER_EQUIPMENT">
+                            <label for="checkbox42">Other optional equipment (250 char. max)</label>
+                            <textarea auto-fill-sync ng-if="vehicleOptionModel.IS_OTHER_EQUIPMENT == true" name="otherOpnl" class="form-control ml-10 mt-10"
+                                ng-maxlength="250" placeholder="Enter optional equipment" ng-model="vehicleOptionModel.OTHER_OPTIONAL_EQUIPMENT"></textarea>
+
+                            <span class="help-block" ng-show="showMessageMaxLen(vehicleInfOption.otherOpnl)">
+                                Optional Equipment , should be max 250 letters
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="details">
+            <div class="clearfix">
+                <div class="col-lg-12 col-md-12">
+                    <div class="form-row equalHeight border-collapse">
+                        <div class="checkbox checkbox-primary mb-0">
+                            <input id="checkbox43" class="styled" type="checkbox" ng-change="vanLimoOnChange()" ng-model="vehicleOptionModel.IS_VAN_OR_LIMO">
+
+                            <label for="checkbox43">Check here if this is a van or limo</label>
+                        </div>
+
+
+                        <div class="row ml-20" ng-if="vehicleOptionModel.IS_VAN_OR_LIMO">
+                            <div class="col-lg-4">
+                                <div class="checkbox checkbox-primary">
+                                    <input id="checkbox101" class="styled" ng-model="vehicleOptionModel.INTERIROR_PANELING" type="checkbox">
+                                    <label for="checkbox101">Interior Paneling</label>
+                                </div>
+                                <div class="checkbox checkbox-primary">
+                                    <input id="checkbox102" class="styled" ng-model="vehicleOptionModel.REAR_PASSENGER_SEATING" type="checkbox">
+                                    <label for="checkbox102">Rear Passenger Seating</label>
+                                </div>
+                                <div class="checkbox checkbox-primary">
+                                    <input id="checkbox103" class="styled" ng-model="vehicleOptionModel.EXTERIOR_DECORATIVE_PAINT" type="checkbox">
+                                    <label for="checkbox103">Exterior Decorative Paint</label>
+                                </div>
+                                <div class="checkbox checkbox-primary">
+                                    <input id="checkbox104" class="styled" ng-model="vehicleOptionModel.NON_FACTORY_INSTALLED_AC" type="checkbox">
+                                    <label for="checkbox104">Non-Factory Installed AC</label>
+                                </div>
+                                <div class="checkbox checkbox-primary">
+                                    <input id="checkbox109" class="styled" ng-model="vehicleOptionModel.OTHER" type="checkbox">
+                                    <label for="checkbox109">Click here to add Additional Customization</label>
+                                    <input ng-if="vehicleOptionModel.OTHER == true" type="text" name="addCust" ng-maxlength="150" class="form-control ml-10 mt-10"
+                                        ng-model="vehicleOptionModel.OTHER_DESCRIPTION" placeholder="Enter Additional Customization"
+                                        auto-fill-sync>
+
+                                    <span class="help-block" ng-show="showMessageMaxLen(vehicleInfOption.addCust)">
+                                        Additional Customization, should be max 150 letters
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-lg-offset-1">
+                                <div class="checkbox checkbox-primary">
+                                    <input id="checkbox105" class="styled" ng-model="vehicleOptionModel.CUSTOMIZED_WINDOWS" type="checkbox">
+                                    <label for="checkbox105">Customized Window</label>
+                                </div>
+                                <div class="checkbox checkbox-primary">
+                                    <input id="checkbox106" class="styled" ng-model="vehicleOptionModel.STEREO" type="checkbox">
+                                    <label for="checkbox106">Stereo</label>
+                                </div>
+                                <div class="checkbox checkbox-primary">
+                                    <input id="checkbox107" class="styled" ng-model="vehicleOptionModel.REFRIGERATOR" type="checkbox">
+                                    <label for="checkbox107">Refrigerator</label>
+                                </div>
+                                <div class="checkbox checkbox-primary">
+                                    <input id="checkbox108" class="styled" ng-model="vehicleOptionModel.TELEVISION_VCR_DVD" type="checkbox">
+                                    <label for="checkbox108">Television/VCR/DVD</label>
+                                </div>
+                                <div ng-if="vehicleOptionModel.TELEVISION_VCR_DVD == true">
+                                    <label>Permanently Installed?</label>
+                                    <div class="radio radio-inline radio-primary mt-0">
+                                        <input type="radio" id="radio100" ng-model="vehicleOptionModel.TELEVISION_VCR_DVD_PERMANENT" name="Television" ng-value="true">
+                                        <label for="radio100"> Yes</label>
+                                    </div>
+                                    <div class="radio radio-inline radio-primary mt-0">
+                                        <input type="radio" id="radio101" ng-model="vehicleOptionModel.TELEVISION_VCR_DVD_PERMANENT" name="Television" ng-value="false">
+                                        <label for="radio101"> No</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="text-right mt-20 mb-20">
+            <button class="btn btn-tertiary" wz-previous="logStep()" type="button">
+                <i class="fa fa-chevron-left"></i>
+            </button>
+            <button type="button" class="btn btn-tertiary" ng-click="onCancel()">Cancel</button>
+
+            <button id="vehicleInfOption" name="vehicleInfOption" type="submit" ng-if="stateCode != 'NJ' && vehicleOptionModel.ANTITHEFT_NONE == true"
+                class="btn btn-secondary" ng-click="goNext(vehicleOptionModel, stateCode)">Save & Continue</button>
+
+            <button id="vehicleInfOption" name="vehicleInfOption" type="submit" ng-if="stateCode != 'NJ' && vehicleOptionModel.ANTITHEFT_NONE == false"
+                class="btn btn-secondary" ng-click="goNext(vehicleOptionModel, stateCode)">Save & Continue</button>
+
+            <button id="vehicleInfOption" name="vehicleInfOption" type="submit" ng-if="stateCode != 'NJ' && vehicleOptionModel.ANTITHEFT_NONE == undefined"
+                class="btn btn-secondary" ng-click="goNext(vehicleOptionModel, stateCode)">Save & Continue</button>
+
+            <button id="vehicleInfOption" name="vehicleInfOption" type="submit" ng-if="stateCode == 'NJ' && vehicleOptionModel.ANTI_THEFT_NONE_NEW_JERCY == true"
+                class="btn btn-secondary" ng-click="goNext(vehicleOptionModel, stateCode)">Save & Continue</button>
+
+            <button id="vehicleInfOption" name="vehicleInfOption" type="submit" ng-if="stateCode == 'NJ' && vehicleOptionModel.ANTI_THEFT_NONE_NEW_JERCY == undefined"
+                class="btn btn-secondary" ng-click="goNext(vehicleOptionModel, stateCode)">Save & Continue</button>
+
+            <button id="vehicleInfOption" name="vehicleInfOption" type="submit" ng-if="stateCode == 'NJ' && vehicleOptionModel.ANTI_THEFT_NONE_NEW_JERCY == false"
+                class="btn btn-secondary" ng-click="goNext(vehicleOptionModel, stateCode)">Save & Continue</button>
+
+        </div>
+    </form>
+</div>

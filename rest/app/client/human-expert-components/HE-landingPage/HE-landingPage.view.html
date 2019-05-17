@@ -1,0 +1,128 @@
+<!--start comment code 9/10/018 -->
+
+<div>
+    <header class="common">
+        <div class="container-fluid">
+            <div class="logo">
+                <img src="rest/assets/images/logo.svg" alt="Carco">
+            </div>
+            <div class="pull-right hidden-sm">
+                <nav role="navigation" class="navbar mainmenu">
+                    <ul class="nav navbar-nav dropdown">
+                        <li>
+                            <a ui-sref-active="active" ng-class="{ 'test': isActive('humanExpert.queueList') }" ui-sref="humanExpert.queueList">Human Expert Queue</a>
+                        </li>
+
+                        <li class="dropdown">
+                            <a data-toggle="dropdown" class="dropdown-toggle avatar pr-0">
+                                <span>Welcome {{FirstNameToDispaly}} {{LastNameToDispaly}}</span>
+
+                                <i class="fa fa-angle-down"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-right">
+                                <li ng-repeat="item in welcomeDropDown">
+                                    <a ui-sref-active="active" ng-click="onSubmit(item.title)" ui-sref="{{item.route}}">
+                                        <i class="fa {{item.faClass}} fa-lg mr-10 profile-icon"></i> {{item.title}}</a>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+
+        </div>
+
+    </header>
+
+    <div ui-view></div>
+
+</div>
+
+<!--end comment code 9/10/018 -->
+
+<!-- <div class="humanExpertLandingPage">
+    <header class="common">
+        <div class="container-fluid">
+            <div class="logo">
+                <img src="rest/assets/images/logo.svg" alt="Carco">
+            </div>
+            <div class="pull-right hidden-sm">
+                <nav role="navigation" class="navbar mainmenu">
+                    <ul class="nav navbar-nav dropdown">
+                        <li class="dropdown">
+                            <a data-toggle="dropdown" class="dropdown-toggle avatar pr-0">
+                                <span>Welcome {{FirstNameToDispaly}} {{LastNameToDispaly}}</span>
+                                <i class="fa fa-angle-down"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-right">
+                                <li ng-repeat="item in welcomeDropDown">
+                                    <a ui-sref-active="active" ng-click="onSubmit(item.title)" ui-sref="{{item.route}}">
+                                        <i class="fa {{item.faClass}} fa-lg mr-10 profile-icon"></i> {{item.title}}</a>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section class="content dashboard">
+        <div class="container-fluid">
+            <div class="details mt-20">
+                <div class="photo-processing-msg">
+                    10 photos are awaiting for processing
+                </div>
+                <div class="col-lg-5 col-md-5">
+                    <div id="CountDownTimer" data-timer="900"></div>
+                    <div class="time_remaining">Remaining</div>
+                    <div class="user-details mt-30">
+                        <label>Name</label>
+                        <p>Kate Lynch</p>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6">
+                            <div class="user-details">
+                                <label>User / Site Id</label>
+                                <p>991</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6">
+                            <div class="user-details">
+                                <label>Role</label>
+                                <p>inspector</p>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="user-details">
+                        <label>Date & Time</label>
+                        <p>9/5/2018 1:23 PM</p>
+                    </div>
+                </div>
+                <div class="col-lg-7 col-md-7">
+                    <div class="human-expert-img-wrapper">
+                        <img src="https://hips.hearstapps.com/amv-prod-cad-assets.s3.amazonaws.com/media/assets/submodel/8645.jpg">
+                    </div>
+                    <div class="mt-20 text-right">
+                        <button type="button" class="btn btn-success mr-5">Approve</button>
+                        <button type="button" class="btn btn-danger">Reject</button>
+                    </div>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container-fluid">
+            &copy;2018 CARCO Group. All rights reserved.
+        </div>
+    </footer>
+
+    <div ui-view></div>
+
+</div> -->

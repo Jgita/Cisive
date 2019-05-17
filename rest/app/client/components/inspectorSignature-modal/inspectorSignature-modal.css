@@ -1,0 +1,10 @@
+.form-row .signature {
+    /* border: 1px solid orange; */
+    margin: 0 auto;
+    cursor: pointer;
+  }
+  .form-row .signature canvas {
+    /* border: 1px solid #999; */
+    margin: 0 auto;
+    cursor: pointer;
+  }

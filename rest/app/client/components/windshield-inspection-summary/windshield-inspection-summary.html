@@ -1,0 +1,185 @@
+<div class="info windshield-report">
+    <h2 class="mobile-title hidden-lg hidden-md">Inspection Summary</h2>
+    <p>Please review/edit inspection information then scroll down to sign your inspection</p>
+    <div class="summary">
+        <div class="details">
+            <div class="row-eq-height row1 clearfix">
+                <div class="col-lg-6 col-md-6 border-collapse cols">
+                    <div class="form-row">
+                        <div class="edit-btn-wrapper">
+                            <button type="submit" class="btn btn-sm btn-primary" ng-click="editWizardPage(0)">Edit</button>
+                        </div>
+
+                        <label>Date of Inspection:
+                            <span id="currentDate">{{winInspectionSummaryResp.WIN_INSPECTION_DATE | date : "MM/dd/y"}}</span>
+                        </label>
+                        <label ng-if="winInspectionSummaryResp.WIN_ADVERSE_CONDITIONS != null">Adverse Condition:
+                            <span>{{ADVERSE_NAME}}</span>
+                        </label>
+                        <label ng-if="winInspectionSummaryResp.WIN_ADVERSE_CONDITIONS == null">Adverse Condition:
+                            <span>{{wsNoneProvided}}</span>
+                        </label>
+                        <label>Insurance co. Name:
+                            <span ng-if="winInspectionSummaryResp.WIN_INSPECTION_COMPANY_NAME != 'OTHER/UNKNOWN'">{{winInspectionSummaryResp.WIN_INSPECTION_COMPANY_NAME}}</span>
+                            <span ng-if="winInspectionSummaryResp.WIN_INSPECTION_COMPANY_NAME == 'OTHER/UNKNOWN'">{{winInspectionSummaryResp.WIN_INSURANCE_COMPANY_NAME_OTHER}}</span>
+                        </label>
+                        <label>Policy or Application #:
+                            <span ng-if="winInspectionSummaryResp.WIN_POLICY_NUMBER != null">{{winInspectionSummaryResp.WIN_POLICY_NUMBER}}</span>
+                            <span ng-if="winInspectionSummaryResp.WIN_POLICY_NUMBER == null">{{wsNoneProvided}}</span>
+                        </label>
+                        <label>Insured's Name:
+                            <span>{{winInspectionSummaryResp.WIN_INSURED_LAST_NAME}}<span ng-if="winInspectionSummaryResp.WIN_INSURED_FIRST_NAME">, </span>{{winInspectionSummaryResp.WIN_INSURED_FIRST_NAME}}</span>
+                        </label>
+                        <label>Insured's Address:
+                            <span>{{winInspectionSummaryResp.WIN_INSURED_ADDRESS}}, {{winInspectionSummaryResp.WIN_INSURED_TOWN}},
+                                {{STATE_NAME_OWNER}} {{winInspectionSummaryResp.WIN_INSURED_ZIPCODE}}</span>
+                        </label>
+
+                        <label>Insured's Phone:
+                            <span ng-if="winInspectionSummaryResp.WIN_INSURED_CELL_PHONE != '' || winInspectionSummaryResp.WIN_INSURED_CELL_PHONE != null">{{winInspectionSummaryResp.WIN_INSURED_CELL_PHONE | tel}}</span>
+                            <span ng-if="winInspectionSummaryResp.WIN_INSURED_CELL_PHONE == null && winInspectionSummaryResp.WIN_INSURED_LANDLINE  == null">&nbsp;{{wsNoneProvided}}</span>
+                            <span ng-if="winInspectionSummaryResp.WIN_INSURED_CELL_PHONE == '' && winInspectionSummaryResp.WIN_INSURED_LANDLINE == null">&nbsp;{{wsNoneProvided}}</span>
+                            <span ng-if="winInspectionSummaryResp.WIN_INSURED_LANDLINE != null">{{winInspectionSummaryResp.WIN_INSURED_LANDLINE | tel}}</span>
+                            <span ng-if="winInspectionSummaryResp.WIN_INSURED_LANDLINE == '' && winInspectionSummaryResp.WIN_INSURED_CELL_PHONE == ''">&nbsp;{{wsNoneProvided}}</span>
+                            <span ng-if="winInspectionSummaryResp.WIN_INSURED_LANDLINE == '' && winInspectionSummaryResp.WIN_INSURED_CELL_PHONE == null">&nbsp;{{wsNoneProvided}}</span>
+                        </label>
+
+                        <label>Insured's Email:
+                            <span>{{winInspectionSummaryResp.WIN_INSURED_EMAIL}}</span>
+                        </label>
+
+                        <label>Year, Make & Model:
+                            <span ng-if="winInspectionSummaryResp.WIN_MODEL == 'OTHER'">{{year}} {{make}} {{winInspectionSummaryResp.WIN_MODEL_OTHER}}</span>
+                            <span ng-if="winInspectionSummaryResp.WIN_MODEL != 'OTHER'">{{year}} {{make}} {{winInspectionSummaryResp.WIN_MODEL}}</span>
+                        </label>
+                        <label>VIN:
+                            <span>{{winInspectionSummaryResp.WIN_VEHICLE_IDENTIFICATION_NUMBER | uppercase}}</span>
+                        </label>
+                        <label>Odometer:
+                            <span>{{winInspectionSummaryResp.WIN_ODOMETER}}</span>
+                        </label>
+                        <label>Plate #:
+                            <span ng-if="winInspectionSummaryResp.WIN_LICENSE_PLATE != null">{{winInspectionSummaryResp.WIN_LICENSE_PLATE | uppercase}}</span>
+                            <span ng-if="winLicesePlate == true">NA</span>
+                        </label>
+
+                        <label>Plate State:
+                            <span ng-if="winInspectionSummaryResp.WIN_STATE == 61">{{winInspectionSummaryResp.WIN_STATE_OF_VEHICLE_PLATE_OTHER}}</span>
+                            <span ng-if="winInspectionSummaryResp.WIN_STATE != 61">{{PlateStateName}}</span>
+                        </label>
+
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 border-collapse cols">
+                    <div class="form-row">
+
+                        <div class="edit-btn-wrapper">
+                            <button type="submit" class="btn btn-sm btn-primary" ng-click="editWizardPage(1)">Edit</button>
+                        </div>
+
+                        <label class="short">Windshield Damaged:
+                            <span ng-if="winInspectionSummaryResp.WIN_NO_DAMAGE == false || winInspectionSummaryResp.WIN_NO_DAMAGE == null">{{DamagedDevicesString}}</span>
+                            <span ng-if="winInspectionSummaryResp.WIN_NO_DAMAGE == true">No existing damage, or missing parts</span>
+                        </label>
+
+                        <label>Additional Details of Windshield Damage:
+                            <span ng-if="winInspectionSummaryResp.WINDSHIELD_DAMAGE_DESCRIBE != null">{{winInspectionSummaryResp.WINDSHIELD_DAMAGE_DESCRIBE}}</span>
+                            <span ng-if="winInspectionSummaryResp.WINDSHIELD_DAMAGE_DESCRIBE == null || winInspectionSummaryResp.WINDSHIELD_DAMAGE_DESCRIBE == ''">{{wsNoneProvided}}</span>
+                        </label>
+
+                        <label>Windshield Rain Sensor for Automatic Wipers:
+                            <span ng-if="winInspectionSummaryResp.AUTOMATIC_WIPERS == true">YES</span>
+                            <span ng-if="winInspectionSummaryResp.AUTOMATIC_WIPERS != true">NO</span>
+                        </label>
+
+
+                        <label>Tinted Windshield:
+                            <span ng-if="winInspectionSummaryResp.TINTED_WINDSHIELD == true">YES</span>
+                            <span ng-if="winInspectionSummaryResp.TINTED_WINDSHIELD != true">NO</span>
+                        </label>
+
+                        <label>Additional Windshield Customization:
+                            <span ng-if="winInspectionSummaryResp.WIN_OTHER_DESCRIPTION != null">{{winInspectionSummaryResp.WIN_OTHER_DESCRIPTION}}</span>
+                            <span ng-if="winInspectionSummaryResp.WIN_OTHER_DESCRIPTION == null || winInspectionSummaryResp.WIN_OTHER_DESCRIPTION == ''">{{wsNoneProvided}}</span>
+                        </label>
+
+                        <label>Inspector:
+                            <span ng-if="dispalyIdInspector">{{userEmail}}</span>
+                            <span ng-if="dispalyIdInspector == false">{{inspectorName}}</span>
+                        </label>
+
+                        <label>Site Id:
+                            <span>{{siteID}}</span>
+                        </label>
+
+                        <label ng-if="dispalyIdInspector">Inspection Site Name:
+                            <span>{{siteName}}</span>
+                        </label>
+
+                        <label ng-if="dispalyIdInspector">Site Location (Address):
+                            <span>{{siteLocation}}</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="details">
+            <div class="row1 clearfix">
+                <div class="col-lg-12 col-md-12 border-collapse cols">
+                    <div class="form-row">
+                        <!-- <div class="mb-20 instruction-text">The above is a true statement of any and all existing windshield damage as of the date of this inspection.
+                        The undersigned certifies, under penalty of perjury, that this inspection report is true and complete
+                        to the best of his/her knowledge.</div> -->
+                        <!-- <div ng-if="inspectorSignVisibility == false" class="mb-20 instruction-text">The above is a true statement of any and all existing visible damage, rust, and/or missing parts as of
+                        the date of this inspection. The undersigned certifies, under penalty of perjury, that this inspection
+                        report is true and complete to the best of his/her knowledge.</div> -->
+
+                        <div class="mb-20 instruction-text">I have reviewed the above and acknowledge that it is a true and complete description of the windshield's
+                            physical condition.</div>
+                        <label>Date Inspection Performed: {{date}}</label>
+                        <!-- <label>{{date}}</label> -->
+                        <button class="btn btn-sm btn-primary mt-20" type="button" ng-disabled="isDisabledWinInsuredSignOnce" ng-click="showModal()">Insured Signature</button>
+                    </div>
+
+                    <div ng-if="winSingStatus != false" class="signature-widget">
+                        <img style="border:none;background:none;" alt="" ng-src="{{ Usersing }}">
+                    </div>
+
+                    <div ng-if="winInspectionSummaryResp.WIN_INSURED_SIGNATURE != null" class="signature-widget">
+                        <div>
+                            <img style="border:none;background:none;" alt="" data-ng-src="data:image/png;base64,{{Usersing}}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Inspector Signature -->
+        <div class="details">
+            <div class="row1 clearfix" ng-if="inspectorSignVisibility">
+                <div class="col-lg-12 col-md-12 border-collapse cols">
+                    <div class="form-row">
+                        <!-- <div class="mb-20 instruction-text">The above is a true statement of any and all existing visible damage, rust, and/or missing parts
+                            as of the date of this inspection. The undersigned certifies, under penalty of perjury, that
+                            this inspection report is true and complete to the best of his/her knowledge.</div> -->
+                        <div class="mb-20 instruction-text">The above is a true statement of any and all existing Windshield damage as of the date of this inspection.
+                            The undersigned certifies, under penalty of perjury, that this inspection report is true and
+                            complete to the best of his/her knowledge.</div>
+                        <label>Date Inspection Performed: {{date}}</label>
+                        <!-- <label>{{date}}</label> -->
+                        <button class="btn btn-sm btn-primary mt-20" ng-disabled="isWinInsuredSing" ng-click="showWinInspectorModal()" type="button">Inspector Signature</button>
+                    </div>
+                    <div ng-if="singStatus != false" class="signature-widget">
+                        <img style="border:none;background:none;" alt="" ng-src="{{ winInspectorUsersing }}">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-30 text-right mt-20">
+            <button class="btn btn-tertiary" wz-previous="logStep()" type="button">
+                <i class="fa fa-chevron-left"></i>
+            </button>
+            <button type="button" class="btn btn-tertiary" ng-click="onCancel()">Cancel</button>
+        </div>
+    </div>
+</div>

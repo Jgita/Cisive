@@ -1,0 +1,59 @@
+<div class="modal-content">
+    <div class="modal-header pb-0">
+        <div class="success">
+            <i class="fa fa-check-square"></i>
+            <span>Success</span>
+        </div>
+    </div>
+    <div class="modal-body">
+        <h4 class="text-center">Inspection has been successfully submitted to CARCO</h4>
+        <h4 ng-if="IsEmailPopup == false" class="text-center">Link to inspection report has been emailed to ({{emailToModel}})</h4>
+        <div class="download">
+            <div>
+                <a type="button">
+                    <i class="fa fa-download fa-3x"></i>
+                </a>
+            </div>
+
+            <h4 ng-if="IsWEBView">
+                <a style="cursor: pointer" ng-click="downloadPdf()">Download</a> the Inspection Report Form PDF</h4>
+            <h4 ng-if="IsMobileView">
+                <a href="downloadMobilePdf/{{mobileViewReportNumber}}/{{token}}/{{refreshToken}}" style="cursor: pointer">Download</a> the Inspection Report Form PDF</h4>
+
+            <i class="spin-email" button-spinner="downloadPdfLoader" aria-hidden="true"></i>
+        </div>
+
+
+        <div class="viewInspection">
+            <div class="viewForm">
+                <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                <span ng-if="IsWEBView">
+                    <span class="blueColor">
+                        <a ng-click="viewPDF()">View/Print</a>
+                    </span>Inspection Report Form</span>
+
+                <span ng-if="IsMobileView">
+                    <span class="blueColor">
+                        <a href="viewMobilePdf/{{mobileViewReportNumber}}/{{token}}/{{refreshToken}}">View/Print</a>
+                    </span>Inspection Report Form</span>
+
+            </div>
+            <i class="spin-email" button-spinner="viewPDFLoader" aria-hidden="true"></i>
+
+            <div class="viewForm">
+                <i class="fa fa-envelope" aria-hidden="true"></i>
+                <span ng-if="IsEmailPopup == true">
+                    <span class="blueColor" ng-click="emailModel()">Email </span>Inspection Report Form </span>
+                <span ng-if="IsEmailPopup == false">
+                    <span class="blueColor">
+                        <a ng-click="sendEmail()">Email </a>
+                    </span>Inspection Report Form
+                </span>
+            </div>
+            <i class="spin-email" button-spinner="dataLoading" aria-hidden="true"></i>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" ng-disabled="dataLoading" ng-click="ok()">Ok</button>
+    </div>
+</div>

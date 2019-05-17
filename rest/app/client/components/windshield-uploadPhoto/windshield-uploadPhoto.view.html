@@ -1,0 +1,86 @@
+<section class="content dashboard mb-30">
+    <div class="text-right container-fluid enterInspectionBtn fixed-title">
+        <span class="uploadPhoto">Windshield Inspection Photos</span>
+        <div class="uploadBtn-wrapper">
+            <button type="button" class="btn btn-secondary" button-spinner="buttonLoader" ng-click="confirmAnduploadAllPhotos()">Click to Continue After Selecting Photos</button>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="details windshield-uploaded-photo-wrapper-first">
+            <h1>Full Windshield Photo(s) & VIN Plate on Dashboard
+                <span class="note"> (Min. 2, Max. 3)</span>
+            </h1>
+            <div class="clearfix"></div>
+            <div class="uploaded-photo mb-10" ng-repeat="item in winPhotosUploadedByUser.fullPhoto track by $index">
+                <div ng-if="winPhotosUploadedByUser.fullPhoto.length != 0">
+                    <div class="img-border">
+                        <img style="cursor: pointer;" ng-if="winPhotosUploadedByUser.fullPhoto.length != 0" ng-click="photoViewModal(item)" data-ng-src="data:image/png;base64,{{item.WIN_PHOTO}}">
+                        <div class="btn-delete-wrapper">
+                            <button ng-click="delete($index,'fullPhoto')" tooltip-class="customClass" uib-tooltip="Delete" ng-disabled="photoDisableStatus"
+                                type="button" class="btn btn-remove deleteBtn">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                        </div>
+                    </div>
+                    <p>Full Windshield {{$index + 1}}</p>
+                </div>
+            </div>
+            <div class="uploaded-photo">
+                <div ng-controller="windshieldFullPhotoController">
+                    <div nv-file-over="" uploader="uploader" over-class="another-file-over-class" class="well my-drop-zone select-file mb-0"
+                        ng-if="winPhotosUploadedByUser.fullPhoto.length < 3">
+                        <div class="upload-btn-wrapper select-file-button">
+                            <button ng-disabled="damageImageCounterDisable" class="btn">Upload Photo(s)</button>
+                            <input ng-disabled="damageImageCounterDisable" type="file" nv-file-select="" uploader="uploader" multiple name="myfile" filters="imageFilter, sizeFilter"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+        </div>
+    </div>
+
+    <div class="container-fluid mt-20">
+        <div class="details uploaded-photo-wrapper">
+            <h1>Windshield Damage Photo(s)
+                <span class="note">(If applicable, max 6 photos)</span>
+            </h1>
+
+            <div class="clearfix"></div>
+            <div class="uploaded-photo mb-10" ng-repeat="item in winPhotosUploadedByUser.damage track by $index">
+                <div ng-if="winPhotosUploadedByUser.damage.length != 0">
+                    <div class="img-border">
+                        <img style="cursor: pointer;" ng-if="winPhotosUploadedByUser.damage.length != 0" ng-click="photoViewModal(item)" data-ng-src="data:image/png;base64,{{item.WIN_PHOTO}}">
+                        <div class="btn-delete-wrapper">
+                            <button ng-click="delete($index,'damage')" tooltip-class="customClass" uib-tooltip="Delete" ng-disabled="photoDisableStatus"
+                                type="button" class="btn btn-remove deleteBtn">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </button>
+                        </div>
+                    </div>
+                    <p>Windshield Damage {{$index + 1}}</p>
+                </div>
+            </div>
+            <div class="uploaded-photo">
+                <div ng-controller="windshieldDamagePhotoController">
+                    <div nv-file-over="" uploader="uploader" over-class="another-file-over-class" class="well my-drop-zone select-file mb-0"
+                        ng-if="winPhotosUploadedByUser.damage.length < 6">
+                        <div class="upload-btn-wrapper select-file-button">
+                            <button ng-disabled="damageImageCounterDisable" class="btn">Upload Photo(s)</button>
+                            <input ng-disabled="damageImageCounterDisable" type="file" nv-file-select="" uploader="uploader" multiple name="myfile" filters="imageFilter, sizeFilter"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</section>
+<footer>
+    <div ng-include="'rest/app/client/views/footer.html'"></div>
+</footer>

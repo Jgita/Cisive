@@ -1,0 +1,350 @@
+<form>
+    <h2 class="mobile-title hidden-lg hidden-md">Inspection Summary</h2>
+    <p>Please review/edit inspection information then scroll down to sign your inspection</p>
+    <div class="summary">
+        <div class="details">
+            <div class="row-eq-height row1 clearfix">
+                <div class="col-lg-12 col-md-12 border-collapse">
+                    <div class="row">
+                        <div class="edit-btn-wrapper">
+                            <button type="submit" class="btn btn-sm btn-primary" ng-click="editWizardPage(0)">Edit</button>
+                        </div>
+                        <div class="col-lg-6 col-md-6 cols">
+                            <div class="form-row">
+                                <label class="short">Date of Inspection:
+                                    <span>{{inspectionSummaryResp.INSPECTION_DATE | date : "MM/dd/y"}}</span>
+                                </label>
+                                <label>Adverse Condition:
+                                    <span ng-if="inspectionSummaryResp.ADVERSE_CONDITIONS != ''">{{inspectionSummaryResp.ADVERSE_CONDITIONS}}</span>
+                                    <span ng-if="inspectionSummaryResp.ADVERSE_CONDITIONS == ''">
+                                        {{noneProvided}}
+                                    </span>
+                                </label>
+                                <label>Insurance co. Name:
+                                    <span ng-if="inspectionSummaryResp.INSPECTION_COMPANY_NAME != 'OTHER/UNKNOWN'">{{inspectionSummaryResp.INSPECTION_COMPANY_NAME}}</span>
+                                    <span ng-if="inspectionSummaryResp.INSPECTION_COMPANY_NAME == 'OTHER/UNKNOWN'">{{inspectionSummaryResp.INSURANCE_COMPANY_NAME_OTHER}}</span>
+                                </label>
+                                <label>Policy or Application #:
+                                    <span ng-if="inspectionSummaryResp.POLICY_NUMBER == null">{{noneProvided}}</span>
+                                    <span ng-if="inspectionSummaryResp.POLICY_NUMBER != null">{{inspectionSummaryResp.POLICY_NUMBER}}</span>
+                                </label>
+                                <label>Commercial Vehicle:
+                                    <span ng-if="inspectionSummaryResp.IS_COMMERCIAL_VEHICLE == null">{{noneProvided}}</span>
+                                    <span ng-if="inspectionSummaryResp.IS_COMMERCIAL_VEHICLE == true">YES</span>
+                                    <span ng-if="inspectionSummaryResp.IS_COMMERCIAL_VEHICLE == false">No</span>
+                                </label>
+                                <label>Insured's Name:
+                                    <span>{{inspectionSummaryResp.INSURED_LAST_NAME}}<span ng-if="inspectionSummaryResp.INSURED_FIRST_NAME">, </span>{{inspectionSummaryResp.INSURED_FIRST_NAME}}</span>
+                                </label>
+                                <label>Insured's Address:
+                                    <span>{{inspectionSummaryResp.INSURED_ADDRESS}}, {{inspectionSummaryResp.INSURED_TOWN}}, {{inspectionSummaryResp.INSURED_STATE_CODE}}
+                                        {{inspectionSummaryResp.INSURED_ZIPCODE}}
+                                    </span>
+                                </label>
+
+                                <label>Insured's Phone:
+                                    <span ng-if="inspectionSummaryResp.INSURED_CELL_PHONE != null">{{inspectionSummaryResp.INSURED_CELL_PHONE | tel}}</span>
+                                    <span ng-if="inspectionSummaryResp.INSURED_CELL_PHONE == null && inspectionSummaryResp.Landline == null">&nbsp;{{noneProvided}}</span>
+                                    <span ng-if="inspectionSummaryResp.INSURED_CELL_PHONE == '' && inspectionSummaryResp.Landline == null">&nbsp;{{noneProvided}}</span>
+                                    <span ng-if="inspectionSummaryResp.Landline != null">{{inspectionSummaryResp.Landline | tel}}</span>
+                                    <span ng-if="inspectionSummaryResp.Landline == '' && inspectionSummaryResp.INSURED_CELL_PHONE == ''">&nbsp;{{noneProvided}}</span>
+                                    <span ng-if="inspectionSummaryResp.Landline == '' && inspectionSummaryResp.INSURED_CELL_PHONE == null">&nbsp;{{noneProvided}}</span>
+                                </label>
+                                <label>Insured's Work Phone:
+                                    <span ng-if="inspectionSummaryResp.INSURED_WORK_PHONE != null">{{inspectionSummaryResp.INSURED_WORK_PHONE | tel}}</span>
+                                    <span ng-if="inspectionSummaryResp.INSURED_WORK_PHONE == null">&nbsp;{{noneProvided}}</span>
+                                </label>
+                                <label>Insured's Email:
+                                    <span>{{inspectionSummaryResp.INSURED_EMAIL}}</span>
+                                </label>
+                                <!-- <div class="mt-20 mb-20">
+                                            <button type="submit" class="btn btn-sm btn-primary" ng-click="editWizardPage(0)">Edit Information</button>
+                                        </div> -->
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 cols">
+                            <div class="form-row">
+
+                                <label class="short">Broker/Agent Name:
+                                    <span ng-if="inspectionSummaryResp.BROKER_NAME != null">&nbsp;{{inspectionSummaryResp.BROKER_NAME}}</span>
+                                    <span ng-if="inspectionSummaryResp.BROKER_NAME == null || inspectionSummaryResp.BROKER_NAME == ''">{{noneProvided}}</span>
+                                </label>
+                                <label>Insurance Authorization Form Supplied by Insured:
+                                    <span ng-if="inspectionSummaryResp.IS_COMMERCIAL_AUTHORIZATION_FORM_SUPPLIED_BY_INSURED == true">&nbsp;YES</span>
+                                    <span ng-if="inspectionSummaryResp.IS_COMMERCIAL_AUTHORIZATION_FORM_SUPPLIED_BY_INSURED == false">&nbsp;NO</span>
+                                </label>
+
+                                <label ng-if="inspectionSummaryResp.IS_COMMERCIAL_AUTHORIZATION_FORM_SUPPLIED_BY_INSURED == true">Authorization Form Number:
+                                    <span ng-if="inspectionSummaryResp.AUTHORIZATION_FORM_NUMBER != null">&nbsp;{{inspectionSummaryResp.AUTHORIZATION_FORM_NUMBER}} </span>
+                                    <span ng-if="inspectionSummaryResp.AUTHORIZATION_FORM_NUMBER == null">&nbsp;{{noneProvided}}</span>
+                                </label>
+
+                                <label ng-if="inspectionSummaryResp.ARE_YOU_INSURED == true">Is the Person with the Vehicle the Insured:
+                                    <span ng-if="inspectionSummaryResp.ARE_YOU_INSURED == true">&nbsp;YES</span>
+                                </label>
+
+                                <label ng-if="inspectionSummaryResp.ARE_YOU_INSURED == false">Additional Operator's Name:
+                                    <span ng-if="inspectionSummaryResp.INSURED_PRINT_FNAME != '' && inspectionSummaryResp.INSURED_PRINT_FNAME != null">&nbsp;{{inspectionSummaryResp.INSURED_PRINT_LNAME}}, {{inspectionSummaryResp.INSURED_PRINT_FNAME}}</span>
+                                </label>
+
+                                <label ng-if="inspectionSummaryResp.ARE_YOU_INSURED == false">Additional Operator's Address 1:
+                                    <span ng-if="inspectionSummaryResp.ADDITIONAL_INFO_ADDRESS != '' && inspectionSummaryResp.ADDITIONAL_INFO_ADDRESS != null">&nbsp;{{inspectionSummaryResp.ADDITIONAL_INFO_ADDRESS}}, {{inspectionSummaryResp.ADDITIONAL_INFO_TOWN}},
+                                        {{inspectionSummaryResp.ADDITIONAL_INFO_STATE}} {{inspectionSummaryResp.ADDITIONAL_INFO_ZIPCODE}}
+                                    </span>
+                                </label>
+
+                                <label ng-if="inspectionSummaryResp.ARE_YOU_INSURED == false">Additional Operator's Address 2:
+                                    <span ng-if="inspectionSummaryResp.ADDITIONAL_INFO_ADDRESS_TWO != '' && inspectionSummaryResp.ADDITIONAL_INFO_ADDRESS_TWO != null">&nbsp;{{inspectionSummaryResp.ADDITIONAL_INFO_ADDRESS_TWO}}, {{inspectionSummaryResp.ADDITIONAL_INFO_TOWN}},
+                                        {{inspectionSummaryResp.ADDITIONAL_INFO_STATE}} {{inspectionSummaryResp.ADDITIONAL_INFO_ZIPCODE}}
+                                    </span>
+                                    <span ng-if="inspectionSummaryResp.ADDITIONAL_INFO_ADDRESS_TWO == '' || inspectionSummaryResp.ADDITIONAL_INFO_ADDRESS_TWO == null">&nbsp;{{noneProvided}}
+                                    </span>
+                                </label>
+
+                                <label ng-if="inspectionSummaryResp.ARE_YOU_INSURED == false">Relationship to Insured:
+                                    <span ng-if="inspectionSummaryResp.RELATIONSHIP_TO_CAR_OWNER != '' && inspectionSummaryResp.RELATIONSHIP_TO_CAR_OWNER != null">&nbsp;{{inspectionSummaryResp.RELATIONSHIP_TO_CAR_OWNER}}
+                                    </span>
+                                </label>
+
+                                <label>Inspector:
+                                    <span>{{userEmail}}</span>
+                                    <!-- <span ng-if="dispalyIdInspector != true">{{noneProvided}}</span> -->
+                                </label>
+
+                                <label>Site Id:
+                                    <span>{{siteID}}</span>
+                                </label>
+
+                                <label ng-if="dispalyIdInspector">Inspection Site Name:
+                                    <span>{{siteName}}</span>
+                                </label>
+
+                                <label ng-if="dispalyIdInspector">Site Location (Address):
+                                    <span>{{siteLocation}}</span>
+                                </label>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="details">
+            <div class="row-eq-height row2 clearfix">
+                <div class="col-lg-6 col-md-6 border-collapse cols">
+                    <div class="form-row">
+                        <div class="edit-btn-wrapper">
+                            <button type="submit" class="btn btn-sm btn-primary" ng-click="editWizardPage(2)">Edit</button>
+                        </div>
+                        <label class="short">Year, Make & Model:
+                            <span ng-if="inspectionSummaryResp.MODEL_ID != 'OTHER'">{{inspectionSummaryResp.YEAR}} {{inspectionSummaryResp.ModelName}} {{inspectionSummaryResp.MODEL_ID}}</span>
+                            <span ng-if="inspectionSummaryResp.MODEL_ID == 'OTHER'">{{inspectionSummaryResp.YEAR}} {{inspectionSummaryResp.ModelName}} {{inspectionSummaryResp.MODEL_OTHER}}</span>
+                        </label>
+                        <label>Transmission:
+                            <span ng-if="inspectionSummaryResp.TRANSMISSION == 'Automatic'">{{inspectionSummaryResp.TRANSMISSION}} {{AutoDevicesString}}</span>
+                            <span ng-if="inspectionSummaryResp.TRANSMISSION == 'Manual'">{{inspectionSummaryResp.TRANSMISSION}} {{ManualDevicesString}}</span>
+                        </label>
+
+                        <label>VIN:
+                            <span>{{inspectionSummaryResp.VEHICLE_IDENTIFICATION_NUMBER | uppercase}}</span>
+                        </label>
+
+                        <label>Plate #:
+                            <span ng-if="inspectionSummaryResp.LICENSE_PLATE != null">{{inspectionSummaryResp.LICENSE_PLATE | uppercase}}</span>
+                            <span ng-if="licesePlate == true">NA</span>
+                        </label>
+
+                        <label>Plate State:
+                            <span>{{inspectionSummaryResp.STATE}}</span>
+                        </label>
+
+                        <label>Location where VIN Obtained:
+                            <span>{{VINLocationSummery}}</span>
+                        </label>
+
+                        <label>Principal Location where Vehicle is Kept:
+                            <span>{{garageInsuredAddress}}</span>
+                        </label>
+
+                        <label>Color:
+                            <span ng-if="colorMajorcode != '17' && colorMinorcode != '17' ">{{inspectionSummaryResp.COLOR_MAJOR}}
+                                <span ng-if="inspectionSummaryResp.COLOR_MINOR != null && inspectionSummaryResp.COLOR_MINOR != ''">/</span> {{inspectionSummaryResp.COLOR_MINOR}}</span>
+                            <span ng-if="colorMajorcode != '17' && colorMinorcode == '17' ">{{inspectionSummaryResp.COLOR_MAJOR}}
+                                <span ng-if="inspectionSummaryResp.COLOR_MINOR_OTHER != null && inspectionSummaryResp.COLOR_MINOR != ''">/</span> {{inspectionSummaryResp.COLOR_MINOR_OTHER}}</span>
+                            <span ng-if="colorMajorcode == '17' && colorMinorcode != '17' ">{{inspectionSummaryResp.COLOR_MAJOR_OTHER}}
+                                <span ng-if="inspectionSummaryResp.COLOR_MINOR != null && inspectionSummaryResp.COLOR_MINOR != ''">/</span> {{inspectionSummaryResp.COLOR_MINOR}}</span>
+                            <span ng-if="colorMajorcode == '17' && colorMinorcode == '17' ">{{inspectionSummaryResp.COLOR_MAJOR_OTHER}}
+                                <span ng-if="inspectionSummaryResp.COLOR_MINOR_OTHER != null && inspectionSummaryResp.COLOR_MINOR != ''">/</span> {{inspectionSummaryResp.COLOR_MINOR_OTHER}}</span>
+                        </label>
+                        <label>Seat Material:
+                            <span>{{inspectionSummaryResp.SEAT_MATERIAL}}</span>
+                        </label>
+
+                        <label>EPA Sticker Missing:
+                            <span ng-if="inspectionSummaryResp.IS_EPA_STICKER_MISSING == ' ' || inspectionSummaryResp.IS_EPA_STICKER_MISSING == null">{{noneProvided}}</span>
+                            <span ng-if="inspectionSummaryResp.IS_EPA_STICKER_MISSING == 'Y'">YES</span>
+                            <span ng-if="inspectionSummaryResp.IS_EPA_STICKER_MISSING == 'N'">NO</span>
+                        </label>
+                        <label>Style:
+                            <span ng-if="inspectionSummaryResp.STYLE != 'Other'">{{inspectionSummaryResp.STYLE}}</span>
+                            <span ng-if="inspectionSummaryResp.STYLE == 'Other'">{{inspectionSummaryResp.STYLE_OTHER}}</span>
+                        </label>
+                        <label>Front Seat Color:
+                            <span>{{inspectionSummaryResp.FRONT_SEAT_COLOR}}</span>
+                        </label>
+                        <label>Odometer:
+                            <span>{{inspectionSummaryResp.ODOMETER}}</span>
+                        </label>
+
+                    </div>
+                </div>
+                <div class="px-15 visible-xs visible-sm">
+                    <hr class="no-margin">
+                </div>
+                <div class="col-lg-6 col-md-6 border-collapse cols">
+                    <div class="form-row">
+                        <div class="edit-btn-wrapper">
+                            <button type="submit" class="btn btn-sm btn-primary" ng-click="editWizardPage(3)">Edit</button>
+                        </div>
+                        <label class="short">Radio Equipment:
+                            <span ng-if="!nonePro">{{radioDevicesString}} {{radioFactoryInstalled}} </span>
+                            <!-- <span style="margin-left: -4px;" ng-if="inspectionSummaryResp.GPS_NAVIGATION_SYSTEM_INSTALLED == true">,</span> {{gpsNaviSysInstalled}}</span> -->
+                            <span ng-if="nonePro">
+                                {{noneProvided}}
+
+                            </span>
+                        </label>
+                        <label>Anti-Theft Device:
+                            <span ng-show="$root.stateCode == 'NJ'">
+                                <span ng-if="inspectionSummaryResp.ANTI_THEFT_NONE_NEW_JERCY == false">None
+                                </span>
+                            </span>
+                            <span ng-show="$root.stateCode != 'NJ'">
+                                <span ng-if="inspectionSummaryResp.ANTITHEFT_NONE == false">None
+                                </span>
+                            </span>
+
+                            <span ng-if="stateCode != 'NJ'">{{antitheftDevicesString}}
+                            </span>
+
+                            <span ng-if="stateCode == 'NJ'">{{antitheftDevicesNewJLablessString}}
+                            </span>
+
+                        </label>
+                        <label>Exterior:
+                            <span ng-if="noneProExterior == true">{{noneProvided}}</span>
+                            <span ng-if="noneProExterior == false">{{ExteriorDevicesString}}</span>
+                        </label>
+                        <label>Seats:
+                            <span ng-if="noneProSeats == false">{{SeatsDevicesString}}</span>
+                            <span ng-if="noneProSeats == true">{{noneProvided}}</span>
+                        </label>
+                        <label>Instrumentation:
+                            <span ng-if="noneProInstrumentation == false">{{instrumentationDevicesString}}</span>
+                            <span ng-if="noneProInstrumentation == true">{{noneProvided}}</span>
+                        </label>
+                        <label>Safety:
+                            <span ng-if="noneProSafety == false">{{SafetyDevicesString}}</span>
+                            <span ng-if="noneProSafety == true">{{noneProvided}}</span>
+                        </label>
+                        <label>Other Optional Equipment:
+                            <span ng-if="inspectionSummaryResp.IS_OTHER_EQUIPMENT == true">{{inspectionSummaryResp.OTHER_OPTIONAL_EQUIPMENT}}</span>
+                            <span ng-if="inspectionSummaryResp.IS_OTHER_EQUIPMENT == null || inspectionSummaryResp.IS_OTHER_EQUIPMENT == false || inspectionSummaryResp.OTHER_OPTIONAL_EQUIPMENT == null || inspectionSummaryResp.OTHER_OPTIONAL_EQUIPMENT == ''">{{noneProvided}}</span>
+                            <!-- <span ng-if="inspectionSummaryResp.OTHER_OPTIONAL_EQUIPMENT == null || inspectionSummaryResp.OTHER_OPTIONAL_EQUIPMENT == ''">{{noneProvided}}</span> -->
+                        </label>
+                        <label>Van or Limo:
+                            <span ng-if="inspectionSummaryResp.IS_VAN_OR_LIMO == true">{{vanLimoDevicesString}}</span>
+                            <!-- <span ng-if="inspectionSummaryResp.IS_VAN_OR_LIMO == false || inspectionSummaryResp.IS_VAN_OR_LIMO == null">{{noneProvided}}</span> -->
+                            <span ng-if="vanLimoNoneProvided">{{noneProvided}}</span>
+                        </label>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="details">
+            <div class="row1 clearfix">
+                <div class="col-lg-12 col-md-12 border-collapse cols">
+                    <div class="form-row">
+                        <div class="edit-btn-wrapper">
+                            <button type="submit" class="btn btn-sm btn-primary" ng-click="editWizardPage(4)">Edit</button>
+                        </div>
+                        <label class="short">Damaged:
+                            <span ng-if="noneProDamaged == true && inspectionSummaryResp.NO_EXISTING_DAMAGE_RUST_MISSING_PART == false">{{noneProvided}}</span>
+                            <span ng-if="inspectionSummaryResp.NO_EXISTING_DAMAGE_RUST_MISSING_PART == false">{{DamagedDevicesString}}</span>
+                            <span ng-if="inspectionSummaryResp.NO_EXISTING_DAMAGE_RUST_MISSING_PART == true">No existing damage, rust or missing parts</span>
+                        </label>
+                        <label>Rusted:
+                            <span ng-if="noneProRusted == true && inspectionSummaryResp.NO_EXISTING_DAMAGE_RUST_MISSING_PART == false">{{noneProvided}}</span>
+                            <span ng-if="inspectionSummaryResp.NO_EXISTING_DAMAGE_RUST_MISSING_PART == false">{{rustedDamagedString}}</span>
+                            <span ng-if="inspectionSummaryResp.NO_EXISTING_DAMAGE_RUST_MISSING_PART == true">No existing damage, rust or missing parts</span>
+                        </label>
+                        <label>Further Description:
+                            <span ng-if="inspectionSummaryResp.DESCRIPTION != null">{{inspectionSummaryResp.DESCRIPTION}}</span>
+                            <span ng-if="inspectionSummaryResp.DESCRIPTION == null">{{noneProvided}}</span>
+                        </label>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Insured Signature -->
+        <div class="details">
+            <div class="row1 clearfix">
+                <div class="col-lg-12 col-md-12 border-collapse cols">
+                    <div class="form-row">
+
+                        <!-- <div ng-if="inspectorSignVisibility == false" class="mb-20 instruction-text">The above is a true statement of any and all existing visible damage, rust, and/or missing parts as of
+                            the date of this inspection. The undersigned certifies, under penalty of perjury, that this inspection
+                            report is true and complete to the best of his/her knowledge.</div> -->
+
+                        <div class="mb-20 instruction-text">I have reviewed the above and acknowledge that it is a true and complete description of the auto's
+                            physical condition and accessory items.</div>
+
+                        <label>Date Inspection Performed: {{date}}</label>
+
+
+                        <button class="btn btn-sm btn-primary mt-20" ng-click="showModal()" ng-disabled="isDisabledInsuredSignOnce" type="button">Insured Signature</button>
+                    </div>
+                    <div ng-if="singStatus != false" class="signature-widget">
+                        <img style="border:none;background:none;" alt="" ng-src="{{ Usersing }}">
+
+                    </div>
+                    <div ng-if="inspectionSummaryResp.INSURED_SIGNATURE != null" class="signature-widget">
+                        <div>
+                            <img style="border:none;background:none;" alt="" data-ng-src="data:image/png;base64,{{Usersing}}">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Inspector Signature -->
+        <div class="details">
+            <div class="row1 clearfix" ng-if="inspectorSignVisibility">
+                <div class="col-lg-12 col-md-12 border-collapse cols">
+                    <div class="form-row">
+                        <div class="mb-20 instruction-text">The above is a true statement of any and all existing visible damage, rust, and/or missing parts
+                            as of the date of this inspection. The undersigned certifies, under penalty of perjury, that
+                            this inspection report is true and complete to the best of his/her knowledge.</div>
+                        <label>Date Inspection Performed: {{date}}</label>
+
+                        <button class="btn btn-sm btn-primary mt-20" ng-disabled="isInsuredSing" ng-click="showInspectorModal()" type="button">Inspector Signature</button>
+                    </div>
+                    <div ng-if="singStatus != false" class="signature-widget">
+                        <img style="border:none;background:none;" alt="" ng-src="{{ inspectorUsersing }}">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="mb-30 text-right mt-20">
+        <button class="btn btn-tertiary" wz-previous="logStep()" type="button">
+            <i class="fa fa-chevron-left"></i>
+        </button>
+        <button type="button" class="btn btn-tertiary" ng-click="onCancel()">Cancel</button>
+    </div>
+    </div>
+</form>

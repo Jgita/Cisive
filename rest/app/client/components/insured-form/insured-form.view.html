@@ -1,0 +1,482 @@
+<form name="insuredForm" id="insuredForm" ng-submit="insuredSubmit()" role="form" novalidate>
+	<h2 class="mobile-title hidden-lg hidden-md">Insured Info</h2>
+	<!-- <h3 class="mb-20">Please provide the following information</h3> -->
+	<div class="details">
+		<h1>Policy Details</h1>
+		<div class="row-eq-height clearfix">
+			<div class="col-lg-4 col-md-4 cols border-collapse">
+				<div class="form-row">
+					<label>Date of Inspection:
+						<span>{{date}}</span>
+					</label>
+					<label class="txt">Time of Inspection:
+						<span>{{time}}</span>
+					</label>
+				</div>
+			</div>
+			<div class="col-lg-4 col-md-4 cols border-collapse">
+				<div class="form-row">
+					<label>Adverse Conditions</label>
+					<select ng-model="insuredInfo.ADVERSE_CONDITIONS" class="form-control" name="adverse" id="adverse">
+						<option value="" selected>Select Adverse Condition</option>
+						<option ng-repeat="adverseCondition in adverseConditions" ng-selected="insuredInfo.ADVERSE_CONDITIONS == adverseCondition.ID"
+						 value="{{adverseCondition.ID}}">{{adverseCondition.ADVERSE_CONDITION}}</option>
+					</select>
+				</div>
+			</div>
+			<div class="col-lg-4 col-md-4 cols border-collapse">
+				<div class="form-row" ng-class="{ 'has-error': insuredForm.insuCompany.$touched && insuredForm.insuCompany.$error.required, 'has-success':insuredForm.insuCompany.$valid}">
+					<label>Insurance Company
+						<span class="asterisk">*</span>
+					</label>
+
+					<select ng-model="insuredInfo.INSPECTION_COMPANY_NAME" class="form-control" name="insuCompany" id="insurance-company" required>
+						<option value="" selected>Select Insurance Company</option>
+						<option ng-repeat="insuranceCompany in insuranceCompanies" ng-selected="insuredInfo.INSPECTION_COMPANY_NAME == insuranceCompany.Name"
+						 value="{{insuranceCompany.Name}}">{{insuranceCompany.Name}}</option>
+					</select>
+					<span class="select-arrow"></span>
+
+					<span ng-show="showMessage(insuredForm.insuCompany)" class="help-block">Insurance Company is required</span>
+
+					<input ng-if="insuredInfo.INSPECTION_COMPANY_NAME == otherUnknownCompanyCode" autocomplete="off" ng-maxlength="35" type="text"
+					 name="otherInsuComp" id="style-Text" class="form-control" ng-model="insuredInfo.INSURANCE_COMPANY_NAME_OTHER" placeholder="Enter Insurance Company"
+					 auto-fill-sync required />
+					<span ng-show="showMessage(insuredForm.otherInsuComp)" class="help-block">Insurance Company is required</span>
+					<span class="help-block" ng-show="(insuredForm.otherInsuComp.$error.maxlength && insuredForm.otherInsuComp.$dirty) ">
+						Insurance Company, should be max 35 letters
+					</span>
+				</div>
+			</div>
+		</div>
+
+		<div class="row-eq-height clearfix">
+			<div class="col-lg-4 col-md-4 cols border-collapse">
+				<div class="form-row" ng-class="{'has-error':insuredForm.policyNo.$touched && insuredForm.policyNo.$error.maxlength,'has-success':insuredForm.policyNo.$valid}">
+					<label>Policy or Application #</label>
+					<input ng-maxlength="16" autocomplete="off" type="text" class="form-control" ng-model="insuredInfo.POLICY_NUMBER" placeholder="Enter Policy or Application #"
+					 name="policyNo" id="policy-number" auto-fill-sync>
+					<span class="help-block" ng-show="(insuredForm.policyNo.$error.maxlength && insuredForm.policyNo.$dirty) ">
+						Policy or Application #, should be composed of max 16 letters & digits
+					</span>
+				</div>
+			</div>
+			<div class="col-lg-4 col-md-4 cols border-collapse">
+				<div class="form-row">
+					<label>Is this a commercial vehicle?</label>
+					<div class="checkbox checkbox-primary mb-0">
+						<input type="checkbox" id="checkbox" class="styled" ng-model="insuredInfo.IS_COMMERCIAL_VEHICLE" auto-fill-sync>
+						<label for="checkbox">Yes</label>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-4 col-md-4 cols border-collapse hidden-xs hidden-sm">
+				<div class="form-row">
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="details">
+		<h1>Personal Details</h1>
+		<div class="clearfix row-eq-height">
+			<div class="col-lg-4 col-md-4 cols border-collapse">
+				<div class="form-row" ng-class="{ 'has-error': insuredForm.lastName.$touched && insuredForm.lastName.$error.required || insuredForm.lastName.$error.maxlength, 'has-success':insuredForm.lastName.$valid}">
+
+					<label>Insured’s Last Name or Company Name
+						<span class="asterisk">*</span>
+					</label>
+					<input autocomplete="off" ng-maxlength="50" type="text" name="lastName" id="lastName" class="form-control" ng-model="insuredInfo.INSURED_LAST_NAME "
+					 placeholder="Enter Insured’s Last Name or Company Name" auto-fill-sync required/>
+					<span ng-show="showMessage(insuredForm.lastName)" class="help-block">Insured’s Last Name or Company Name is required</span>
+					<span class="help-block" ng-show="(insuredForm.lastName.$error.maxlength && insuredForm.lastName.$dirty) ">
+						Insured’s Last Name or Company Name, should be max 50 letters
+					</span>
+					<div class="checkbox checkbox-primary mb-0">
+						<input type="checkbox" id="checkboxCompany" class="styled" ng-model="insuredInfo.IS_FIRST_NAME_ENABLE" auto-fill-sync>
+						<label for="checkboxCompany">Check here if Company Name</label>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="col-lg-4 col-md-4 cols border-collapse">
+				<div ng-if="insuredInfo.IS_FIRST_NAME_ENABLE == true" class="form-row" ng-class="{ 'has-error': insuredForm.firstName.$touched && insuredForm.firstName.$error.maxlength, 'has-success':insuredForm.firstName.$valid}">
+					<label>Insured’s First Name
+					</label>
+					<input autocomplete="off" ng-maxlength="50" type="text" name="firstName" id="firstName" class="form-control" ng-model="insuredInfo.INSURED_FIRST_NAME "
+					 placeholder="Enter Insured's First Name" auto-fill-sync/>
+					<span class="help-block" ng-show="(insuredForm.firstName.$error.maxlength && insuredForm.firstName.$dirty) ">
+						Insured's first name, should be max 50 letters
+					</span>
+				</div>
+
+				<div ng-if="insuredInfo.IS_FIRST_NAME_ENABLE == false || insuredInfo.IS_FIRST_NAME_ENABLE == undefined" class="form-row"
+				 ng-class="{ 'has-error': insuredForm.firstName.$touched && insuredForm.firstName.$error.required || insuredForm.firstName.$error.maxlength, 'has-success':insuredForm.firstName.$valid}">
+					<label>Insured’s First Name
+						<span class="asterisk">*</span>
+					</label>
+					<input autocomplete="off" ng-maxlength="50" type="text" name="firstName" id="firstName" class="form-control" ng-model="insuredInfo.INSURED_FIRST_NAME "
+					 placeholder="Enter Insured's First Name" auto-fill-sync required/>
+					<span ng-if="insuredInfo.IS_FIRST_NAME_ENABLE == false || insuredInfo.IS_FIRST_NAME_ENABLE == undefined" ng-show="showMessage(insuredForm.firstName)"
+					 class="help-block">Insured's first name is required</span>
+					<span class="help-block" ng-show="(insuredForm.firstName.$error.maxlength && insuredForm.firstName.$dirty) ">
+						Insured's first name, should be max 50 letters
+					</span>
+				</div>
+			</div>
+			<div class="col-lg-4 col-md-4 cols border-collapse">
+				<div class="form-row" ng-class="{'has-error':insuredForm.middleName.$error.maxlength || insuredForm.middleName.$error.minlength,'has-success':insuredForm.middleName.$valid}">
+					<label>Insured’s Middle Initial (1 letter)</label>
+					<input autocomplete="off" ng-keydown="$event.keyCode != 32 ? $event:$event.preventDefault()" only-letters-input type="text"
+					 ng-minlength="1" ng-maxlength="1" name="middleName" id="middleName" class="form-control" ng-model="insuredInfo.INSURED_MIDDLE_NAME"
+					 placeholder="Enter Middle Initial" auto-fill-sync/>
+
+					<div ng-if="insuredForm.middleName.$touched || signupSubmitted">
+
+						<span class="help-block" ng-show="((insuredForm.middleName.$error.minlength || insuredForm.middleName.$error.maxlength) && insuredForm.middleName.$dirty) ">
+							Insured’s middle name should be max 1 character
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row-eq-height clearfix">
+			<div class="col-lg-4 col-md-4 cols border-collapse" id="insuredAdd">
+				<div class="form-row" ng-class="{ 'has-error': insuredForm.address.$touched && insuredForm.address.$error.required || insuredForm.address.$error.maxlength, 'has-success':insuredForm.address.$valid}">
+					<label>Insured’s Street Address
+						<span class="asterisk">*</span>
+					</label>
+					<textarea class="form-control" ng-maxlength="150" name="address" placeholder="Enter Street Address" ng-model="insuredInfo.INSURED_ADDRESS"
+					 id="exampleTextarea" rows="2" auto-fill-sync required></textarea>
+					<span ng-show="showMessage(insuredForm.address)" class="help-block">Insured's address is required</span>
+					<span class="help-block" ng-show="(insuredForm.address.$error.maxlength && insuredForm.address.$dirty) ">
+						Insured's address, should be composed of max 150 letters & digits
+					</span>
+				</div>
+			</div>
+			<div class="col-lg-4 col-md-4 cols border-collapse">
+				<div class="form-row" ng-class="{ 'has-error': insuredForm.town.$touched && insuredForm.town.$error.required || insuredForm.town.$error.maxlength, 'has-success':insuredForm.town.$valid}">
+					<label>Insured’s City/Town
+						<span class="asterisk">*</span>
+					</label>
+					<input autocomplete="off" ng-maxlength="20" only-letters-input type="text" name="town" id="town" class="form-control" ng-model="insuredInfo.INSURED_TOWN "
+					 placeholder="Enter City/Town" auto-fill-sync required/>
+					<span ng-show="showMessage(insuredForm.town)" class="help-block">Insured’s town is required.
+					</span>
+					<span class="help-block" ng-show="(insuredForm.town.$error.maxlength && insuredForm.town.$dirty) ">
+						Insured’s town, should be max 20 letters
+					</span>
+				</div>
+			</div>
+
+			<div class="col-lg-4 col-md-4 cols border-collapse">
+				<div class="form-row" ng-class="{ 'has-error': insuredForm.state.$touched && insuredForm.state.$error.required, 'has-success':insuredForm.state.$valid}">
+					<label>Insured’s State/Province
+						<span class="asterisk">*</span>
+					</label>
+					<select ng-model="insuredInfo.INSURED_STATE_CODE" class="form-control" name="state" id="state" required>
+						<option value="" selected>Select state</option>
+						<option ng-repeat="state in states" ng-selected="insuredInfo.INSURED_STATE_CODE == state.id" value="{{state.id}}">{{state.name}}</option>
+					</select>
+					<span class="select-arrow"></span>
+					<span ng-show="showMessage(insuredForm.state)" class="help-block">State/Province is required</span>
+				</div>
+			</div>
+		</div>
+
+		<div class="row-eq-height clearfix">
+			<div class="col-lg-4 col-md-4 cols border-collapse">
+
+				<div class="form-row" ng-class="{ 'has-error': insuredForm.zipCode.$touched && insuredForm.zipCode.$error.required, 'has-warning':insuredForm.zipCode.$error.pattern, 'has-success':insuredForm.zipCode.$valid }">
+					<label>Insured’s Zip/Postal Code
+						<span class="asterisk">*</span>
+					</label>
+					<input class="form-control" autocomplete="off" type="tel" maxlength="5" ng-keydown="$event.keyCode != 32 ? $event:$event.preventDefault()"
+					 numbers-only ng-pattern="/^(?!0{5})[0-9]{5}$/" class="form-control" ng-model="insuredInfo.INSURED_ZIPCODE" placeholder="Enter Zip Code"
+					 value="" id="zip-code" name="zipCode" auto-fill-sync required>
+
+					<span ng-show="showMessage(insuredForm.zipCode)" class="help-block">Zipcode is required</span>
+					<span ng-show="insuredForm.zipCode.$error.pattern" class="help-block"> The US zipcode must contain 5 digits and non zero. </span>
+				</div>
+			</div>
+
+
+			<div class="col-lg-4 col-md-4 cols border-collapse">
+				<div class="form-row">
+					<div class="radio radio-inline radio-primary">
+						<input id="radio-Mobile" name="PhoneNoRadio" type="radio" ng-checked="typeOfPhoneNumbers[0].checked" ng-click="handleRadioClick(typeOfPhoneNumbers[0])"
+						 value="Mobile" ng-model="insuredInfo.selectedValue.name">
+						<label for="radio-Mobile">Mobile
+							<span class="asterisk" ng-if="isRequired">*</span>
+						</label>
+					</div>
+					<div class="radio radio-inline pl-0"> OR </div>
+					<div class="radio radio-inline radio-primary">
+						<input id="radio-Landline" name="PhoneNoRadio" type="radio" ng-checked="typeOfPhoneNumbers[1].checked" ng-click="handleRadioClick(typeOfPhoneNumbers[1])"
+						 value="Landline" ng-model="insuredInfo.selectedValue.name">
+						<label for="radio-Landline"> Landline
+							<span class="asterisk" ng-if="isRequired">*</span>
+						</label>
+					</div>
+					<div ng-if="showMobile" class="mt-10">
+						<input type="tel" autocomplete="off" class="form-control" id="inputPhone" name="phoneNumber" phone-input placeholder="Enter Mobile Number"
+						 ng-change="cellPhoneUpdate('cell')" ng-model="insuredInfo.INSURED_CELL_PHONE" ng-required="isRequired" auto-fill-sync>
+
+						<span ng-show="showMessage(insuredForm.phoneNumber)" class="help-block">Mobile Number is required</span>
+						<span class="help-block" ng-show="insuredForm.phoneNumber.$error.phoneInput">Mobile Number should be 10 digits and non zero.</span>
+
+					</div>
+
+					<div ng-if="showLandline" class="mt-10">
+
+						<input type="tel" phone-input autocomplete="off" class="form-control" id="inputPhone" name="landline" placeholder="Enter Landline Number"
+						 ng-change="cellPhoneUpdate('landLine')" ng-model="insuredInfo.INSURED_LANDLINE" ng-required="isRequired" auto-fill-sync>
+
+						<span ng-show="showMessage(insuredForm.landline)" class="help-block">Landline Number is required</span>
+						<span class="help-block" ng-show="insuredForm.landline.$error.phoneInput">Landline Number should be 10 digits and non zero.</span>
+
+					</div>
+				</div>
+			</div>
+
+			<div class="col-lg-4 col-md-4 cols border-collapse">
+				<div class="form-row">
+					<label>Insured’s Work Phone</label>
+					<input type="tel" phone-input autocomplete="off" class="form-control" id="inputPhone" name="phone" placeholder="Enter Contact Number"
+					 ng-model="insuredInfo.INSURED_WORK_PHONE" auto-fill-sync>
+					<span class="help-block" ng-show="insuredForm.phone.$error.phoneInput">Phone number should be 10 digits and non zero.</span>
+					<!-- <span class="help-block" ng-show="(insuredForm.phone.$error.maxlength && insuredForm.phone.$dirty) ">
+							Phone number should be 10 digits
+						</span> -->
+				</div>
+			</div>
+		</div>
+
+		<div class="row-eq-height clearfix">
+			<div class="col-lg-4 col-md-4 cols border-collapse">
+				<div class="form-row" ng-class="{ 'has-error':insuredForm.email.$error.pattern  && insuredForm.email.$touched || insuredForm.email.$error.required, 'has-success':insuredForm.email.$valid}">
+					<label>Insured’s Email Address
+						<span class="asterisk">*</span>
+					</label>
+					<input autocomplete="off" type="text" ng-maxlength="50" name="email" id="email" class="form-control" ng-model="insuredInfo.INSURED_EMAIL"
+					 placeholder="Enter Email" ng-pattern="/^[\w\-\.\+]+\@[a-zA-Z0-9\.\-]+\.[a-zA-z]{2,4}$/" auto-fill-sync required/>
+					<span ng-show="insuredForm.email.$dirty && insuredForm.email.$error.pattern" class="help-block">Please enter valid Email Address</span>
+					<span ng-show="showMessage(insuredForm.email)" class="help-block">Insured’s Email Address is required</span>
+					<span class="help-block" ng-show="(insuredForm.email.$error.maxlength && insuredForm.email.$dirty) ">
+						Insured's Email Address, should be max 50 letters
+					</span>
+				</div>
+			
+			</div>
+			<div class="col-lg-4 col-md-4 cols border-collapse hidden-xs hidden-sm">
+				<div class="form-row">
+
+				</div>
+			</div>
+			<div class="col-lg-4 col-md-4 cols border-collapse hidden-xs hidden-sm">
+				<div class="form-row">
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="details">
+		<div class="row-eq-height clearfix">
+			<div class="col-lg-4 col-md-4 cols border-collapse">
+				<div class="form-row">
+					<label>Is the Person with the Vehicle the Insured?
+						<span class="asterisk">*</span>
+					</label>
+					<div class="radio radio-inline radio-primary mt-0">
+						<input id="radioYes" name="radioInsured" type="radio" ng-click="HideMode()" ng-value="true" ng-model="insuredInfo.ARE_YOU_INSURED"
+						 class="custom-control-input" ng-required="!insuredInfo.ARE_YOU_INSURED" />
+						<label for="radioYes"> Yes</label>
+					</div>
+					<div class="radio radio-inline radio-primary">
+						<input id="radioNo" name="radioInsured" type="radio" ng-click="changeMode()" ng-value="false" ng-model="insuredInfo.ARE_YOU_INSURED"
+						 class="custom-control-input" ng-required="!insuredInfo.ARE_YOU_INSURED" />
+						<label for="radioNo"> No</label>
+					</div>
+					<span class="help-block marT5" ng-show="showMessage(insuredForm.radioInsured)">
+						Please select is the person with the vehicle the insured
+
+					</span>
+					<div ng-if="hideInfo" class="additional-info">
+						<div class="mt-20">
+							<label class="mt-10">Please enter the name, address and relationship to the insured in the boxes below.</label>
+						</div>
+
+						<label>Name
+							<span class="asterisk">*</span>
+						</label>
+
+						<div class="row">
+							<div class="col-lg-6" ng-class="{ 'has-error': insuredForm.addInfoLastName.$touched && insuredForm.addInfoLastName.$error.required || insuredForm.addInfoLastName.$error.maxlength, 'has-success':insuredForm.addInfoLastName.$valid}">
+								<input type="text" name="addInfoLastName" autocomplete="off" class="form-control" ng-maxlength="50" ng-model="insuredInfo.INSURED_PRINT_LNAME"
+								 placeholder="Enter Last Name" auto-fill-sync required/>
+
+								<span ng-show="showMessage(insuredForm.addInfoLastName)" class="help-block">Last name is required</span>
+								<span class="help-block" ng-show="(insuredForm.addInfoLastName.$error.maxlength && insuredForm.addInfoLastName.$dirty) ">
+									Last name, should be max 50 letters
+								</span>
+							</div>
+							<div class="col-lg-6" ng-class="{ 'has-error': insuredForm.addInfoFirstName.$touched && insuredForm.addInfoFirstName.$error.required || insuredForm.addInfoFirstName.$error.maxlength, 'has-success':insuredForm.addInfoFirstName.$valid}">
+								<input type="text" name="addInfoFirstName" autocomplete="off" class="form-control" ng-model="insuredInfo.INSURED_PRINT_FNAME"
+								 placeholder="Enter First Name" ng-maxlength="50" auto-fill-sync required/>
+
+								<span ng-show="showMessage(insuredForm.addInfoFirstName)" class="help-block">First name is required</span>
+								<span class="help-block" ng-show="(insuredForm.addInfoFirstName.$error.maxlength && insuredForm.addInfoFirstName.$dirty) ">
+									First name, should be max 50 letters
+								</span>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-lg-6">
+								<div class="mt-10" ng-class="{ 'has-error': insuredForm.additionAddress.$touched && insuredForm.additionAddress.$error.required || insuredForm.additionAddress.$error.maxlength, 'has-success':insuredForm.additionAddress.$valid}">
+									<label>Address 1
+										<span class="asterisk">*</span>
+									</label>
+									<textarea type="text" rows="1" ng-maxlength="40" name="additionAddress" autocomplete="off" class="form-control" ng-model="insuredInfo.ADDITIONAL_INFO_ADDRESS"
+									 placeholder="Enter Address" auto-fill-sync required></textarea>
+									<span ng-show="showMessage(insuredForm.additionAddress)" class="help-block">Address is required</span>
+									<span class="help-block" ng-show="(insuredForm.additionAddress.$error.maxlength && insuredForm.additionAddress.$dirty) ">
+										Address, should be composed of max 40 letters & digits
+									</span>
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<div class="mt-10">
+									<label>Address 2
+										<span style="visibility: hidden;" class="asterisk">*</span>
+									</label>
+									<textarea type="text" rows="1" name="additionAddress2" ng-maxlength="40" autocomplete="off" class="form-control" ng-model="insuredInfo.ADDITIONAL_INFO_ADDRESS_TWO"
+									 placeholder="Enter Address" auto-fill-sync></textarea>
+									<span class="help-block" ng-show="(insuredForm.additionAddress2.$error.maxlength && insuredForm.additionAddress2.$dirty) ">
+										Address, should be composed of max 40 letters & digits
+									</span>
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-lg-6">
+								<div class="mt-10" ng-class="{ 'has-error': insuredForm.addTown.$touched && insuredForm.addTown.$error.required || insuredForm.addTown.$error.maxlength, 'has-success':insuredForm.addTown.$valid}">
+									<label>Town
+										<span class="asterisk">*</span>
+									</label>
+									<input type="text" autocomplete="off" name="addTown" ng-maxlength="20" class="form-control" ng-model="insuredInfo.ADDITIONAL_INFO_TOWN"
+									 placeholder="Enter Town" auto-fill-sync required>
+									<span ng-show="showMessage(insuredForm.addTown)" class="help-block">Town is required.
+									</span>
+									<span class="help-block" ng-show="(insuredForm.addTown.$error.maxlength && insuredForm.addTown.$dirty) ">
+										Town, should be max 20 letters
+									</span>
+								</div>
+							</div>
+							<div class="col-lg-6">
+								<div class="mt-10" ng-class="{ 'has-error': insuredForm.zipCodeINFO.$touched && insuredForm.zipCodeINFO.$error.required, 'has-warning':insuredForm.zipCodeINFO.$error.pattern, 'has-success':insuredForm.zipCodeINFO.$valid }">
+									<label>Zip/Postal Code
+										<span class="asterisk">*</span>
+									</label>
+									<input type="tel" name="zipCodeINFO" autocomplete="off" ng-pattern="/^(?!0{5})[0-9]{5}$/" maxlength="5" numbers-only ng-keydown="$event.keyCode != 32 ? $event:$event.preventDefault()"
+									 class="form-control" ng-model="insuredInfo.ADDITIONAL_INFO_ZIPCODE" placeholder="Enter Code" auto-fill-sync required>
+									<span ng-show="insuredForm.zipCodeINFO.$error.pattern" class="help-block"> The US zipcode must contain 5 digits and non zero.</span>
+									<span ng-show="showMessage(insuredForm.zipCodeINFO)" class="help-block">Zipcode is required</span>
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="mt-10" ng-class="{ 'has-error': insuredForm.addState.$touched && insuredForm.addState.$error.required, 'has-success':insuredForm.addState.$valid}">
+									<label>State
+										<span class="asterisk">*</span>
+									</label>
+									<select ng-model="insuredInfo.ADDITIONAL_INFO_STATE" class="form-control" name="addState" id="state" auto-fill-sync required>
+										<option value="" selected>Select state</option>
+										<option ng-repeat="state in states" ng-selected="insuredInfo.ADDITIONAL_INFO_STATE == state.id" value="{{state.id}}">{{state.name}}</option>
+									</select>
+									<span ng-show="showMessage(insuredForm.addState)" class="help-block">State is required</span>
+								</div>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col-lg-12">
+								<div class="mt-10" ng-class="{ 'has-error': insuredForm.relToCar.$touched && insuredForm.relToCar.$error.required, 'has-success':insuredForm.relToCar.$valid}">
+									<label>Relationship to Insured
+										<span class="asterisk">*</span>
+									</label>
+									<select class="form-control" name="relToCar" ng-model="insuredInfo.RELATIONSHIP_TO_CAR_OWNER" required>
+										<option value="">Please Select</option>
+										<option ng-repeat="item in relToCarOwner" ng-selected="insuredInfo.RELATIONSHIP_TO_CAR_OWNER == item.ID" value="{{item.ID}}">{{item.RELATION}}</option>
+									</select>
+									<span ng-show="showMessage(insuredForm.relToCar)" class="help-block">Relation to car owner is required</span>
+								</div>
+							</div>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-lg-4 col-md-4 cols border-collapse">
+				<div class="form-row" ng-class="{'has-error':insuredForm.brokername.$touched && insuredForm.brokername.$error.maxlength,'has-success':insuredForm.brokername.$valid}">
+					<label>Broker/Agent Name</label>
+					<input type="text" name="brokername" autocomplete="off" ng-maxlength="50" ng-model="insuredInfo.BROKER_NAME" class="form-control"
+					 placeholder="Enter Name" auto-fill-sync>
+					<span class="help-block" ng-show="(insuredForm.brokername.$error.maxlength && insuredForm.brokername.$dirty) ">
+						Broker Name, should be max 50 letters
+					</span>
+				</div>
+			</div>
+
+			<div class="col-lg-4 col-md-4 cols border-collapse">
+				<div class="form-row">
+					<label>Insurance Authorization form Supplied by Insured
+						<span class="asterisk">*</span>
+					</label>
+					<div class="radio radio-inline radio-primary mt-0">
+						<input id="authRadio1" name="authRadio" ng-model="insuredInfo.IS_COMMERCIAL_AUTHORIZATION_FORM_SUPPLIED_BY_INSURED" type="radio"
+						 ng-value="true" class="custom-control-input" ng-change="getAuthorizationValue(insuredInfo.IS_COMMERCIAL_AUTHORIZATION_FORM_SUPPLIED_BY_INSURED)"
+						 ng-required="!insuredInfo.IS_COMMERCIAL_AUTHORIZATION_FORM_SUPPLIED_BY_INSURED">
+						<label for="authRadio1"> Yes</label>
+					</div>
+					<div class="radio radio-inline radio-primary">
+						<input id="authRadio2" name="authRadio" ng-model="insuredInfo.IS_COMMERCIAL_AUTHORIZATION_FORM_SUPPLIED_BY_INSURED" type="radio"
+						 ng-value="false" class="custom-control-input" ng-change="getAuthorizationValue(insuredInfo.IS_COMMERCIAL_AUTHORIZATION_FORM_SUPPLIED_BY_INSURED)"
+						 ng-required="!insuredInfo.IS_COMMERCIAL_AUTHORIZATION_FORM_SUPPLIED_BY_INSURED">
+						<label for="authRadio2"> No</label>
+					</div>
+
+					<span class="help-block marT5" ng-show="showMessage(insuredForm.authRadio)">
+						Please select insurance authorization form supplied by insured
+					</span>
+				</div>
+
+				<div ng-if="insuredInfo.IS_COMMERCIAL_AUTHORIZATION_FORM_SUPPLIED_BY_INSURED" class="form-row" ng-class="{'has-error':insuredForm.authFormNum.$touched && insuredForm.authFormNum.$error.required || insuredForm.authFormNum.$error.maxlength || insuredForm.authFormNum.$error.minlength,'has-success':insuredForm.authFormNum.$valid}">
+					<label>Enter Authorization Number or NA
+						<span class="asterisk">*</span>
+					</label>
+					<input type="text" autocomplete="off" ng-keydown="$event.keyCode != 32 ? $event:$event.preventDefault()" class="form-control"
+					 ng-minlength="2" ng-maxlength="7" id="auth-form-number" name="authFormNum" placeholder="Enter Authorization Number or NA"
+					 ng-model="insuredInfo.AUTHORIZATION_FORM_NUMBER" auto-fill-sync required/>
+					<span class="help-block" ng-show="showMessage(insuredForm.authFormNum)">
+						Authorization Number is required
+					</span>
+					<span class="help-block" ng-show="((insuredForm.authFormNum.$error.minlength || insuredForm.authFormNum.$error.maxlength) && insuredForm.authFormNum.$dirty) ">
+						Authorization Number length should be min 2 & max 7 characters, composed of letters and digits
+					</span>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="text-right mt-20 mb-20">
+		<button id="insuredForm" name="insuredForm" type="submit" class="btn btn-secondary" ng-click="goNext(insuredInfo,1,$event)">Save & Continue</button>
+	</div>
+</form>

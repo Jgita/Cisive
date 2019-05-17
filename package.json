@@ -1,0 +1,51 @@
+{
+  "name": "carco",
+  "version": "1.0.0",
+  "description": "carco demo",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "postinstall": "bower install"
+  },
+  "keywords": [
+    "carco"
+  ],
+  "author": "carco",
+  "license": "ISC",
+  "dependencies": {
+    "angular": "^1.6.6",
+    "angular-base64": "^2.0.5",
+    "angular-cookies": "^1.6.9",
+    "angular-datatables": "^0.6.2",
+    "angular-file-upload": "^2.5.0",
+    "angular-pdfjs-viewer": "^2.0.1",
+    "angular-recaptcha": "^4.2.0",
+    "angular-resource": "^1.6.9",
+    "angular-sanitize": "^1.3.0",
+    "angular-signature": "^1.0.3",
+    "angular-toastr": "^2.1.1",
+    "angular-ui-bootstrap": "^2.5.6",
+    "angular-ui-router": "^1.0.3",
+    "angular-wizard": "^1.1.1",
+    "bootstrap": "^3.3.7",
+    "compression": "^1.7.3",
+    "datatables.net": "^1.10.16",
+    "express": "^4.15.3",
+    "express-static-gzip": "^1.1.3",
+    "font-awesome": "^4.7.0",
+    "jquery": "^3.2.1",
+    "jquery-ui": "^1.12.1",
+    "lodash": "^4.17.10",
+    "ng-image-appear": "^1.11.11",
+    "ng-popover": "^2.0.0",
+    "signature_pad": "^1.6.0",
+    "underscore": "^1.9.1"
+  },
+  "devDependencies": {
+    "eslint-detailed-reporter": "^0.7.3",
+    "node-sass": "^4.5.3",
+    "raw-loader": "^0.5.1",
+    "sass-loader": "^6.0.6",
+    "tether": "^1.4.3"
+  }
+}

@@ -1,0 +1,52 @@
+<div class="profile">
+    <section class="content">
+        <div class="container-fluid">
+            <div class="info windshield-report">
+                <h3 class="mb-20">
+                    Profile
+                    <button ui-sref="{{route}}" class="btn-primary">
+                        Edit
+                    </button>
+                </h3>
+                <div class="details">
+                    <div class="row-eq-height clearfix">
+                        <div class="col-lg-6 col-md-6 cols border-collapse">
+                            <div class="form-row">
+                                <label>First Name</label>
+                                <label class="form-control">{{profileData.INSURED_FIRST_NAME}}</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 cols border-collapse">
+
+                            <div class="form-row">
+                                <label>Email</label>
+                                <label class="form-control">{{profileData.USER_NAME}}</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row-eq-height clearfix">
+                        <div class="col-lg-6 col-md-6 cols border-collapse">
+                            <div class="form-row">
+                                <label>Last Name</label>
+                                <label class="form-control">{{profileData.INSURED_LAST_NAME}}</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 cols border-collapse">
+                            <div class="form-row">
+                                <label>Cell Phone</label>
+                                <label class="form-control">{{profileData.INSURED_CELL_PHONE | tel}}</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer>
+        <!-- <div class="container-fluid">
+            &copy;2018 CARCO Group. All rights reserved.
+        </div> -->
+        <div ng-include="'rest/app/client/views/footer.html'"></div>
+    </footer>
+
+</div>

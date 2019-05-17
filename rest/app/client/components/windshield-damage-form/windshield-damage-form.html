@@ -1,0 +1,248 @@
+<div class="info windshield-report">
+    <form name="windshieldDamageForm" id="windshieldDamageForm" ng-submit="windshieldDamage()" role="form" novalidate>
+        <h2 class="mobile-title hidden-lg hidden-md">Windshield Damage Section</h2>
+        <!-- <h3 class="mb-20">Please provide the following information</h3> -->
+        <div class="details windshield-damage">
+            <h1>Physical Condition of Windshield</h1>
+            <div class="col-lg-12 col-md-12 cols border-collapse">
+                <div class="border-collapse">
+                    <div class="form-row min-height-auto">
+                        <div class="checkbox checkbox-primary">
+                            <input id="checkbox70" class="styled" type="checkbox" ng-click='winUncheckAll()' ng-model="windshieldDamageInfo.WIN_NO_DAMAGE">
+                            <label for="checkbox70">CHECK HERE IF NO EXISTING WINDSHIELD DAMAGE</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-row windshield-img-wrapper hidden-xs hidden-sm">
+                    <h4 class="text-left">EXTERNAL FRONT VIEW</h4>
+                    <div class="col-lg-4 col-sm-4 text-right cusTextLeft padL0">
+                        <div class=" checkbox-primary">
+
+                            <label for="checkbox1">Passenger Top</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-4 text-center cusTextLeft padL0">
+                        <div class=" checkbox-primary">
+
+                            <label for="checkbox2">Center</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-4 text-left cusTextLeft padL0">
+                        <div class=" checkbox-primary">
+
+                            <label for="checkbox3">Driver Top </label>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <img src="rest/assets/images/windshield.png" alt="windshield" ng-checked="checkall" ng-disabled="windshieldDamageInfo.WIN_NO_DAMAGE"
+                        class="img-responsive">
+                    <div class="clearfix"></div>
+                    <div class="col-lg-4 col-sm-4 text-right cusTextLeft padL0">
+                        <div class=" checkbox-primary">
+
+                            <label for="checkbox4">Passenger Bottom </label>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-4 text-center cusTextLeft padL0">
+                        <div class=" checkbox-primary">
+
+                            <label for="checkbox5">Center</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-4 text-left cusTextLeft padL0">
+                        <div class=" checkbox-primary">
+
+                            <label for="checkbox6">Driver Bottom </label>
+                        </div>
+                    </div>
+                </div>
+
+                <!--mobiel view-->
+                <div class="col-lg-6 col-md-6 pt-20 hidden-lg hidden-md text-center">
+                    <img src="rest/assets/images/windshield-mobile.jpg" alt="windshield" class="img-responsive">
+                </div>
+                <!--end mobile view-->
+
+                <div class="form-row clearfix">
+                    <label class="mb-30">Physical Condition of Windshield
+                        <h3>(Please check all boxes below that apply)</h3>
+                    </label>
+
+                    <div class="sides-view-wrapper clearfix">
+                        <div class="sides-view">
+                            <label class="side-title">
+                                <span>
+                                    <strong>Passenger Side</strong>
+                                </span>
+                            </label>
+                            <div class="passenger-side">
+                                <div class="checkbox checkbox-primary">
+                                    <input id="checkbox21" class="styled" type="checkbox" ng-checked="checkall" ng-disabled="windshieldDamageInfo.WIN_NO_DAMAGE"
+                                        ng-model="windshieldDamageInfo.PASSENGER_CHIP">
+                                    <label for="checkbox21">Chipped</label>
+                                </div>
+                                <div class="checkbox checkbox-primary">
+                                    <input id="checkbox22" class="styled" type="checkbox" ng-checked="checkall" ng-disabled="windshieldDamageInfo.WIN_NO_DAMAGE"
+                                        ng-model="windshieldDamageInfo.PASSENGER_STAR_CRACK">
+                                    <label for="checkbox22">Star Crack</label>
+                                </div>
+                                <div class="checkbox checkbox-primary">
+                                    <input id="checkbox23" class="styled" type="checkbox" ng-checked="checkall" ng-disabled="windshieldDamageInfo.WIN_NO_DAMAGE"
+                                        ng-model="windshieldDamageInfo.PASSENGER_CRACKED">
+                                    <label for="checkbox23">Cracked</label>
+                                </div>
+                                <div class="checkbox checkbox-primary">
+                                    <input id="checkbox25" class="styled" type="checkbox" ng-checked="checkall" ng-disabled="windshieldDamageInfo.WIN_NO_DAMAGE"
+                                        ng-model="windshieldDamageInfo.PASSENGER_SMASHED">
+                                    <label for="checkbox25">Smashed</label>
+                                </div>
+                                <div class="checkbox checkbox-primary">
+                                    <input id="checkbox24" class="styled" type="checkbox" ng-checked="checkall" ng-disabled="windshieldDamageInfo.WIN_NO_DAMAGE"
+                                        ng-model="windshieldDamageInfo.PASSENGER_PIT">
+                                    <label for="checkbox24">Pitted</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="sides-view">
+                            <label class="side-title">
+                                <span>
+                                    <strong>Center</strong>
+                                </span>
+                            </label>
+                            <div class="center-side">
+                                <div class="checkbox checkbox-primary">
+                                    <input id="checkbox251" class="styled" type="checkbox" ng-checked="checkall" ng-disabled="windshieldDamageInfo.WIN_NO_DAMAGE"
+                                        ng-model="windshieldDamageInfo.CENTER_CHIP">
+                                    <label for="checkbox251">Chipped</label>
+                                </div>
+                                <div class="checkbox checkbox-primary">
+                                    <input id="checkbox26" class="styled" type="checkbox" ng-checked="checkall" ng-disabled="windshieldDamageInfo.WIN_NO_DAMAGE"
+                                        ng-model="windshieldDamageInfo.CENTER_STAR_CRACK">
+                                    <label for="checkbox26">Star Crack</label>
+                                </div>
+                                <div class="checkbox checkbox-primary">
+                                    <input id="checkbox231" class="styled" type="checkbox" ng-checked="checkall" ng-disabled="windshieldDamageInfo.WIN_NO_DAMAGE"
+                                        ng-model="windshieldDamageInfo.CENTER_CRACKED">
+                                    <label for="checkbox231">Cracked</label>
+                                </div>
+
+                                <div class="checkbox checkbox-primary">
+                                    <input id="checkbox28" class="styled" type="checkbox" ng-checked="checkall" ng-disabled="windshieldDamageInfo.WIN_NO_DAMAGE"
+                                        ng-model="windshieldDamageInfo.CENTER_SMASHED">
+                                    <label for="checkbox28">Smashed</label>
+                                </div>
+                                <div class="checkbox checkbox-primary">
+                                    <input id="checkbox27" class="styled" type="checkbox" ng-checked="checkall" ng-disabled="windshieldDamageInfo.WIN_NO_DAMAGE"
+                                        ng-model="windshieldDamageInfo.CENTER_PIT">
+                                    <label for="checkbox27">Pitted</label>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="sides-view">
+                            <label class="side-title">
+                                <span>
+                                    <strong>Driver Side</strong>
+                                </span>
+                            </label>
+                            <div class="driver-side">
+                                <div class="checkbox checkbox-primary">
+                                    <input id="checkbox29" class="styled" type="checkbox" ng-checked="checkall" ng-disabled="windshieldDamageInfo.WIN_NO_DAMAGE"
+                                        ng-model="windshieldDamageInfo.DRIVER_SIDE_CHIP">
+                                    <label for="checkbox29">Chipped</label>
+                                </div>
+                                <div class="checkbox checkbox-primary">
+                                    <input id="checkbox30" class="styled" type="checkbox" ng-checked="checkall" ng-disabled="windshieldDamageInfo.WIN_NO_DAMAGE"
+                                        ng-model="windshieldDamageInfo.DRIVER_SIDE_STAR_CRACK">
+                                    <label for="checkbox30">Star Crack</label>
+                                </div>
+                                <div class="checkbox checkbox-primary">
+                                    <input id="checkbox233" class="styled" type="checkbox" ng-checked="checkall" ng-disabled="windshieldDamageInfo.WIN_NO_DAMAGE"
+                                        ng-model="windshieldDamageInfo.DRIVER_SIDE_CRACKED">
+                                    <label for="checkbox233">Cracked</label>
+                                </div>
+
+                                <div class="checkbox checkbox-primary">
+                                    <input id="checkbox32" class="styled" type="checkbox" ng-checked="checkall" ng-disabled="windshieldDamageInfo.WIN_NO_DAMAGE"
+                                        ng-model="windshieldDamageInfo.DRIVER_SIDE_SMASHED">
+                                    <label for="checkbox32">Smashed</label>
+                                </div>
+                                <div class="checkbox checkbox-primary">
+                                    <input id="checkbox31" class="styled" type="checkbox" ng-checked="checkall" ng-disabled="windshieldDamageInfo.WIN_NO_DAMAGE"
+                                        ng-model="windshieldDamageInfo.DRIVER_SIDE_PIT">
+                                    <label for="checkbox31">Pitted</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+
+        <div class="details">
+            <div class="form-row">
+                <label>Additional Details of Windshield Damage (optional)</label>
+                <input type="text" autocomplete="off" name="damageDescribe" auto-fill-sync ng-maxlength="250" class="form-control" placeholder="Enter Description"
+                    ng-model="windshieldDamageInfo.WINDSHIELD_DAMAGE_DESCRIBE">
+
+                <span class="help-block" ng-show="showMessageMaxLenOther(windshieldDamageForm.damageDescribe)">
+                    Windshield Damage Describe should be max 250 character
+                </span>
+            </div>
+        </div>
+
+        <div class="details row-eq-height clearfix">
+            <div class="col-lg-4 col-md-4 cols border-collapse">
+                <div class="form-row">
+                    <div class="checkbox checkbox-primary">
+                        <input id="checkbox64" class="styled" type="checkbox" ng-model="windshieldDamageInfo.AUTOMATIC_WIPERS">
+                        <label for="checkbox64">Windshield Rain Sensor for Automatic Wipers</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-4 cols border-collapse">
+                <div class="form-row">
+                    <label>Tinted Windshield</label>
+
+                    <div class="radio radio-inline radio-primary mt-0">
+                        <input id="radioYes" name="radio" type="radio" ng-value="true" ng-model="windshieldDamageInfo.TINTED_WINDSHIELD" class="custom-control-input">
+                        <label for="radioYes"> Yes</label>
+                    </div>
+                    <div class="radio radio-inline radio-primary">
+                        <input id="radioNo" name="radio" type="radio" ng-value="false" ng-model="windshieldDamageInfo.TINTED_WINDSHIELD" class="custom-control-input">
+                        <label for="radioNo"> No</label>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-4 cols border-collapse">
+                <div class="form-row">
+                    <label>Additional Windshield Customization</label>
+                    <input type="text" autocomplete="off" auto-fill-sync class="form-control" name="CUSTOMIZATION" ng-maxlength="150" ng-model="windshieldDamageInfo.WIN_OTHER_DESCRIPTION"
+                        placeholder="Enter Description">
+                    <span class="help-block" ng-show="showMessageMaxLen(windshieldDamageForm.CUSTOMIZATION)">
+                        Additional Windshield Customization, should max 150 letters
+                    </span>
+                </div>
+            </div>
+        </div>
+
+
+
+        <div class="mb-30 text-right mt-20">
+            <button class="btn btn-tertiary" wz-previous="logStep()" type="button">
+                <i class="fa fa-chevron-left"></i>
+            </button>
+            <button type="button" class="btn btn-tertiary" ng-click="onCancel()">Cancel</button>
+
+            <button id="windshieldDamageForm" name="windshieldDamageForm" type="submit" button-spinner="dataLoading" class="btn btn-secondary"
+                ng-click="goNext(windshieldDamageInfo)">Save & Continue</button>
+        </div>
+    </form>
+
+</div>

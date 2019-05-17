@@ -1,0 +1,9 @@
+<div class="del-popover" ng-controller="deleteController">
+    <p>Are you sure you want to delete?</p>
+    <button close-on-click="true" type="submit" class="btn btn-tertiary">
+        Cancel
+    </button>
+    <button ng-click="item.remove();delete(item)" type="submit" class="btn btn-primary btn-sm">
+        Remove
+    </button>
+</div>
